@@ -7,6 +7,7 @@ let timetable = [];
 let timerInterval = null;
 let timerSeconds = 0;
 let scores = { 1: 0, 2: 0 };
+let manualOverride = false; // Prevents auto-switching when user manually selects a class
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
@@ -68,6 +69,9 @@ function updateClock() {
 
 // Detect current or next class from timetable
 function detectCurrentClass() {
+    // Don't auto-switch if user manually selected a class
+    if (manualOverride) return;
+
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -375,6 +379,7 @@ function setLight(color) {
 
 // Cycle through classes
 function cycleClass() {
+    manualOverride = true;
     const classes = Object.keys(classContent);
     const currentIndex = classes.indexOf(currentClass);
     const nextIndex = (currentIndex + 1) % classes.length;
@@ -407,8 +412,11 @@ function setupKeyboardShortcuts() {
 
             // Navigation
             case 'c': cycleClass(); break;
-            case 'f': setClass('form-time'); break;
+            case 'f': manualOverride = true; setClass('form-time'); break;
             case 'escape': collapseRandomiser(); break;
+
+            // Auto mode (re-enable auto class detection)
+            case 'home': manualOverride = false; detectCurrentClass(); break;
 
             // Scores
             case 'q': addScore(1, 1); break;

@@ -5,8 +5,10 @@
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Check uniform and equipment",
-        "Read notices on the board"
+        "Check uniform is correct",
+        "Check bag and pencil case",
+        "Check music lessons for the week",
+        "Check matches and fixtures"
     ],
     "formTime": {
         "onThisDay": [
