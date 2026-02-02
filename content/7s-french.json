@@ -1,8 +1,7 @@
 {
-    "className": "7S French",
+    "className": "7S French (Girls only - boys away)",
     "students": [
-        "Barron", "Alfie", "Henry", "Oliver", "Hazell",
-        "Guy", "Archie", "Lettice", "Francesca", "Hugo"
+        "Hazell", "Lettice", "Francesca"
     ],
     "objectives": [
         "Write about a town in French",
@@ -27,6 +26,11 @@
             ["pr\u00e8s du centre", "loin de l'\u00e9cole", "\u00e0 c\u00f4t\u00e9 de la gare"]
         ]
     },
+    "tasks": [
+        "Create a map of your imaginary town",
+        "Label at least 6 places in French",
+        "This will be used next lesson with the full group"
+    ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
