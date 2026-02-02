@@ -123,9 +123,19 @@ function updateCountdown(now) {
     endTime.setHours(endH, endM, 0, 0);
 
     const diff = endTime - now;
+    const countdown = document.getElementById('period-countdown');
     if (diff > 0) {
         const mins = Math.floor(diff / 60000);
-        document.getElementById('period-countdown').textContent = `${mins} min restantes`;
+        countdown.textContent = `${mins} min restantes`;
+
+        // Flash French flag colours when 5 mins or less
+        if (mins <= 5) {
+            countdown.classList.add('ending-soon');
+        } else {
+            countdown.classList.remove('ending-soon');
+        }
+    } else {
+        countdown.classList.remove('ending-soon');
     }
 }
 
