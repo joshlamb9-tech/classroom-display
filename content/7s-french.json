@@ -1,0 +1,37 @@
+{
+    "className": "7S French",
+    "students": [
+        "Barron", "Alfie", "Henry", "Oliver", "Hazell",
+        "Guy", "Archie", "Lettice", "Francesca", "Hugo"
+    ],
+    "objectives": [
+        "Write about a town in French",
+        "Use prepositions of place",
+        "Create a map to support writing"
+    ],
+    "vocabulary": [
+        {"french": "une ville", "english": "a town"},
+        {"french": "il y a", "english": "there is/are"},
+        {"french": "une \u00e9glise", "english": "a church"},
+        {"french": "un march\u00e9", "english": "a market"},
+        {"french": "une boulangerie", "english": "a bakery"},
+        {"french": "pr\u00e8s de", "english": "near"},
+        {"french": "loin de", "english": "far from"},
+        {"french": "\u00e0 c\u00f4t\u00e9 de", "english": "next to"}
+    ],
+    "sentenceBuilder": {
+        "headers": ["Starter", "Place", "Position"],
+        "columns": [
+            ["Dans ma ville, il y a", "Il n'y a pas de"],
+            ["une \u00e9glise", "un march\u00e9", "une boulangerie", "un parc", "une piscine"],
+            ["pr\u00e8s du centre", "loin de l'\u00e9cole", "\u00e0 c\u00f4t\u00e9 de la gare"]
+        ]
+    },
+    "seatingPlan": {
+        "rows": 4,
+        "cols": 6,
+        "seats": []
+    },
+    "doNow": "Draw a simple map of an imaginary town",
+    "exitTicket": "Write 3 sentences describing your town"
+}

@@ -1,0 +1,24 @@
+[
+    {"class": "8s-french", "start": "10:05", "end": "11:15", "days": ["monday"]},
+    {"class": "3j-french", "start": "12:20", "end": "12:55", "days": ["monday"]},
+    {"class": "6t-french", "start": "16:05", "end": "16:40", "days": ["monday"]},
+    {"class": "7s-french", "start": "16:40", "end": "17:15", "days": ["monday"]},
+
+    {"class": "3j-french", "start": "10:05", "end": "10:40", "days": ["tuesday"]},
+
+    {"class": "8l-french", "start": "08:55", "end": "09:30", "days": ["wednesday"]},
+    {"class": "6t-french", "start": "09:30", "end": "10:40", "days": ["wednesday"]},
+    {"class": "8s-french", "start": "11:45", "end": "12:20", "days": ["wednesday"]},
+
+    {"class": "7s-french", "start": "08:55", "end": "10:05", "days": ["thursday"]},
+    {"class": "6t-french", "start": "10:40", "end": "11:15", "days": ["thursday"]},
+    {"class": "7m-french", "start": "16:05", "end": "17:15", "days": ["thursday"]},
+
+    {"class": "7m-french", "start": "09:30", "end": "10:05", "days": ["friday"]},
+    {"class": "8l-french", "start": "10:05", "end": "11:15", "days": ["friday"]},
+    {"class": "8s-french", "start": "12:20", "end": "12:55", "days": ["friday"]},
+
+    {"class": "7m-french", "start": "09:30", "end": "10:05", "days": ["saturday"]},
+    {"class": "8l-french", "start": "11:45", "end": "12:20", "days": ["saturday"]},
+    {"class": "7s-french", "start": "12:20", "end": "12:55", "days": ["saturday"]}
+]

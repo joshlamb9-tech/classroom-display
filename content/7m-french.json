@@ -1,0 +1,17 @@
+{
+    "className": "7M French",
+    "students": [
+        "Ben", "Catherine", "Monty", "Charlie", "Harry",
+        "Ava", "Sami", "Rory", "Emma"
+    ],
+    "objectives": [],
+    "vocabulary": [],
+    "sentenceBuilder": null,
+    "seatingPlan": {
+        "rows": 4,
+        "cols": 6,
+        "seats": []
+    },
+    "doNow": "",
+    "exitTicket": ""
+}

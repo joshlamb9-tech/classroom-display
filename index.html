@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Display</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="header">
+            <div id="time">--:--</div>
+            <div id="class-info">
+                <span id="class-name">Loading...</span>
+                <span id="period-countdown"></span>
+            </div>
+            <div id="date">--</div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <main id="dashboard">
+            <!-- Left Column -->
+            <div class="column left">
+                <!-- Objectives -->
+                <div class="widget" id="widget-objectives">
+                    <h3>Learning Objectives</h3>
+                    <ul id="objectives-list"></ul>
+                </div>
+
+                <!-- Vocabulary -->
+                <div class="widget" id="widget-vocab">
+                    <h3>Key Vocabulary</h3>
+                    <div id="vocab-grid"></div>
+                </div>
+            </div>
+
+            <!-- Center Column -->
+            <div class="column center">
+                <!-- Timer -->
+                <div class="widget" id="widget-timer">
+                    <div id="timer-display">--:--</div>
+                    <div id="timer-controls">
+                        <button onclick="startTimer(60)">1m</button>
+                        <button onclick="startTimer(120)">2m</button>
+                        <button onclick="startTimer(300)">5m</button>
+                        <button onclick="startTimer(600)">10m</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+
+                <!-- Randomiser -->
+                <div class="widget" id="widget-randomiser">
+                    <h3>Random Student</h3>
+                    <div id="randomiser-result">?</div>
+                    <button onclick="pickRandomStudent()">Pick</button>
+                </div>
+
+                <!-- Sentence Builder -->
+                <div class="widget" id="widget-sentence-builder">
+                    <h3>Sentence Builder</h3>
+                    <div id="sentence-builder"></div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column right">
+                <!-- Scoreboard -->
+                <div class="widget" id="widget-scoreboard">
+                    <h3>Scoreboard</h3>
+                    <div id="scoreboard">
+                        <div class="team" id="team1">
+                            <span class="team-name">Pomme de Terre</span>
+                            <span class="team-score" id="score1">0</span>
+                            <div class="score-buttons">
+                                <button onclick="addScore(1, 1)">+1</button>
+                                <button onclick="addScore(1, -1)">-1</button>
+                            </div>
+                        </div>
+                        <div class="team" id="team2">
+                            <span class="team-name">Haricot Vert</span>
+                            <span class="team-score" id="score2">0</span>
+                            <div class="score-buttons">
+                                <button onclick="addScore(2, 1)">+1</button>
+                                <button onclick="addScore(2, -1)">-1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="resetScores()">Reset</button>
+                </div>
+
+                <!-- Traffic Light -->
+                <div class="widget" id="widget-traffic">
+                    <div class="traffic-light">
+                        <div class="light red" onclick="setLight('red')"></div>
+                        <div class="light amber" onclick="setLight('amber')"></div>
+                        <div class="light green" onclick="setLight('green')"></div>
+                    </div>
+                </div>
+
+                <!-- Tasks for Today -->
+                <div class="widget" id="widget-tasks">
+                    <h3>Tasks for Today</h3>
+                    <ol id="tasks-list"></ol>
+                </div>
+            </div>
+        </main>
+
+        <!-- Controls (visible on hover) -->
+        <div id="controls">
+            <button onclick="cycleClass()">Next Class</button>
+            <span id="keyboard-hint">Space=Timer | R=Random | 1-5=Quick Timer</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

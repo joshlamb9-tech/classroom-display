@@ -1,0 +1,43 @@
+{
+    "className": "6T French",
+    "students": [
+        "William", "Jemima", "Solomon", "Ben", "Mary",
+        "Arthur", "Harry", "Mavis", "Hugh", "Harriet", "Henry"
+    ],
+    "objectives": [
+        "Name school subjects in French",
+        "Say whether you like or dislike subjects"
+    ],
+    "vocabulary": [
+        {"french": "le français", "english": "French"},
+        {"french": "les maths", "english": "maths"},
+        {"french": "l'anglais", "english": "English"},
+        {"french": "les sciences", "english": "science"},
+        {"french": "l'histoire", "english": "history"},
+        {"french": "la géographie", "english": "geography"},
+        {"french": "le sport", "english": "PE"},
+        {"french": "la musique", "english": "music"},
+        {"french": "J'aime", "english": "I like"},
+        {"french": "Je n'aime pas", "english": "I don't like"},
+        {"french": "J'adore", "english": "I love"},
+        {"french": "Je déteste", "english": "I hate"}
+    ],
+    "sentenceBuilder": {
+        "headers": ["Opinion", "Subject"],
+        "columns": [
+            ["J'aime", "Je n'aime pas", "J'adore", "Je déteste"],
+            ["le français", "les maths", "l'anglais", "les sciences", "l'histoire", "la géographie", "le sport", "la musique"]
+        ]
+    },
+    "tasks": [
+        "Stick in your sheets in order",
+        "Complete the vocabulary building exercises"
+    ],
+    "seatingPlan": {
+        "rows": 4,
+        "cols": 6,
+        "seats": []
+    },
+    "doNow": "How many school subjects can you name in English?",
+    "exitTicket": "How do you say 'I love French' in French?"
+}

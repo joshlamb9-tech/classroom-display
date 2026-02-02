@@ -1,0 +1,37 @@
+{
+    "className": "8S French",
+    "students": [
+        "Raffy", "Hugo", "Thomas", "Molly", "Tasha", "Louis", "Ben",
+        "Darcey Bella", "Cecilia", "Sofia", "Arthur", "Aishpreet", "Edward"
+    ],
+    "objectives": [
+        "Describe medical symptoms in French",
+        "Use 'j'ai mal \u00e0...' correctly with body parts",
+        "Practise speaking for CE assessment"
+    ],
+    "vocabulary": [
+        {"french": "J'ai mal \u00e0 la t\u00eate", "english": "I have a headache"},
+        {"french": "J'ai mal au ventre", "english": "I have stomach ache"},
+        {"french": "J'ai mal \u00e0 la gorge", "english": "I have a sore throat"},
+        {"french": "J'ai mal au dos", "english": "I have back pain"},
+        {"french": "J'ai mal aux dents", "english": "I have toothache"},
+        {"french": "Je suis malade", "english": "I am ill"},
+        {"french": "J'ai de la fi\u00e8vre", "english": "I have a fever"},
+        {"french": "Je tousse", "english": "I'm coughing"}
+    ],
+    "sentenceBuilder": {
+        "headers": ["Subject", "Verb", "Body Part"],
+        "columns": [
+            ["J'ai", "Tu as", "Il a", "Elle a"],
+            ["mal \u00e0", "tr\u00e8s mal \u00e0"],
+            ["la t\u00eate", "la gorge", "au ventre", "au dos", "aux dents", "aux oreilles"]
+        ]
+    },
+    "seatingPlan": {
+        "rows": 4,
+        "cols": 6,
+        "seats": []
+    },
+    "doNow": "Write 3 sentences about how you feel today using 'j'ai mal \u00e0...'",
+    "exitTicket": "What's the difference between 'au', '\u00e0 la', and 'aux'?"
+}

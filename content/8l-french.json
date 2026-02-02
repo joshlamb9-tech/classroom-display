@@ -1,0 +1,17 @@
+{
+    "className": "8L French",
+    "students": [
+        "George", "Matilda", "Archie", "Alice", "Isaac", "Orla", "Walter",
+        "Amelie", "Isla", "Flora", "Henry", "Fredrik", "Martha", "Edwin"
+    ],
+    "objectives": [],
+    "vocabulary": [],
+    "sentenceBuilder": null,
+    "seatingPlan": {
+        "rows": 4,
+        "cols": 6,
+        "seats": []
+    },
+    "doNow": "",
+    "exitTicket": ""
+}
