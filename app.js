@@ -257,6 +257,32 @@ function getSignInRecord(date) {
     return { date, signedIn, times };
 }
 
+function showSignInSummary() {
+    const today = new Date().toISOString().split('T')[0];
+    const record = getSignInRecord(today);
+    const students8L = classContent['8l-french']?.students || [];
+    const absent = students8L.filter(s => !record.signedIn.includes(s));
+
+    let summary = `8L SIGN-IN: ${today}\n`;
+    summary += `\nPresent (${record.signedIn.length}):\n`;
+    record.signedIn.forEach(s => {
+        summary += `  ${s} - ${record.times[s] || '?'}\n`;
+    });
+    if (absent.length > 0) {
+        summary += `\nAbsent (${absent.length}):\n`;
+        absent.forEach(s => {
+            summary += `  ${s}\n`;
+        });
+    }
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(summary).then(() => {
+        alert('Sign-in summary copied to clipboard!\n\n' + summary);
+    }).catch(() => {
+        alert(summary);
+    });
+}
+
 // Render form time content
 function renderFormTime(formTime) {
     const container = document.getElementById('form-time-content');
@@ -475,6 +501,9 @@ function setupKeyboardShortcuts() {
 
             // Auto mode (re-enable auto class detection)
             case 'home': manualOverride = false; detectCurrentClass(); break;
+
+            // Sign-in summary
+            case 's': if (e.shiftKey) showSignInSummary(); break;
 
             // Scores
             case 'q': addScore(1, 1); break;
