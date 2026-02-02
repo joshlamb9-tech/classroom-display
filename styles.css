@@ -201,18 +201,20 @@ header {
 }
 
 #widget-randomiser.expanded {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 60vh;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 80vw !important;
+    height: 60vh !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
     border-radius: 20px;
     box-shadow: 0 0 100px rgba(0,0,0,0.8);
+    background: rgba(0, 38, 84, 0.98) !important;
 }
 
 #widget-randomiser.expanded h3 {
@@ -239,11 +241,12 @@ header {
 }
 
 #widget-randomiser.expanded #randomiser-result {
-    font-size: 12rem;
-    min-height: auto;
+    font-size: 10rem !important;
+    min-height: auto !important;
     flex: 1;
-    background: transparent;
-    margin: 0;
+    background: transparent !important;
+    margin: 0 !important;
+    color: #fff !important;
 }
 
 #randomiser-result.spinning {
