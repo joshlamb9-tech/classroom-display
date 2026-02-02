@@ -200,6 +200,63 @@ function renderTasks(tasks) {
     });
 }
 
+// Sign-in feature
+function renderSignIn() {
+    const grid = document.getElementById('signin-grid');
+    const status = document.getElementById('signin-status');
+    if (!grid) return;
+
+    // Get 8L students
+    const students8L = classContent['8l-french']?.students || [];
+    if (students8L.length === 0) {
+        grid.innerHTML = '<p>No students loaded</p>';
+        return;
+    }
+
+    // Get today's sign-ins from localStorage
+    const today = new Date().toISOString().split('T')[0];
+    const signInKey = `signin-8l-${today}`;
+    let signedIn = JSON.parse(localStorage.getItem(signInKey) || '[]');
+
+    grid.innerHTML = '';
+    students8L.forEach(student => {
+        const btn = document.createElement('button');
+        btn.className = 'signin-btn' + (signedIn.includes(student) ? ' signed-in' : '');
+        btn.textContent = student;
+        btn.onclick = () => toggleSignIn(student);
+        grid.appendChild(btn);
+    });
+
+    // Update status
+    status.textContent = `${signedIn.length}/${students8L.length} signed in`;
+}
+
+function toggleSignIn(student) {
+    const today = new Date().toISOString().split('T')[0];
+    const signInKey = `signin-8l-${today}`;
+    let signedIn = JSON.parse(localStorage.getItem(signInKey) || '[]');
+
+    if (signedIn.includes(student)) {
+        signedIn = signedIn.filter(s => s !== student);
+    } else {
+        signedIn.push(student);
+        // Store timestamp for records
+        const timestamps = JSON.parse(localStorage.getItem(`${signInKey}-times`) || '{}');
+        timestamps[student] = new Date().toLocaleTimeString('en-GB');
+        localStorage.setItem(`${signInKey}-times`, JSON.stringify(timestamps));
+    }
+
+    localStorage.setItem(signInKey, JSON.stringify(signedIn));
+    renderSignIn();
+}
+
+function getSignInRecord(date) {
+    const signInKey = `signin-8l-${date}`;
+    const signedIn = JSON.parse(localStorage.getItem(signInKey) || '[]');
+    const times = JSON.parse(localStorage.getItem(`${signInKey}-times`) || '{}');
+    return { date, signedIn, times };
+}
+
 // Render form time content
 function renderFormTime(formTime) {
     const container = document.getElementById('form-time-content');
@@ -211,6 +268,7 @@ function renderFormTime(formTime) {
     }
 
     container.style.display = 'block';
+    renderSignIn();
 
     // On This Day
     const otdList = document.getElementById('on-this-day-list');

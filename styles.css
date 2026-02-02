@@ -594,3 +594,43 @@ body:hover #controls {
     margin-top: 10px;
     color: #d4a056;
 }
+
+/* Sign In */
+#signin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.signin-btn {
+    padding: 12px 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.signin-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.02);
+}
+
+.signin-btn.signed-in {
+    background: #4caf50;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+#signin-status {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #d4a056;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
