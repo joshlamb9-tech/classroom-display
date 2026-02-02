@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="randomiser-overlay" onclick="collapseRandomiser()"></div>
     <div id="app">
         <!-- Header -->
         <header id="header">
@@ -52,7 +53,7 @@
                 <!-- Randomiser -->
                 <div class="widget" id="widget-randomiser">
                     <h3>Random Student</h3>
-                    <div id="randomiser-result">?</div>
+                    <div id="randomiser-result" onclick="if(this.parentElement.classList.contains('expanded')) collapseRandomiser()">?</div>
                     <button onclick="pickRandomStudent()">Pick</button>
                 </div>
 

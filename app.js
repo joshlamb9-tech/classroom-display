@@ -256,7 +256,13 @@ function pickRandomStudent() {
         return;
     }
 
+    const widget = document.getElementById('widget-randomiser');
+    const overlay = document.getElementById('randomiser-overlay');
     const result = document.getElementById('randomiser-result');
+
+    // Expand the widget
+    widget.classList.add('expanded');
+    overlay.classList.add('visible');
     result.classList.add('spinning');
 
     // Spin through names for effect
@@ -274,6 +280,11 @@ function pickRandomStudent() {
             result.textContent = content.students[finalIndex];
         }
     }, 100);
+}
+
+function collapseRandomiser() {
+    document.getElementById('widget-randomiser').classList.remove('expanded');
+    document.getElementById('randomiser-overlay').classList.remove('visible');
 }
 
 // Scoreboard
@@ -328,6 +339,7 @@ function setupKeyboardShortcuts() {
 
             // Navigation
             case 'c': cycleClass(); break;
+            case 'escape': collapseRandomiser(); break;
 
             // Scores
             case 'q': addScore(1, 1); break;

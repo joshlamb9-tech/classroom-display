@@ -197,6 +197,30 @@ header {
 #widget-randomiser {
     text-align: center;
     padding: 20px;
+    transition: all 0.3s ease;
+}
+
+#widget-randomiser.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 60vh;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 0 100px rgba(0,0,0,0.8);
+}
+
+#widget-randomiser.expanded h3 {
+    display: none;
+}
+
+#widget-randomiser.expanded button {
+    display: none;
 }
 
 #randomiser-result {
@@ -210,6 +234,16 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#widget-randomiser.expanded #randomiser-result {
+    font-size: 12rem;
+    min-height: auto;
+    flex: 1;
+    background: transparent;
+    margin: 0;
 }
 
 #randomiser-result.spinning {
@@ -236,6 +270,22 @@ header {
 
 #widget-randomiser button:hover {
     background: #c41e2a;
+}
+
+/* Overlay for expanded randomiser */
+#randomiser-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 999;
+}
+
+#randomiser-overlay.visible {
+    display: block;
 }
 
 /* Sentence Builder */
