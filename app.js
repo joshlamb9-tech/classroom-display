@@ -33,7 +33,7 @@ async function loadTimetable() {
 
 // Load all class content
 async function loadAllContent() {
-    const classes = ['8s-french', '8l-french', '3j-french', '6t-french', '7s-french', '7m-french'];
+    const classes = ['form-time', '8s-french', '8l-french', '3j-french', '6t-french', '7s-french', '7m-french'];
     for (const cls of classes) {
         try {
             const response = await fetch(`content/${cls}.json`);
@@ -150,6 +150,7 @@ function setClass(classId) {
     renderVocab(content.vocabulary);
     renderSentenceBuilder(content.sentenceBuilder);
     renderTasks(content.tasks);
+    renderFormTime(content.formTime);
 }
 
 // Render objectives
@@ -193,6 +194,63 @@ function renderTasks(tasks) {
         li.textContent = task;
         list.appendChild(li);
     });
+}
+
+// Render form time content
+function renderFormTime(formTime) {
+    const container = document.getElementById('form-time-content');
+    if (!container) return;
+
+    if (!formTime) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'block';
+
+    // On This Day
+    const otdList = document.getElementById('on-this-day-list');
+    otdList.innerHTML = '';
+    if (formTime.onThisDay) {
+        formTime.onThisDay.forEach(fact => {
+            const li = document.createElement('li');
+            li.textContent = fact;
+            otdList.appendChild(li);
+        });
+    }
+
+    // Discussion Questions
+    const dqList = document.getElementById('discussion-list');
+    dqList.innerHTML = '';
+    if (formTime.discussionQuestions) {
+        formTime.discussionQuestions.forEach(q => {
+            const li = document.createElement('li');
+            li.textContent = q;
+            dqList.appendChild(li);
+        });
+    }
+
+    // News Headlines
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = '';
+    if (formTime.newsHeadlines) {
+        formTime.newsHeadlines.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'news-item';
+            div.innerHTML = `
+                <span class="news-headline">${item.headline}</span>
+                <span class="news-source">${item.source}</span>
+                <span class="news-summary">${item.summary}</span>
+            `;
+            newsList.appendChild(div);
+        });
+    }
+
+    // Quote of the Day
+    const quoteEl = document.getElementById('quote-of-day');
+    if (formTime.quoteOfTheDay) {
+        quoteEl.innerHTML = `"${formTime.quoteOfTheDay.quote}" <span class="quote-author">— ${formTime.quoteOfTheDay.author}</span>`;
+    }
 }
 
 // Render sentence builder
@@ -349,6 +407,7 @@ function setupKeyboardShortcuts() {
 
             // Navigation
             case 'c': cycleClass(); break;
+            case 'f': setClass('form-time'); break;
             case 'escape': collapseRandomiser(); break;
 
             // Scores

@@ -1,0 +1,44 @@
+{
+    "className": "Form Time",
+    "students": [],
+    "objectives": [],
+    "vocabulary": [],
+    "sentenceBuilder": null,
+    "tasks": [
+        "Check uniform and equipment",
+        "Read notices on the board"
+    ],
+    "formTime": {
+        "onThisDay": [
+            "1709 - Alexander Selkirk rescued after 4 years alone on a desert island (inspired Robinson Crusoe)",
+            "1935 - First lie detector test used in court",
+            "1990 - Nelson Mandela released from prison after 27 years"
+        ],
+        "discussionQuestions": [
+            "If you could have any superpower for just one day, what would you choose and why?",
+            "What's one thing you're looking forward to this week?",
+            "If you could travel anywhere in the world, where would you go?"
+        ],
+        "newsHeadlines": [
+            {
+                "headline": "Scientists discover high schoolers need more sleep",
+                "source": "BBC News",
+                "summary": "New research confirms what students have always known - early school starts are tough!"
+            },
+            {
+                "headline": "AI helps archaeologists find hidden ancient sites",
+                "source": "National Geographic",
+                "summary": "Machine learning spots patterns invisible to the human eye"
+            },
+            {
+                "headline": "Record-breaking snowfall in the Alps",
+                "source": "Sky News",
+                "summary": "Ski resorts report best conditions in 20 years"
+            }
+        ],
+        "quoteOfTheDay": {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        }
+    }
+}

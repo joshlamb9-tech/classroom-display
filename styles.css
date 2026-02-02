@@ -8,7 +8,8 @@
 
 body {
     font-family: 'Dosis', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(90deg, #002654 0%, #002654 33%, #FFFFFF 33%, #FFFFFF 66%, #ED2939 66%, #ED2939 100%);
+    background: #c4a574;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a8865a' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     color: #1a1a2e;
     min-height: 100vh;
     overflow: hidden;
@@ -27,10 +28,11 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: rgba(0, 38, 84, 0.95);
+    background: rgba(62, 47, 30, 0.95);
     border-radius: 12px;
     margin-bottom: 15px;
     color: #fff;
+    border: 2px solid rgba(139, 105, 63, 0.5);
 }
 
 #time {
@@ -88,10 +90,11 @@ header {
 
 /* Widgets */
 .widget {
-    background: rgba(0, 38, 84, 0.95);
+    background: rgba(62, 47, 30, 0.95);
     border-radius: 12px;
     padding: 15px;
     color: #fff;
+    border: 2px solid rgba(139, 105, 63, 0.5);
 }
 
 .widget h3 {
@@ -99,7 +102,7 @@ header {
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 12px;
-    color: #ED2939;
+    color: #d4a056;
     font-weight: 700;
 }
 
@@ -119,7 +122,7 @@ header {
     background: rgba(255,255,255,0.1);
     border-radius: 8px;
     margin: 6px 0;
-    border-left: 4px solid #ED2939;
+    border-left: 4px solid #d4a056;
 }
 
 /* Vocabulary */
@@ -193,7 +196,7 @@ header {
     font-size: 1rem;
     border: none;
     border-radius: 6px;
-    background: #ED2939;
+    background: #8b693f;
     color: #fff;
     cursor: pointer;
     font-family: inherit;
@@ -201,7 +204,7 @@ header {
 }
 
 #timer-controls button:hover {
-    background: #c41e2a;
+    background: #6d5232;
 }
 
 /* Randomiser */
@@ -225,7 +228,7 @@ header {
     align-items: center !important;
     border-radius: 20px;
     box-shadow: 0 0 100px rgba(0,0,0,0.8);
-    background: rgba(0, 38, 84, 0.98) !important;
+    background: rgba(62, 47, 30, 0.98) !important;
 }
 
 #widget-randomiser.expanded h3 {
@@ -275,7 +278,7 @@ header {
     font-size: 1.2rem;
     border: none;
     border-radius: 8px;
-    background: #ED2939;
+    background: #8b693f;
     color: #fff;
     cursor: pointer;
     font-family: inherit;
@@ -283,7 +286,7 @@ header {
 }
 
 #widget-randomiser button:hover {
-    background: #c41e2a;
+    background: #6d5232;
 }
 
 /* Overlay for expanded randomiser */
@@ -325,7 +328,7 @@ header {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
-    color: #ED2939;
+    color: #d4a056;
     font-weight: 700;
 }
 
@@ -455,13 +458,13 @@ header {
     background: rgba(255,255,255,0.1);
     border-radius: 8px;
     margin: 6px 0;
-    border-left: 4px solid #ED2939;
+    border-left: 4px solid #d4a056;
 }
 
 #tasks-list li::before {
     content: counter(task-counter) ". ";
     font-weight: 700;
-    color: #ED2939;
+    color: #d4a056;
 }
 
 /* Controls */
@@ -490,7 +493,7 @@ body:hover #controls {
     font-size: 0.9rem;
     border: none;
     border-radius: 5px;
-    background: #002654;
+    background: #8b693f;
     color: #fff;
     cursor: pointer;
     font-weight: 600;
@@ -520,4 +523,74 @@ body:hover #controls {
         grid-column: span 1;
         flex-direction: column;
     }
+}
+
+/* Form Time Styles */
+#form-time-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#on-this-day-list,
+#discussion-list {
+    list-style: none;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#on-this-day-list li,
+#discussion-list li {
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    margin: 6px 0;
+}
+
+#discussion-list li {
+    border-left: 4px solid #d4a056;
+}
+
+.news-item {
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    margin: 8px 0;
+}
+
+.news-headline {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.news-source {
+    display: block;
+    font-size: 0.8rem;
+    color: #d4a056;
+    margin: 4px 0;
+}
+
+.news-summary {
+    display: block;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+#quote-of-day {
+    font-size: 1.3rem;
+    font-style: italic;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.quote-author {
+    display: block;
+    font-size: 1rem;
+    font-style: normal;
+    margin-top: 10px;
+    color: #d4a056;
 }
