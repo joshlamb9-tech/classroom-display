@@ -149,6 +149,13 @@ function setClass(classId) {
     const content = classContent[classId];
     if (!content) return;
 
+    // Toggle form time mode
+    if (classId === 'form-time') {
+        document.body.classList.add('form-time-mode');
+    } else {
+        document.body.classList.remove('form-time-mode');
+    }
+
     document.getElementById('class-name').textContent = content.className || classId;
     renderObjectives(content.objectives);
     renderVocab(content.vocabulary);

@@ -23,59 +23,19 @@
         <main id="dashboard">
             <!-- Left Column -->
             <div class="column left">
-                <!-- Timer -->
-                <div class="widget" id="widget-timer">
-                    <div id="timer-display">--:--</div>
-                    <div id="timer-controls">
-                        <button onclick="startTimer(60)">1m</button>
-                        <button onclick="startTimer(120)">2m</button>
-                        <button onclick="startTimer(300)">5m</button>
-                        <button onclick="startTimer(600)">10m</button>
-                        <button onclick="stopTimer()">Stop</button>
-                    </div>
+                <!-- Objectives (lessons only) -->
+                <div class="widget lesson-only" id="widget-objectives">
+                    <h3>Learning Objectives</h3>
+                    <ul id="objectives-list"></ul>
                 </div>
 
-                <!-- Randomiser -->
-                <div class="widget" id="widget-randomiser">
-                    <h3>Random Student</h3>
-                    <div id="randomiser-result" onclick="if(this.parentElement.classList.contains('expanded')) collapseRandomiser()">?</div>
-                    <button onclick="pickRandomStudent()">Pick</button>
+                <!-- Vocabulary (lessons only) -->
+                <div class="widget lesson-only" id="widget-vocab">
+                    <h3>Key Vocabulary</h3>
+                    <div id="vocab-grid"></div>
                 </div>
 
-                <!-- Scoreboard -->
-                <div class="widget" id="widget-scoreboard">
-                    <h3>Scoreboard</h3>
-                    <div id="scoreboard">
-                        <div class="team" id="team1">
-                            <span class="team-name">Pomme de Terre</span>
-                            <span class="team-score" id="score1">0</span>
-                            <div class="score-buttons">
-                                <button onclick="addScore(1, 1)">+1</button>
-                                <button onclick="addScore(1, -1)">-1</button>
-                            </div>
-                        </div>
-                        <div class="team" id="team2">
-                            <span class="team-name">Haricot Vert</span>
-                            <span class="team-score" id="score2">0</span>
-                            <div class="score-buttons">
-                                <button onclick="addScore(2, 1)">+1</button>
-                                <button onclick="addScore(2, -1)">-1</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="resetScores()">Reset</button>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="column right">
-                <!-- Tasks for Today -->
-                <div class="widget" id="widget-tasks">
-                    <h3>Tasks for Today</h3>
-                    <ol id="tasks-list"></ol>
-                </div>
-
-                <!-- Form Time Content (hidden unless form-time class) -->
+                <!-- Form Time Content (form time only) -->
                 <div id="form-time-content" style="display: none;">
                     <div class="widget" id="widget-signin">
                         <h3>8L Sign In</h3>
@@ -100,14 +60,83 @@
                     </div>
                 </div>
             </div>
-        </main>
 
-        <!-- Hidden elements for JS compatibility -->
-        <div style="display:none;">
-            <ul id="objectives-list"></ul>
-            <div id="vocab-grid"></div>
-            <div id="sentence-builder"></div>
-        </div>
+            <!-- Center Column -->
+            <div class="column center">
+                <!-- Timer -->
+                <div class="widget" id="widget-timer">
+                    <div id="timer-display">--:--</div>
+                    <div id="timer-controls">
+                        <button onclick="startTimer(60)">1m</button>
+                        <button onclick="startTimer(120)">2m</button>
+                        <button onclick="startTimer(300)">5m</button>
+                        <button onclick="startTimer(600)">10m</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+
+                <!-- Randomiser -->
+                <div class="widget" id="widget-randomiser">
+                    <h3>Random Student</h3>
+                    <div id="randomiser-result" onclick="if(this.parentElement.classList.contains('expanded')) collapseRandomiser()">?</div>
+                    <button onclick="pickRandomStudent()">Pick</button>
+                </div>
+
+                <!-- Sentence Builder (lessons only) -->
+                <div class="widget lesson-only" id="widget-sentence-builder">
+                    <h3>Sentence Builder</h3>
+                    <div id="sentence-builder"></div>
+                </div>
+
+                <!-- Tasks (form time only, in center) -->
+                <div class="widget form-time-only" id="widget-tasks-form" style="display: none;">
+                    <h3>Tasks</h3>
+                    <ol id="tasks-list-form"></ol>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column right">
+                <!-- Scoreboard -->
+                <div class="widget" id="widget-scoreboard">
+                    <h3>Scoreboard</h3>
+                    <div id="scoreboard">
+                        <div class="team" id="team1">
+                            <span class="team-name">Pomme de Terre</span>
+                            <span class="team-score" id="score1">0</span>
+                            <div class="score-buttons">
+                                <button onclick="addScore(1, 1)">+1</button>
+                                <button onclick="addScore(1, -1)">-1</button>
+                            </div>
+                        </div>
+                        <div class="team" id="team2">
+                            <span class="team-name">Haricot Vert</span>
+                            <span class="team-score" id="score2">0</span>
+                            <div class="score-buttons">
+                                <button onclick="addScore(2, 1)">+1</button>
+                                <button onclick="addScore(2, -1)">-1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="resetScores()">Reset</button>
+                </div>
+
+                <!-- Traffic Light (lessons only) -->
+                <div class="widget lesson-only" id="widget-traffic">
+                    <div class="traffic-light">
+                        <div class="light red" onclick="setLight('red')"></div>
+                        <div class="light amber" onclick="setLight('amber')"></div>
+                        <div class="light green" onclick="setLight('green')"></div>
+                    </div>
+                </div>
+
+                <!-- Tasks for Today (lessons only) -->
+                <div class="widget lesson-only" id="widget-tasks">
+                    <h3>Tasks for Today</h3>
+                    <ol id="tasks-list"></ol>
+                </div>
+            </div>
+        </main>
 
         <!-- Controls (visible on hover) -->
         <div id="controls">

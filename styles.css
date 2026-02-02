@@ -77,9 +77,18 @@ header {
 #dashboard {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 15px;
     min-height: 0;
+}
+
+/* Form time mode - hide lesson widgets */
+body.form-time-mode .lesson-only {
+    display: none !important;
+}
+
+body.form-time-mode .form-time-only {
+    display: block !important;
 }
 
 .column {
@@ -163,7 +172,7 @@ header {
 }
 
 #timer-display {
-    font-size: 7rem;
+    font-size: 5rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     color: #fff;
@@ -505,9 +514,23 @@ body:hover #controls {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+    #dashboard {
+        grid-template-columns: 1fr 1fr;
+    }
+    .column.right {
+        grid-column: span 2;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 768px) {
     #dashboard {
         grid-template-columns: 1fr;
+    }
+    .column.right {
+        grid-column: span 1;
+        flex-direction: column;
     }
 }
 
