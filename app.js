@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     detectCurrentClass();
     setInterval(detectCurrentClass, 60000);
     setupKeyboardShortcuts();
+    loadWidgetPreferences();
     setLight('green'); // Default to green
 });
 
@@ -409,6 +410,30 @@ function timerFinished() {
     const display = document.getElementById('timer-display');
     display.textContent = "C'est fini!";
     display.classList.add('danger');
+    playTimerSound();
+}
+
+// Timer sound using Web Audio API
+function playTimerSound() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Play 3 beeps
+    [0, 0.3, 0.6].forEach(delay => {
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.frequency.value = 880; // A5 note
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime + delay);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + 0.2);
+
+        oscillator.start(audioCtx.currentTime + delay);
+        oscillator.stop(audioCtx.currentTime + delay + 0.2);
+    });
 }
 
 // Randomiser
@@ -477,6 +502,44 @@ function cycleClass() {
     setClass(classes[nextIndex]);
 }
 
+// Widget toggles
+function showWidgetToggles() {
+    document.getElementById('widget-toggles').classList.add('visible');
+    document.getElementById('toggle-overlay').classList.add('visible');
+}
+
+function hideWidgetToggles() {
+    document.getElementById('widget-toggles').classList.remove('visible');
+    document.getElementById('toggle-overlay').classList.remove('visible');
+}
+
+function toggleWidget(widgetId, show) {
+    const widget = document.getElementById(widgetId);
+    if (widget) {
+        if (show) {
+            widget.classList.remove('hidden-widget');
+        } else {
+            widget.classList.add('hidden-widget');
+        }
+        // Save preference
+        localStorage.setItem(`widget-${widgetId}`, show ? 'visible' : 'hidden');
+    }
+}
+
+function loadWidgetPreferences() {
+    const widgets = ['widget-objectives', 'widget-vocab', 'widget-sentence-builder', 'widget-timer',
+                     'widget-randomiser', 'widget-scoreboard', 'widget-traffic', 'widget-tasks'];
+
+    widgets.forEach(widgetId => {
+        const pref = localStorage.getItem(`widget-${widgetId}`);
+        if (pref === 'hidden') {
+            document.getElementById(widgetId)?.classList.add('hidden-widget');
+            const checkbox = document.getElementById(`toggle-${widgetId.replace('widget-', '')}`);
+            if (checkbox) checkbox.checked = false;
+        }
+    });
+}
+
 // Keyboard shortcuts
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
@@ -511,6 +574,9 @@ function setupKeyboardShortcuts() {
 
             // Sign-in summary
             case 's': if (e.shiftKey) showSignInSummary(); break;
+
+            // Widget toggles
+            case 't': if (e.shiftKey) showWidgetToggles(); break;
 
             // Scores
             case 'q': addScore(1, 1); break;

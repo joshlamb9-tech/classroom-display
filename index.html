@@ -8,6 +8,19 @@
 </head>
 <body>
     <div id="randomiser-overlay" onclick="collapseRandomiser()"></div>
+    <div id="toggle-overlay" onclick="hideWidgetToggles()"></div>
+    <div id="widget-toggles">
+        <h3>Show/Hide Widgets</h3>
+        <label><input type="checkbox" id="toggle-objectives" checked onchange="toggleWidget('widget-objectives', this.checked)"> Learning Objectives</label>
+        <label><input type="checkbox" id="toggle-vocab" checked onchange="toggleWidget('widget-vocab', this.checked)"> Key Vocabulary</label>
+        <label><input type="checkbox" id="toggle-sentence-builder" checked onchange="toggleWidget('widget-sentence-builder', this.checked)"> Sentence Builder</label>
+        <label><input type="checkbox" id="toggle-timer" checked onchange="toggleWidget('widget-timer', this.checked)"> Timer</label>
+        <label><input type="checkbox" id="toggle-randomiser" checked onchange="toggleWidget('widget-randomiser', this.checked)"> Random Student</label>
+        <label><input type="checkbox" id="toggle-scoreboard" checked onchange="toggleWidget('widget-scoreboard', this.checked)"> Scoreboard</label>
+        <label><input type="checkbox" id="toggle-traffic" checked onchange="toggleWidget('widget-traffic', this.checked)"> Traffic Light</label>
+        <label><input type="checkbox" id="toggle-tasks" checked onchange="toggleWidget('widget-tasks', this.checked)"> Tasks</label>
+        <button onclick="hideWidgetToggles()">Done</button>
+    </div>
     <div id="app">
         <!-- Header -->
         <header id="header">
