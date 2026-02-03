@@ -95,20 +95,21 @@ body.form-time-mode #dashboard {
     grid-template-columns: 1fr 1fr;
 }
 
-body.form-time-mode #form-time-content {
+body.form-time-mode .column.center {
+    display: none;
+}
+
+body.form-time-mode .form-time-content {
     display: flex !important;
     flex-direction: column;
     gap: 10px;
-    max-height: calc(100vh - 150px);
-    overflow: hidden;
 }
 
-body.form-time-mode #form-time-content .widget {
+body.form-time-mode .form-time-content .widget {
     padding: 10px;
-    flex-shrink: 1;
 }
 
-body.form-time-mode #form-time-content .widget h3 {
+body.form-time-mode .form-time-content .widget h3 {
     font-size: 0.9rem;
     margin-bottom: 8px;
 }

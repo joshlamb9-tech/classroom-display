@@ -293,15 +293,17 @@ function showSignInSummary() {
 
 // Render form time content
 function renderFormTime(formTime) {
-    const container = document.getElementById('form-time-content');
-    if (!container) return;
+    const leftContainer = document.getElementById('form-time-left');
+    const rightContainer = document.getElementById('form-time-right');
 
     if (!formTime) {
-        container.style.display = 'none';
+        if (leftContainer) leftContainer.style.display = 'none';
+        if (rightContainer) rightContainer.style.display = 'none';
         return;
     }
 
-    container.style.display = 'block';
+    if (leftContainer) leftContainer.style.display = 'block';
+    if (rightContainer) rightContainer.style.display = 'block';
     renderSignIn();
 
     // On This Day
