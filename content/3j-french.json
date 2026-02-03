@@ -12,12 +12,17 @@
         {"french": "Bof", "english": "Meh"}
     ],
     "sentenceBuilder": {
-        "headers": ["Question", "Response"],
+        "headers": ["Question", "Response", "Feeling"],
         "columns": [
-            ["\u00c7a va?", "Comment \u00e7a va?"],
-            ["\u00c7a va bien", "\u00c7a va tr\u00e8s bien", "\u00c7a va mal", "Comme ci, comme \u00e7a", "Bof"]
+            ["Ça va?", "Comment ça va?"],
+            ["Ça va bien", "Ça va très bien", "Ça va mal", "Comme ci, comme ça", "Bof"],
+            ["heureux", "timide", "nerveux", "détendu", "calme"]
         ]
     },
+    "tasks": [
+        "Open your books",
+        "Get ready for some listening exercises"
+    ],
     "students": [
         "Deniz", "Bunty", "Olivia", "Clementine", "Lootsie", "Reuben",
         "Rebecca", "Wilfrid", "Thomas", "Lelia", "Beth", "Harriet"
