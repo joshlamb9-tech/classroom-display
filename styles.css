@@ -577,6 +577,32 @@ body.form-time-mode #quote-of-day {
     color: #d4a056;
 }
 
+/* Editable tasks area */
+#tasks-editable {
+    min-height: 40px;
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #fff;
+    border: 1px dashed rgba(255,255,255,0.3);
+    outline: none;
+    white-space: pre-wrap;
+}
+
+#tasks-editable:empty:before {
+    content: attr(placeholder);
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+}
+
+#tasks-editable:focus {
+    border-color: #d4a056;
+    background: rgba(255,255,255,0.15);
+}
+
 /* Controls */
 #controls {
     position: fixed;

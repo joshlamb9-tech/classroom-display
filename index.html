@@ -76,6 +76,24 @@
 
             <!-- Center Column -->
             <div class="column center">
+                <!-- Sentence Builder (lessons only) -->
+                <div class="widget lesson-only" id="widget-sentence-builder">
+                    <h3>Sentence Builder</h3>
+                    <div id="sentence-builder"></div>
+                </div>
+
+                <!-- Traffic Light (lessons only) -->
+                <div class="widget lesson-only" id="widget-traffic">
+                    <div class="traffic-light">
+                        <div class="light red" onclick="setLight('red')"></div>
+                        <div class="light amber" onclick="setLight('amber')"></div>
+                        <div class="light green" onclick="setLight('green')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column right">
                 <!-- Timer -->
                 <div class="widget" id="widget-timer">
                     <div id="timer-display">--:--</div>
@@ -95,21 +113,6 @@
                     <button onclick="pickRandomStudent()">Pick</button>
                 </div>
 
-                <!-- Sentence Builder (lessons only) -->
-                <div class="widget lesson-only" id="widget-sentence-builder">
-                    <h3>Sentence Builder</h3>
-                    <div id="sentence-builder"></div>
-                </div>
-
-                <!-- Tasks (form time only, in center) -->
-                <div class="widget form-time-only" id="widget-tasks-form" style="display: none;">
-                    <h3>Tasks</h3>
-                    <ol id="tasks-list-form"></ol>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="column right">
                 <!-- Scoreboard -->
                 <div class="widget" id="widget-scoreboard">
                     <h3>Scoreboard</h3>
@@ -134,19 +137,11 @@
                     <button onclick="resetScores()">Reset</button>
                 </div>
 
-                <!-- Traffic Light (lessons only) -->
-                <div class="widget lesson-only" id="widget-traffic">
-                    <div class="traffic-light">
-                        <div class="light red" onclick="setLight('red')"></div>
-                        <div class="light amber" onclick="setLight('amber')"></div>
-                        <div class="light green" onclick="setLight('green')"></div>
-                    </div>
-                </div>
-
-                <!-- Tasks for Today (lessons only) -->
-                <div class="widget lesson-only" id="widget-tasks">
+                <!-- Tasks for Today -->
+                <div class="widget" id="widget-tasks">
                     <h3>Tasks for Today</h3>
                     <ol id="tasks-list"></ol>
+                    <div id="tasks-editable" contenteditable="true" placeholder="Or type tasks here..."></div>
                 </div>
             </div>
         </main>
