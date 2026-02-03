@@ -308,18 +308,13 @@ function renderFormTime(formTime) {
     if (rightContainer) rightContainer.style.display = 'block';
     renderSignIn();
 
-    // On This Day
-    const otdList = document.getElementById('on-this-day-list');
-    otdList.innerHTML = '';
-    if (formTime.onThisDay) {
-        formTime.onThisDay.forEach(fact => {
-            const li = document.createElement('li');
-            li.textContent = fact;
-            otdList.appendChild(li);
-        });
-    }
+    // Fetch daily quote from API
+    fetchDailyQuote();
 
-    // Discussion Questions
+    // Fetch On This Day from API
+    fetchOnThisDay();
+
+    // Discussion Questions (from JSON)
     const dqList = document.getElementById('discussion-list');
     dqList.innerHTML = '';
     if (formTime.discussionQuestions) {
@@ -330,7 +325,7 @@ function renderFormTime(formTime) {
         });
     }
 
-    // News Headlines
+    // News Headlines (from JSON - I update these)
     const newsList = document.getElementById('news-list');
     newsList.innerHTML = '';
     if (formTime.newsHeadlines) {
@@ -345,12 +340,89 @@ function renderFormTime(formTime) {
             newsList.appendChild(div);
         });
     }
+}
 
-    // Quote of the Day
+// Fetch daily quote from API
+async function fetchDailyQuote() {
     const quoteEl = document.getElementById('quote-of-day');
-    if (formTime.quoteOfTheDay) {
-        quoteEl.innerHTML = `"${formTime.quoteOfTheDay.quote}" <span class="quote-author">— ${formTime.quoteOfTheDay.author}</span>`;
+
+    // Check cache first (refreshes daily)
+    const today = new Date().toISOString().split('T')[0];
+    const cached = localStorage.getItem('daily-quote');
+    if (cached) {
+        const { date, quote, author } = JSON.parse(cached);
+        if (date === today) {
+            quoteEl.innerHTML = `"${quote}" <span class="quote-author">— ${author}</span>`;
+            return;
+        }
     }
+
+    try {
+        const response = await fetch('https://api.quotable.io/random?tags=inspirational|motivational|wisdom');
+        const data = await response.json();
+
+        const quote = data.content;
+        const author = data.author;
+
+        // Cache it
+        localStorage.setItem('daily-quote', JSON.stringify({ date: today, quote, author }));
+
+        quoteEl.innerHTML = `"${quote}" <span class="quote-author">— ${author}</span>`;
+    } catch (e) {
+        // Fallback quote
+        quoteEl.innerHTML = `"The only way to do great work is to love what you do." <span class="quote-author">— Steve Jobs</span>`;
+    }
+}
+
+// Fetch On This Day facts from API
+async function fetchOnThisDay() {
+    const otdList = document.getElementById('on-this-day-list');
+
+    // Check cache first (refreshes daily)
+    const today = new Date().toISOString().split('T')[0];
+    const cached = localStorage.getItem('on-this-day');
+    if (cached) {
+        const { date, facts } = JSON.parse(cached);
+        if (date === today) {
+            renderOnThisDayFacts(facts);
+            return;
+        }
+    }
+
+    try {
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+
+        const response = await fetch(`https://byabbe.se/on-this-day/${month}/${day}/events.json`);
+        const data = await response.json();
+
+        // Get 3 interesting events, prioritize more recent ones
+        const events = data.events || [];
+        const selected = events
+            .filter(e => e.year > 1800) // Focus on more relatable history
+            .slice(0, 5)
+            .sort(() => Math.random() - 0.5) // Shuffle
+            .slice(0, 3)
+            .map(e => `${e.year} - ${e.description}`);
+
+        // Cache it
+        localStorage.setItem('on-this-day', JSON.stringify({ date: today, facts: selected }));
+
+        renderOnThisDayFacts(selected);
+    } catch (e) {
+        otdList.innerHTML = '<li>Could not load historical facts</li>';
+    }
+}
+
+function renderOnThisDayFacts(facts) {
+    const otdList = document.getElementById('on-this-day-list');
+    otdList.innerHTML = '';
+    facts.forEach(fact => {
+        const li = document.createElement('li');
+        li.textContent = fact;
+        otdList.appendChild(li);
+    });
 }
 
 // Render sentence builder
