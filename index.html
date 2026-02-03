@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Display</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
 <body>
     <div id="randomiser-overlay" onclick="collapseRandomiser()"></div>
@@ -20,6 +21,7 @@
         <label><input type="checkbox" id="toggle-traffic" checked onchange="toggleWidget('widget-traffic', this.checked)"> Traffic Light</label>
         <label><input type="checkbox" id="toggle-tasks" checked onchange="toggleWidget('widget-tasks', this.checked)"> Tasks</label>
         <button onclick="hideWidgetToggles()">Done</button>
+        <button onclick="resetWidgetLayout()" style="margin-left: 10px; background: #a04040;">Reset Layout</button>
     </div>
     <div id="app">
         <!-- Header -->

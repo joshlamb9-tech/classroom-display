@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     setInterval(detectCurrentClass, 60000);
     setupKeyboardShortcuts();
     loadWidgetPreferences();
+    initDraggableWidgets();
+    loadWidgetLayout();
     setLight('green'); // Default to green
 });
 
@@ -540,6 +542,65 @@ function loadWidgetPreferences() {
             if (checkbox) checkbox.checked = false;
         }
     });
+}
+
+// Draggable widgets with SortableJS
+function initDraggableWidgets() {
+    const columns = document.querySelectorAll('.column');
+
+    columns.forEach(column => {
+        new Sortable(column, {
+            group: 'widgets',
+            animation: 150,
+            ghostClass: 'widget-ghost',
+            chosenClass: 'widget-chosen',
+            dragClass: 'widget-drag',
+            handle: '.widget',
+            draggable: '.widget',
+            onEnd: saveWidgetLayout
+        });
+    });
+}
+
+function saveWidgetLayout() {
+    const layout = {};
+    const columns = document.querySelectorAll('.column');
+
+    columns.forEach((column, index) => {
+        const widgets = column.querySelectorAll('.widget');
+        layout[`column-${index}`] = Array.from(widgets).map(w => w.id);
+    });
+
+    localStorage.setItem('widget-layout', JSON.stringify(layout));
+}
+
+function loadWidgetLayout() {
+    const saved = localStorage.getItem('widget-layout');
+    if (!saved) return;
+
+    try {
+        const layout = JSON.parse(saved);
+        const columns = document.querySelectorAll('.column');
+
+        columns.forEach((column, index) => {
+            const widgetIds = layout[`column-${index}`];
+            if (!widgetIds) return;
+
+            widgetIds.forEach(id => {
+                const widget = document.getElementById(id);
+                if (widget && widget.classList.contains('widget')) {
+                    column.appendChild(widget);
+                }
+            });
+        });
+    } catch (e) {
+        console.log('Could not load widget layout');
+    }
+}
+
+function resetWidgetLayout() {
+    localStorage.removeItem('widget-layout');
+    location.reload();
 }
 
 // Keyboard shortcuts
