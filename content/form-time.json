@@ -5,10 +5,9 @@
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Check uniform is correct",
-        "Check bag and pencil case",
-        "Check music lessons for the week",
-        "Check matches and fixtures"
+        "PHSEE Catch Up",
+        "Study Skills Booklets",
+        "French Catch Up"
     ],
     "formTime": {
         "onThisDay": [
@@ -23,19 +22,19 @@
         ],
         "newsHeadlines": [
             {
-                "headline": "Scientists discover high schoolers need more sleep",
+                "headline": "Dinosaur footprints discovered in Oxfordshire",
                 "source": "BBC News",
-                "summary": "New research confirms what students have always known - early school starts are tough!"
+                "summary": "Scientists have uncovered a trail of footprints from 166 million years ago - the Middle Jurassic Period!"
             },
             {
-                "headline": "AI helps archaeologists find hidden ancient sites",
-                "source": "National Geographic",
-                "summary": "Machine learning spots patterns invisible to the human eye"
+                "headline": "Carlos Alcaraz wins Australian Open at just 22",
+                "source": "Sky Sports",
+                "summary": "The Spanish tennis star becomes the youngest player ever to complete a Career Grand Slam"
             },
             {
-                "headline": "Record-breaking snowfall in the Alps",
-                "source": "Sky News",
-                "summary": "Ski resorts report best conditions in 20 years"
+                "headline": "England reach U19 Cricket World Cup semi-finals",
+                "source": "BBC Sport",
+                "summary": "Thomas Rew's brilliant century helped England fight back against Australia in the knockout stages"
             }
         ],
         "quoteOfTheDay": {

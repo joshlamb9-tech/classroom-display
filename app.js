@@ -119,7 +119,10 @@ function detectCurrentClass() {
 function updateCountdown(now) {
     if (!currentClass) return;
 
-    const period = timetable.find(p => p.class === currentClass);
+    // Filter by today's day to get correct times
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const today = days[now.getDay()];
+    const period = timetable.find(p => p.class === currentClass && (!p.days || p.days.includes(today)));
     if (!period) {
         document.getElementById('period-countdown').textContent = '';
         return;
@@ -529,21 +532,21 @@ function pickRandomStudent() {
     overlay.classList.add('visible');
     result.classList.add('spinning');
 
-    // Spin through names for effect
+    // Spin through names for effect (8 spins × 50ms = 0.4 seconds)
     let spins = 0;
     const spinInterval = setInterval(() => {
         const randomIndex = Math.floor(Math.random() * content.students.length);
         result.textContent = content.students[randomIndex];
         spins++;
 
-        if (spins > 15) {
+        if (spins > 8) {
             clearInterval(spinInterval);
             result.classList.remove('spinning');
             // Final pick
             const finalIndex = Math.floor(Math.random() * content.students.length);
             result.textContent = content.students[finalIndex];
         }
-    }, 100);
+    }, 50);
 }
 
 function collapseRandomiser() {
