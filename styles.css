@@ -696,6 +696,23 @@ body:hover #controls {
     }
 }
 
+/* Hide form-time-only widgets when not in form time mode */
+#widget-signin,
+#widget-quote,
+#widget-news,
+#widget-on-this-day,
+#widget-discussion {
+    display: none !important;
+}
+
+body.form-time-mode #widget-signin,
+body.form-time-mode #widget-quote,
+body.form-time-mode #widget-news,
+body.form-time-mode #widget-on-this-day,
+body.form-time-mode #widget-discussion {
+    display: block !important;
+}
+
 /* Form Time Styles */
 #form-time-content {
     display: flex;
