@@ -4,9 +4,9 @@
         "Barron", "Alfie", "Henry", "Oliver", "Hazell", "Guy", "Archie", "Lettice", "Francesca", "Hugo"
     ],
     "objectives": [
-        "Write about a town in French",
-        "Use prepositions of place",
-        "Create a map to support writing"
+        "Read a French map of a town",
+        "Identify places using French vocabulary",
+        "Understand prepositions of place"
     ],
     "vocabulary": [
         {"french": "une ville", "english": "a town"},
@@ -27,14 +27,14 @@
         ]
     },
     "tasks": [
-        "Create a map of your imaginary town",
-        "Label at least 6 places in French"
+        "Read the French map of a town",
+        "Write sentences about the relationships between places"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Draw a simple map of an imaginary town",
-    "exitTicket": "Write 3 sentences describing your town"
+    "doNow": "Look at the map - identify 5 places in French",
+    "exitTicket": "Write 3 sentences about where places are located (using près de, à côté de, loin de)"
 }
