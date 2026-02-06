@@ -4,14 +4,23 @@
         "George", "Matilda", "Archie", "Alice", "Isaac", "Orla", "Walter",
         "Amelie", "Isla", "Flora", "Henry", "Fredrik", "Martha", "Edwin"
     ],
-    "objectives": [],
+    "objectives": [
+        "Complete listening exercises independently",
+        "Develop listening comprehension skills",
+        "Work at your own pace through the tasks"
+    ],
     "vocabulary": [],
     "sentenceBuilder": null,
+    "tasks": [
+        "Log in to the language lab",
+        "Complete listening exercises",
+        "Answer comprehension questions"
+    ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "",
-    "exitTicket": ""
+    "doNow": "Get logged in and headphones on",
+    "exitTicket": "How many exercises did you complete today?"
 }
