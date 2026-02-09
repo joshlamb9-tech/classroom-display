@@ -5,22 +5,23 @@
         "Darcey Bella", "Cecilia", "Sofia", "Arthur", "Aishpreet", "Edward"
     ],
     "objectives": [
-        "Complete listening exercises independently",
-        "Develop listening comprehension skills",
-        "Work at your own pace through the tasks"
+        "Develop reading comprehension skills",
+        "Build vocabulary through context",
+        "Complete reading tasks independently"
     ],
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Log in to the language lab",
-        "Complete listening exercises",
-        "Answer comprehension questions"
+        "Reading starter",
+        "Vocabulary building exercises",
+        "Reading comprehensions",
+        "Extension: Complete listening exercises"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Get logged in and headphones on",
-    "exitTicket": "How many exercises did you complete today?"
+    "doNow": "Complete the reading starter",
+    "exitTicket": "What new vocabulary did you learn today?"
 }
