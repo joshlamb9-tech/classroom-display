@@ -1,27 +1,17 @@
 {
     "className": "3J French",
     "objectives": [
-        "Listen and repeat key vocabulary in French"
+        "Develop listening comprehension skills in French",
+        "Build vocabulary through audio context",
+        "Complete listening tasks independently"
     ],
-    "vocabulary": [
-        {"french": "\u00c7a va?", "english": "How are you?"},
-        {"french": "\u00c7a va bien", "english": "I'm fine"},
-        {"french": "\u00c7a va tr\u00e8s bien", "english": "I'm very well"},
-        {"french": "\u00c7a va mal", "english": "I'm not well"},
-        {"french": "Comme ci, comme \u00e7a", "english": "So-so"},
-        {"french": "Bof", "english": "Meh"}
-    ],
-    "sentenceBuilder": {
-        "headers": ["Question", "Response", "Feeling"],
-        "columns": [
-            ["Ça va?", "Comment ça va?"],
-            ["Ça va bien", "Ça va très bien", "Ça va mal", "Comme ci, comme ça", "Bof"],
-            ["heureux", "timide", "nerveux", "détendu", "calme"]
-        ]
-    },
+    "vocabulary": [],
+    "sentenceBuilder": null,
     "tasks": [
-        "Open your books",
-        "Get ready for some listening exercises"
+        "Reading starter",
+        "Vocabulary building exercises",
+        "Listening exercises",
+        "Extension: Complete any remaining listening tasks"
     ],
     "students": [
         "Deniz", "Bunty", "Olivia", "Clementine", "Lootsie", "Reuben",
@@ -32,6 +22,6 @@
         "cols": 6,
         "seats": []
     },
-    "doNow": "Practise asking your partner '\u00c7a va?' with the actions",
-    "exitTicket": "How do you say 'I'm very well' in French?"
+    "doNow": "Complete the reading starter",
+    "exitTicket": "What new words did you hear in the listening exercises?"
 }
