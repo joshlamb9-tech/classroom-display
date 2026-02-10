@@ -293,6 +293,15 @@
             display: block;
         }
 
+        #class-name.flash {
+            animation: flash 2s infinite;
+        }
+
+        @keyframes flash {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+
         #date {
             font-size: 1.3rem;
             opacity: 0.9;
@@ -396,6 +405,42 @@
             font-weight: 600;
             text-align: center;
             box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .display-toggle-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .display-toggle-btn {
+            flex: 1;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 3px solid #8b693f;
+            border-radius: 10px;
+            background: rgba(139, 105, 63, 0.3);
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .display-toggle-btn:hover {
+            background: rgba(139, 105, 63, 0.5);
+        }
+
+        .display-toggle-btn.active {
+            background: #4caf50;
+            border-color: #4caf50;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .display-toggle-btn.inactive {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #333;
+            opacity: 0.4;
         }
 
         /* Timer Widget */
@@ -642,6 +687,10 @@
                             <div id="do-checklist"></div>
                         </div>
                         <div id="toggle-display" style="display: none;"></div>
+                        <div class="display-toggle-buttons">
+                            <button class="display-toggle-btn" id="display-silence-btn">🤫 Silence</button>
+                            <button class="display-toggle-btn" id="display-chat-btn">💬 Chat to your Partner</button>
+                        </div>
                     </div>
                 </div>
 
@@ -671,6 +720,57 @@
     </div>
 
     <script>
+        // Student lists (first names only)
+        const studentLists = {
+            '3J': ['Deniz', 'Bunty', 'Olivia', 'Clementine', 'Lootsie', 'Reuben', 'Rebecca', 'Wilfrid', 'Thomas', 'Lelia', 'Beth', 'Harriet'],
+            '3F': ['Ella', 'Reuben', 'Teddy', 'Esme', 'Meredith', 'Kamrun', 'Erin', 'Beatrice', 'Will', 'Daisy', 'Bobby'],
+            '4B': ['Penelope', 'Alice', 'Sebastien', 'Katherine', 'Leon', 'Alice', 'Rafferty', 'Joshua', 'Frankie'],
+            '4O': ['Mikey', 'Aurora', 'Alex', 'Lauren', 'Zander', 'Angus', 'Max', 'Manasvini', 'Annie', 'Charlotte'],
+            '5B': ['Milo', 'Spencer', 'Timothy', 'Henry', 'Chester', 'Dexter', 'Isobel', 'Rory', 'Isabella', 'Connie', 'Florence', 'Jemima', 'Daphne', 'William', 'Heidi', 'Charles', 'Isabelle', 'Florence'],
+            '6T': ['William', 'Jemima', 'Solomon', 'Annabelle', 'Ben', 'Mary', 'Arthur', 'Harry', 'Mavis', 'Hugh', 'Harriet', 'Henry'],
+            '6S': ['Harrison', 'Elliot', 'Daisy', 'Zayd', 'Stepan', 'Sasha', 'Jac', 'Hugo', 'Alfred', 'Emily', 'Joseph'],
+            '7M': ['Ben', 'Catherine', 'Monty', 'Charlie', 'Harry', 'Ava', 'Sami', 'Rory', 'Emma'],
+            '7S': ['Barron', 'Alfie', 'Henry', 'Oliver', 'Hazell', 'Guy', 'Archie', 'Lettice', 'Francesca', 'Hugo'],
+            '8L': ['George', 'Matilda', 'Archie', 'Alice', 'Isaac', 'Orla', 'Walter', 'Amelie', 'Isla', 'Flora', 'Henry', 'Fredrik', 'Martha', 'Edwin'],
+            '8S': ['Raffy', 'Hugo', 'Thomas', 'Molly', 'Tasha', 'Louis', 'Ben', 'Darcey Bella', 'Cecilia', 'Sofia', 'Arthur', 'Aishpreet', 'Edward']
+        };
+
+        // Combine lists for year groups
+        studentLists['Year 3'] = [...studentLists['3J'], ...studentLists['3F']];
+        studentLists['Year 4'] = [...studentLists['4B'], ...studentLists['4O']];
+        studentLists['Year 5'] = studentLists['5B'];
+        studentLists['Year 6'] = [...studentLists['6T'], ...studentLists['6S']];
+        studentLists['Year 7'] = [...studentLists['7M'], ...studentLists['7S']];
+        studentLists['Year 8'] = [...studentLists['8L'], ...studentLists['8S']];
+
+        // Sets don't have defined student lists yet
+        studentLists['Y7 Maths Set 1'] = [];
+        studentLists['Y7 Maths Set 2'] = [];
+        studentLists['Y7 English Set 1'] = [];
+        studentLists['Y7 English Set 2'] = [];
+        studentLists['Y8 Maths Set 1'] = [];
+        studentLists['Y8 Maths Set 2'] = [];
+        studentLists['Y8 English Set 1'] = [];
+        studentLists['Y8 English Set 2'] = [];
+
+        // School timetable
+        const timetable = [
+            { period: 1, start: '08:20', end: '08:55' },
+            { period: 2, start: '08:55', end: '09:30' },
+            { period: 3, start: '09:30', end: '10:05' },
+            { period: 4, start: '10:05', end: '10:40' },
+            { period: 5, start: '10:40', end: '11:15' },
+            { period: 'Break', start: '11:15', end: '11:45' },
+            { period: 6, start: '11:45', end: '12:20' },
+            { period: 7, start: '12:20', end: '12:55' },
+            { period: 'Lunch', start: '12:55', end: '14:40' },
+            { period: 8, start: '14:40', end: '15:15' },
+            { period: 9, start: '15:15', end: '15:50' },
+            { period: 'Break', start: '15:50', end: '16:05' },
+            { period: 10, start: '16:05', end: '16:40' },
+            { period: 11, start: '16:40', end: '17:15' }
+        ];
+
         // State
         let selectedClass = null;
         let selectedNeedItems = new Set();
@@ -707,7 +807,7 @@
             });
         });
 
-        // Toggle buttons (Silence / Chat)
+        // Toggle buttons (Setup - Silence / Chat)
         document.getElementById('silence-toggle').addEventListener('click', () => {
             setToggle('silence');
         });
@@ -739,6 +839,39 @@
                     silenceBtn.classList.add('inactive');
                     silenceBtn.classList.remove('active');
                 }
+            }
+
+            // Update display buttons if in display mode
+            updateDisplayToggleButtons();
+        }
+
+        // Display toggle buttons
+        document.getElementById('display-silence-btn').addEventListener('click', () => {
+            setDisplayToggle('silence');
+        });
+
+        document.getElementById('display-chat-btn').addEventListener('click', () => {
+            setDisplayToggle('chat');
+        });
+
+        function setDisplayToggle(toggle) {
+            activeToggle = (activeToggle === toggle) ? null : toggle;
+            updateDisplayToggleButtons();
+        }
+
+        function updateDisplayToggleButtons() {
+            const silenceBtn = document.getElementById('display-silence-btn');
+            const chatBtn = document.getElementById('display-chat-btn');
+
+            silenceBtn.classList.remove('active', 'inactive');
+            chatBtn.classList.remove('active', 'inactive');
+
+            if (activeToggle === 'silence') {
+                silenceBtn.classList.add('active');
+                chatBtn.classList.add('inactive');
+            } else if (activeToggle === 'chat') {
+                chatBtn.classList.add('active');
+                silenceBtn.classList.add('inactive');
             }
         }
 
@@ -808,17 +941,8 @@
                 document.getElementById('do-section').style.display = 'none';
             }
 
-            // Update toggle display
-            const toggleDisplay = document.getElementById('toggle-display');
-            if (activeToggle) {
-                const emoji = activeToggle === 'silence' ? '🤫' : '💬';
-                const text = activeToggle === 'silence' ? 'Silence' : 'Chat to your Partner';
-                toggleDisplay.className = 'toggle-display';
-                toggleDisplay.textContent = `${emoji} ${text}`;
-                toggleDisplay.style.display = 'block';
-            } else {
-                toggleDisplay.style.display = 'none';
-            }
+            // Update toggle display buttons
+            updateDisplayToggleButtons();
 
             // Switch modes
             document.getElementById('setup-mode').style.display = 'none';
@@ -846,7 +970,6 @@
             // Analogue clock
             const hours = now.getHours() % 12;
             const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
 
             const hourAngle = (hours * 30) + (minutes * 0.5);
             const minuteAngle = minutes * 6;
@@ -859,6 +982,45 @@
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
             document.getElementById('date').textContent = dateStr;
+
+            // Check for 5-minute warning
+            const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            const currentPeriod = getCurrentPeriod(currentTime);
+            const className = document.getElementById('class-name');
+
+            if (currentPeriod && typeof currentPeriod.period === 'number') {
+                const endTime = parseTime(currentPeriod.end);
+                const currentMinutes = now.getHours() * 60 + now.getMinutes();
+                const minutesLeft = endTime - currentMinutes;
+
+                if (minutesLeft <= 5 && minutesLeft > 0) {
+                    className.classList.add('flash');
+                } else {
+                    className.classList.remove('flash');
+                }
+            } else {
+                className.classList.remove('flash');
+            }
+        }
+
+        function getCurrentPeriod(currentTime) {
+            const current = parseTime(currentTime);
+
+            for (let slot of timetable) {
+                const start = parseTime(slot.start);
+                const end = parseTime(slot.end);
+
+                if (current >= start && current < end) {
+                    return slot;
+                }
+            }
+
+            return null;
+        }
+
+        function parseTime(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
         }
 
         // Timer functions
@@ -899,19 +1061,39 @@
 
         // Random student picker
         function pickRandomStudent() {
-            const result = document.getElementById('randomiser-result');
-            result.classList.add('spinning');
+            const students = studentLists[selectedClass] || [];
 
-            let spinCount = 0;
-            const spinInterval = setInterval(() => {
-                result.textContent = Math.floor(Math.random() * 30) + 1;
-                spinCount++;
-                if (spinCount > 20) {
-                    clearInterval(spinInterval);
+            if (students.length === 0) {
+                // Fallback to numbers for sets without student lists
+                const result = document.getElementById('randomiser-result');
+                result.classList.add('spinning');
+
+                let spinCount = 0;
+                const spinInterval = setInterval(() => {
                     result.textContent = Math.floor(Math.random() * 30) + 1;
-                    result.classList.remove('spinning');
-                }
-            }, 100);
+                    spinCount++;
+                    if (spinCount > 20) {
+                        clearInterval(spinInterval);
+                        result.textContent = Math.floor(Math.random() * 30) + 1;
+                        result.classList.remove('spinning');
+                    }
+                }, 100);
+            } else {
+                // Use actual student names
+                const result = document.getElementById('randomiser-result');
+                result.classList.add('spinning');
+
+                let spinCount = 0;
+                const spinInterval = setInterval(() => {
+                    result.textContent = students[Math.floor(Math.random() * students.length)];
+                    spinCount++;
+                    if (spinCount > 20) {
+                        clearInterval(spinInterval);
+                        result.textContent = students[Math.floor(Math.random() * students.length)];
+                        result.classList.remove('spinning');
+                    }
+                }, 100);
+            }
         }
     </script>
 </body>
