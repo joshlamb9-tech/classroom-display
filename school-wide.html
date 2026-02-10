@@ -1072,12 +1072,12 @@
                 const spinInterval = setInterval(() => {
                     result.textContent = Math.floor(Math.random() * 30) + 1;
                     spinCount++;
-                    if (spinCount > 20) {
+                    if (spinCount > 3) {
                         clearInterval(spinInterval);
                         result.textContent = Math.floor(Math.random() * 30) + 1;
                         result.classList.remove('spinning');
                     }
-                }, 100);
+                }, 50);
             } else {
                 // Use actual student names
                 const result = document.getElementById('randomiser-result');
@@ -1087,12 +1087,12 @@
                 const spinInterval = setInterval(() => {
                     result.textContent = students[Math.floor(Math.random() * students.length)];
                     spinCount++;
-                    if (spinCount > 20) {
+                    if (spinCount > 3) {
                         clearInterval(spinInterval);
                         result.textContent = students[Math.floor(Math.random() * students.length)];
                         result.classList.remove('spinning');
                     }
-                }, 100);
+                }, 50);
             }
         }
     </script>
