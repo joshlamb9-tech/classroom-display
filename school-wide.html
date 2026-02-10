@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School-Wide Classroom Display</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dosis', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #c4a574;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a8865a' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #1a1a2e;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Setup Mode */
+        #setup-mode {
+            background: rgba(62, 47, 30, 0.95);
+            border: 2px solid rgba(139, 105, 63, 0.5);
+            border-radius: 12px;
+            padding: 30px;
+            color: #fff;
+        }
+
+        #setup-mode h1 {
+            color: #d4a056;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .selector-section {
+            margin-bottom: 30px;
+        }
+
+        .selector-section h2 {
+            color: #d4a056;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .class-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .class-btn {
+            padding: 15px 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: 2px solid #8b693f;
+            border-radius: 8px;
+            background: rgba(139, 105, 63, 0.3);
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .class-btn:hover {
+            background: #8b693f;
+            transform: scale(1.05);
+        }
+
+        .objective-input-container {
+            margin-bottom: 30px;
+        }
+
+        .objective-input-container label {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #d4a056;
+        }
+
+        #objective-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-family: 'Dosis', sans-serif;
+            border: 2px solid #8b693f;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        #objective-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .checkboxes-container h2 {
+            color: #d4a056;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            background: rgba(139, 105, 63, 0.3);
+            border: 3px solid #8b693f;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(139, 105, 63, 0.5);
+        }
+
+        .checkbox-item.checked {
+            background: #4caf50;
+            border-color: #4caf50;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            background: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            margin-top: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: #45a049;
+            transform: scale(1.02);
+        }
+
+        .start-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* Display Mode */
+        #display-mode {
+            display: none;
+        }
+
+        #display-mode.active {
+            display: block;
+        }
+
+        header {
+            background: rgba(62, 47, 30, 0.95);
+            border: 2px solid rgba(139, 105, 63, 0.5);
+            border-radius: 12px;
+            padding: 20px 30px;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #time {
+            font-size: 3rem;
+            font-weight: 300;
+            font-variant-numeric: tabular-nums;
+        }
+
+        #class-info {
+            text-align: center;
+            flex: 1;
+        }
+
+        #class-name {
+            font-size: 2.5rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #period-countdown {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        #date {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .objective-display {
+            background: rgba(62, 47, 30, 0.95);
+            border: 2px solid rgba(139, 105, 63, 0.5);
+            border-radius: 12px;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .objective-display h2 {
+            color: #d4a056;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .objective-text {
+            font-size: 2rem;
+            line-height: 1.6;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border-left: 5px solid #d4a056;
+        }
+
+        .checklist-display {
+            background: rgba(62, 47, 30, 0.95);
+            border: 2px solid rgba(139, 105, 63, 0.5);
+            border-radius: 12px;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .checklist-display h2 {
+            color: #d4a056;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .checklist-item {
+            font-size: 1.5rem;
+            padding: 15px 20px;
+            background: #4caf50;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .edit-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            background: #8b693f;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn:hover {
+            background: #6d5232;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1000px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Setup Mode -->
+        <div id="setup-mode">
+            <h1>Classroom Display Setup</h1>
+
+            <!-- Class Selection -->
+            <div class="selector-section">
+                <h2>Select Class</h2>
+                <div class="class-buttons">
+                    <button class="class-btn" data-class="3J">3J</button>
+                    <button class="class-btn" data-class="3F">3F</button>
+                    <button class="class-btn" data-class="4B">4B</button>
+                    <button class="class-btn" data-class="4O">4O</button>
+                    <button class="class-btn" data-class="5B">5B</button>
+                    <button class="class-btn" data-class="6T">6T</button>
+                    <button class="class-btn" data-class="6S">6S</button>
+                    <button class="class-btn" data-class="7M">7M</button>
+                    <button class="class-btn" data-class="7S">7S</button>
+                    <button class="class-btn" data-class="8L">8L</button>
+                    <button class="class-btn" data-class="8S">8S</button>
+                </div>
+                <div class="class-buttons">
+                    <button class="class-btn" data-class="Year 3">Year 3</button>
+                    <button class="class-btn" data-class="Year 4">Year 4</button>
+                    <button class="class-btn" data-class="Year 5">Year 5</button>
+                    <button class="class-btn" data-class="Year 6">Year 6</button>
+                    <button class="class-btn" data-class="Year 7">Year 7</button>
+                    <button class="class-btn" data-class="Year 8">Year 8</button>
+                </div>
+                <h2 style="margin-top: 20px;">Sets</h2>
+                <div class="class-buttons">
+                    <button class="class-btn" data-class="Y7 Maths Set 1">Y7 Maths Set 1</button>
+                    <button class="class-btn" data-class="Y7 Maths Set 2">Y7 Maths Set 2</button>
+                    <button class="class-btn" data-class="Y7 Maths Set 3">Y7 Maths Set 3</button>
+                    <button class="class-btn" data-class="Y8 Maths Set 1">Y8 Maths Set 1</button>
+                    <button class="class-btn" data-class="Y8 Maths Set 2">Y8 Maths Set 2</button>
+                    <button class="class-btn" data-class="Y8 Maths Set 3">Y8 Maths Set 3</button>
+                </div>
+            </div>
+
+            <!-- Learning Objective -->
+            <div class="objective-input-container">
+                <label for="objective-input">Learning Objective</label>
+                <input type="text" id="objective-input" placeholder="Type the learning objective for this lesson...">
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="checkboxes-container">
+                <h2>You Will Need</h2>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item" data-item="Whiteboards">📝 Whiteboards</div>
+                    <div class="checkbox-item" data-item="Books">📚 Books</div>
+                    <div class="checkbox-item" data-item="Folders">📁 Folders</div>
+                    <div class="checkbox-item" data-item="Independent Work">🤔 Independent Work</div>
+                    <div class="checkbox-item" data-item="Group Work">👥 Group Work</div>
+                    <div class="checkbox-item" data-item="Silence">🤫 Silence</div>
+                    <div class="checkbox-item" data-item="Talk to your Partner">💬 Talk to your Partner</div>
+                </div>
+            </div>
+
+            <button class="start-btn" id="start-display-btn" disabled>Start Display</button>
+        </div>
+
+        <!-- Display Mode -->
+        <div id="display-mode">
+            <header>
+                <div id="time">--:--</div>
+                <div id="class-info">
+                    <span id="class-name">--</span>
+                    <span id="period-countdown">--</span>
+                </div>
+                <div id="date">--</div>
+            </header>
+
+            <div class="content">
+                <div class="objective-display">
+                    <h2>Learning Objective</h2>
+                    <div class="objective-text" id="objective-display"></div>
+                </div>
+
+                <div class="checklist-display">
+                    <h2>You Will Need</h2>
+                    <div id="checklist"></div>
+                </div>
+            </div>
+
+            <button class="edit-btn" onclick="returnToSetup()">Edit</button>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let selectedClass = null;
+        let selectedItems = new Set();
+        let timerInterval = null;
+
+        // School timetable
+        const timetable = [
+            { period: 1, start: '08:20', end: '08:55' },
+            { period: 2, start: '08:55', end: '09:30' },
+            { period: 3, start: '09:30', end: '10:05' },
+            { period: 4, start: '10:05', end: '10:40' },
+            { period: 5, start: '10:40', end: '11:15' },
+            { period: 'Break', start: '11:15', end: '11:45' },
+            { period: 6, start: '11:45', end: '12:20' },
+            { period: 7, start: '12:20', end: '12:55' },
+            { period: 'Lunch', start: '12:55', end: '14:40' },
+            { period: 8, start: '14:40', end: '15:15' },
+            { period: 9, start: '15:15', end: '15:50' },
+            { period: 'Break', start: '15:50', end: '16:05' },
+            { period: 10, start: '16:05', end: '16:40' },
+            { period: 11, start: '16:40', end: '17:15' }
+        ];
+
+        // Class selection
+        document.querySelectorAll('.class-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.class-btn').forEach(b => b.style.background = 'rgba(139, 105, 63, 0.3)');
+                btn.style.background = '#8b693f';
+                selectedClass = btn.dataset.class;
+                updateStartButton();
+            });
+        });
+
+        // Checkbox selection
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const itemName = item.dataset.item;
+                if (selectedItems.has(itemName)) {
+                    selectedItems.delete(itemName);
+                    item.classList.remove('checked');
+                } else {
+                    selectedItems.add(itemName);
+                    item.classList.add('checked');
+                }
+            });
+        });
+
+        // Objective input
+        document.getElementById('objective-input').addEventListener('input', updateStartButton);
+
+        function updateStartButton() {
+            const objective = document.getElementById('objective-input').value.trim();
+            const btn = document.getElementById('start-display-btn');
+            btn.disabled = !(selectedClass && objective);
+        }
+
+        // Start display
+        document.getElementById('start-display-btn').addEventListener('click', () => {
+            const objective = document.getElementById('objective-input').value.trim();
+
+            // Update display
+            document.getElementById('class-name').textContent = selectedClass;
+            document.getElementById('objective-display').textContent = objective;
+
+            // Update checklist
+            const checklist = document.getElementById('checklist');
+            checklist.innerHTML = '';
+            selectedItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'checklist-item';
+                const emoji = document.querySelector(`[data-item="${item}"]`).textContent.split(' ')[0];
+                div.textContent = `${emoji} ${item}`;
+                checklist.appendChild(div);
+            });
+
+            // Switch modes
+            document.getElementById('setup-mode').style.display = 'none';
+            document.getElementById('display-mode').classList.add('active');
+
+            // Start clock
+            startClock();
+        });
+
+        function returnToSetup() {
+            document.getElementById('setup-mode').style.display = 'block';
+            document.getElementById('display-mode').classList.remove('active');
+            if (timerInterval) clearInterval(timerInterval);
+        }
+
+        function startClock() {
+            updateClock();
+            timerInterval = setInterval(updateClock, 1000);
+        }
+
+        function updateClock() {
+            const now = new Date();
+
+            // Time
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}`;
+
+            // Date
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+            document.getElementById('date').textContent = dateStr;
+
+            // Period countdown
+            const currentTime = `${hours}:${minutes}`;
+            const currentPeriod = getCurrentPeriod(currentTime);
+
+            if (currentPeriod) {
+                const endTime = parseTime(currentPeriod.end);
+                const currentMinutes = now.getHours() * 60 + now.getMinutes();
+                const minutesLeft = endTime - currentMinutes;
+
+                if (typeof currentPeriod.period === 'number') {
+                    document.getElementById('period-countdown').textContent =
+                        `Period ${currentPeriod.period} - ${minutesLeft} minute${minutesLeft !== 1 ? 's' : ''} remaining`;
+                } else {
+                    document.getElementById('period-countdown').textContent = currentPeriod.period;
+                }
+            } else {
+                document.getElementById('period-countdown').textContent = 'Outside school hours';
+            }
+        }
+
+        function getCurrentPeriod(currentTime) {
+            const current = parseTime(currentTime);
+
+            for (let slot of timetable) {
+                const start = parseTime(slot.start);
+                const end = parseTime(slot.end);
+
+                if (current >= start && current < end) {
+                    return slot;
+                }
+            }
+
+            return null;
+        }
+
+        function parseTime(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+    </script>
+</body>
+</html>
