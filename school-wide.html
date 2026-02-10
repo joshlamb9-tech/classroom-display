@@ -24,7 +24,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -81,18 +81,18 @@
             transform: scale(1.05);
         }
 
-        .objective-input-container {
-            margin-bottom: 30px;
+        .input-container {
+            margin-bottom: 25px;
         }
 
-        .objective-input-container label {
+        .input-container label {
             display: block;
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: #d4a056;
         }
 
-        #objective-input {
+        .text-input {
             width: 100%;
             padding: 15px;
             font-size: 1.2rem;
@@ -103,8 +103,13 @@
             color: #fff;
         }
 
-        #objective-input::placeholder {
+        .text-input::placeholder {
             color: rgba(255,255,255,0.4);
+        }
+
+        #tasks-input {
+            min-height: 100px;
+            resize: vertical;
         }
 
         .checkboxes-container h2 {
@@ -115,19 +120,20 @@
 
         .checkbox-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .checkbox-item {
             background: rgba(139, 105, 63, 0.3);
             border: 3px solid #8b693f;
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
@@ -139,6 +145,42 @@
             background: #4caf50;
             border-color: #4caf50;
             box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            background: rgba(139, 105, 63, 0.3);
+            border: 3px solid #8b693f;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(139, 105, 63, 0.5);
+        }
+
+        .toggle-btn.active {
+            background: #4caf50;
+            border-color: #4caf50;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .toggle-btn.inactive {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #333;
+            opacity: 0.4;
         }
 
         .start-btn {
@@ -174,7 +216,9 @@
         }
 
         #display-mode.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
         }
 
         header {
@@ -189,10 +233,53 @@
             align-items: center;
         }
 
-        #time {
-            font-size: 3rem;
-            font-weight: 300;
-            font-variant-numeric: tabular-nums;
+        .analogue-clock {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+
+        .clock-face {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #d4a056;
+            position: relative;
+        }
+
+        .clock-center {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #d4a056;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .clock-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            background: #fff;
+            border-radius: 3px;
+        }
+
+        .hour-hand {
+            width: 4px;
+            height: 30px;
+            margin-left: -2px;
+        }
+
+        .minute-hand {
+            width: 3px;
+            height: 45px;
+            margin-left: -1.5px;
+            background: #d4a056;
         }
 
         #class-info {
@@ -204,12 +291,6 @@
             font-size: 2.5rem;
             font-weight: 600;
             display: block;
-            margin-bottom: 10px;
-        }
-
-        #period-countdown {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.8);
         }
 
         #date {
@@ -217,30 +298,45 @@
             opacity: 0.9;
         }
 
-        .content {
+        .main-content {
+            flex: 1;
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 20px;
+            min-height: 0;
         }
 
-        .objective-display {
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
             background: rgba(62, 47, 30, 0.95);
             border: 2px solid rgba(139, 105, 63, 0.5);
             border-radius: 12px;
-            padding: 30px;
+            padding: 25px;
             color: #fff;
         }
 
-        .objective-display h2 {
+        .widget h2 {
             color: #d4a056;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .objective-text {
-            font-size: 2rem;
+            font-size: 1.8rem;
             line-height: 1.6;
             padding: 20px;
             background: rgba(255,255,255,0.1);
@@ -248,30 +344,152 @@
             border-left: 5px solid #d4a056;
         }
 
-        .checklist-display {
-            background: rgba(62, 47, 30, 0.95);
-            border: 2px solid rgba(139, 105, 63, 0.5);
-            border-radius: 12px;
-            padding: 30px;
-            color: #fff;
+        .tasks-list {
+            list-style: none;
+            counter-reset: task-counter;
+            font-size: 1.3rem;
+            line-height: 1.8;
         }
 
-        .checklist-display h2 {
+        .tasks-list li {
+            counter-increment: task-counter;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 4px solid #d4a056;
+        }
+
+        .tasks-list li::before {
+            content: counter(task-counter) ". ";
+            font-weight: 700;
             color: #d4a056;
-            font-size: 1.5rem;
+        }
+
+        .checklist-section {
             margin-bottom: 20px;
+        }
+
+        .checklist-section h3 {
+            color: #d4a056;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .checklist-item {
+            font-size: 1.3rem;
+            padding: 12px 18px;
+            background: #4caf50;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .toggle-display {
             font-size: 1.5rem;
             padding: 15px 20px;
             background: #4caf50;
             border-radius: 10px;
-            margin-bottom: 12px;
             font-weight: 600;
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+            text-align: center;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Timer Widget */
+        .timer-widget {
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .timer-display.warning {
+            color: #ff9800;
+        }
+
+        .timer-display.danger {
+            color: #ED2939;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .timer-controls button {
+            padding: 10px 18px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background: #8b693f;
+            color: #fff;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .timer-controls button:hover {
+            background: #6d5232;
+        }
+
+        /* Random Student Widget */
+        .randomiser-widget {
+            text-align: center;
+        }
+
+        .randomiser-result {
+            font-size: 2.5rem;
+            font-weight: 700;
+            padding: 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .randomiser-result.spinning {
+            animation: spin-text 0.1s infinite;
+        }
+
+        @keyframes spin-text {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .randomiser-widget button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            background: #8b693f;
+            color: #fff;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .randomiser-widget button:hover {
+            background: #6d5232;
         }
 
         .edit-btn {
@@ -289,6 +507,7 @@
             font-family: 'Dosis', sans-serif;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: all 0.2s ease;
+            z-index: 1000;
         }
 
         .edit-btn:hover {
@@ -296,8 +515,8 @@
             transform: scale(1.05);
         }
 
-        @media (max-width: 1000px) {
-            .content {
+        @media (max-width: 1200px) {
+            .main-content {
                 grid-template-columns: 1fr;
             }
         }
@@ -345,22 +564,37 @@
             </div>
 
             <!-- Learning Objective -->
-            <div class="objective-input-container">
+            <div class="input-container">
                 <label for="objective-input">Learning Objective</label>
-                <input type="text" id="objective-input" placeholder="Type the learning objective for this lesson...">
+                <input type="text" id="objective-input" class="text-input" placeholder="Type the learning objective for this lesson...">
             </div>
 
-            <!-- Checkboxes -->
+            <!-- Tasks -->
+            <div class="input-container">
+                <label for="tasks-input">Tasks (one per line)</label>
+                <textarea id="tasks-input" class="text-input" placeholder="Type each task on a new line..."></textarea>
+            </div>
+
+            <!-- What You Need -->
             <div class="checkboxes-container">
-                <h2>You Will Need</h2>
+                <h2>What You Need</h2>
                 <div class="checkbox-grid">
-                    <div class="checkbox-item" data-item="Whiteboards">📝 Whiteboards</div>
-                    <div class="checkbox-item" data-item="Books">📚 Books</div>
-                    <div class="checkbox-item" data-item="Folders">📁 Folders</div>
-                    <div class="checkbox-item" data-item="Independent Work">🤔 Independent Work</div>
-                    <div class="checkbox-item" data-item="Group Work">👥 Group Work</div>
-                    <div class="checkbox-item" data-item="Silence">🤫 Silence</div>
-                    <div class="checkbox-item" data-item="Talk to your Partner">💬 Talk to your Partner</div>
+                    <div class="checkbox-item" data-item="Whiteboards" data-group="need">📝 Whiteboards</div>
+                    <div class="checkbox-item" data-item="Books" data-group="need">📚 Books</div>
+                    <div class="checkbox-item" data-item="Folders" data-group="need">📁 Folders</div>
+                </div>
+            </div>
+
+            <!-- What You'll Do -->
+            <div class="checkboxes-container">
+                <h2>What You'll Do</h2>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item" data-item="Independent Work" data-group="do">🤔 Independent Work</div>
+                    <div class="checkbox-item" data-item="Group Work" data-group="do">👥 Group Work</div>
+                </div>
+                <div class="toggle-buttons">
+                    <div class="toggle-btn" id="silence-toggle" data-toggle="silence">🤫 Silence</div>
+                    <div class="toggle-btn" id="chat-toggle" data-toggle="chat">💬 Chat to your Partner</div>
                 </div>
             </div>
 
@@ -370,23 +604,63 @@
         <!-- Display Mode -->
         <div id="display-mode">
             <header>
-                <div id="time">--:--</div>
+                <div class="analogue-clock">
+                    <div class="clock-face">
+                        <div class="clock-hand hour-hand" id="hour-hand"></div>
+                        <div class="clock-hand minute-hand" id="minute-hand"></div>
+                        <div class="clock-center"></div>
+                    </div>
+                </div>
                 <div id="class-info">
                     <span id="class-name">--</span>
-                    <span id="period-countdown">--</span>
                 </div>
                 <div id="date">--</div>
             </header>
 
-            <div class="content">
-                <div class="objective-display">
-                    <h2>Learning Objective</h2>
-                    <div class="objective-text" id="objective-display"></div>
+            <div class="main-content">
+                <div class="left-column">
+                    <div class="widget">
+                        <h2>Learning Objective</h2>
+                        <div class="objective-text" id="objective-display"></div>
+                    </div>
+
+                    <div class="widget" id="tasks-widget" style="display: none;">
+                        <h2>Tasks</h2>
+                        <ol class="tasks-list" id="tasks-display"></ol>
+                    </div>
+
+                    <div class="widget">
+                        <h2>What You Need & What You'll Do</h2>
+                        <div class="checklist-section" id="need-section" style="display: none;">
+                            <h3>What You Need</h3>
+                            <div id="need-checklist"></div>
+                        </div>
+                        <div class="checklist-section" id="do-section" style="display: none;">
+                            <h3>What You'll Do</h3>
+                            <div id="do-checklist"></div>
+                        </div>
+                        <div id="toggle-display" style="display: none;"></div>
+                    </div>
                 </div>
 
-                <div class="checklist-display">
-                    <h2>You Will Need</h2>
-                    <div id="checklist"></div>
+                <div class="right-column">
+                    <div class="widget timer-widget">
+                        <h2>Timer</h2>
+                        <div class="timer-display" id="timer-display">--:--</div>
+                        <div class="timer-controls">
+                            <button onclick="startTimer(60)">1m</button>
+                            <button onclick="startTimer(120)">2m</button>
+                            <button onclick="startTimer(300)">5m</button>
+                            <button onclick="startTimer(600)">10m</button>
+                            <button onclick="stopTimer()">Stop</button>
+                        </div>
+                    </div>
+
+                    <div class="widget randomiser-widget">
+                        <h2>Random Student</h2>
+                        <div class="randomiser-result" id="randomiser-result">?</div>
+                        <button onclick="pickRandomStudent()">Pick</button>
+                    </div>
                 </div>
             </div>
 
@@ -397,26 +671,12 @@
     <script>
         // State
         let selectedClass = null;
-        let selectedItems = new Set();
+        let selectedNeedItems = new Set();
+        let selectedDoItems = new Set();
+        let activeToggle = null;
+        let clockInterval = null;
         let timerInterval = null;
-
-        // School timetable
-        const timetable = [
-            { period: 1, start: '08:20', end: '08:55' },
-            { period: 2, start: '08:55', end: '09:30' },
-            { period: 3, start: '09:30', end: '10:05' },
-            { period: 4, start: '10:05', end: '10:40' },
-            { period: 5, start: '10:40', end: '11:15' },
-            { period: 'Break', start: '11:15', end: '11:45' },
-            { period: 6, start: '11:45', end: '12:20' },
-            { period: 7, start: '12:20', end: '12:55' },
-            { period: 'Lunch', start: '12:55', end: '14:40' },
-            { period: 8, start: '14:40', end: '15:15' },
-            { period: 9, start: '15:15', end: '15:50' },
-            { period: 'Break', start: '15:50', end: '16:05' },
-            { period: 10, start: '16:05', end: '16:40' },
-            { period: 11, start: '16:40', end: '17:15' }
-        ];
+        let timerSeconds = 0;
 
         // Class selection
         document.querySelectorAll('.class-btn').forEach(btn => {
@@ -432,18 +692,57 @@
         document.querySelectorAll('.checkbox-item').forEach(item => {
             item.addEventListener('click', () => {
                 const itemName = item.dataset.item;
-                if (selectedItems.has(itemName)) {
-                    selectedItems.delete(itemName);
+                const group = item.dataset.group;
+                const set = group === 'need' ? selectedNeedItems : selectedDoItems;
+
+                if (set.has(itemName)) {
+                    set.delete(itemName);
                     item.classList.remove('checked');
                 } else {
-                    selectedItems.add(itemName);
+                    set.add(itemName);
                     item.classList.add('checked');
                 }
             });
         });
 
-        // Objective input
+        // Toggle buttons (Silence / Chat)
+        document.getElementById('silence-toggle').addEventListener('click', () => {
+            setToggle('silence');
+        });
+
+        document.getElementById('chat-toggle').addEventListener('click', () => {
+            setToggle('chat');
+        });
+
+        function setToggle(toggle) {
+            const silenceBtn = document.getElementById('silence-toggle');
+            const chatBtn = document.getElementById('chat-toggle');
+
+            if (activeToggle === toggle) {
+                // Deactivate
+                activeToggle = null;
+                silenceBtn.classList.remove('active', 'inactive');
+                chatBtn.classList.remove('active', 'inactive');
+            } else {
+                // Activate
+                activeToggle = toggle;
+                if (toggle === 'silence') {
+                    silenceBtn.classList.add('active');
+                    silenceBtn.classList.remove('inactive');
+                    chatBtn.classList.add('inactive');
+                    chatBtn.classList.remove('active');
+                } else {
+                    chatBtn.classList.add('active');
+                    chatBtn.classList.remove('inactive');
+                    silenceBtn.classList.add('inactive');
+                    silenceBtn.classList.remove('active');
+                }
+            }
+        }
+
+        // Objective and tasks input
         document.getElementById('objective-input').addEventListener('input', updateStartButton);
+        document.getElementById('tasks-input').addEventListener('input', updateStartButton);
 
         function updateStartButton() {
             const objective = document.getElementById('objective-input').value.trim();
@@ -454,21 +753,70 @@
         // Start display
         document.getElementById('start-display-btn').addEventListener('click', () => {
             const objective = document.getElementById('objective-input').value.trim();
+            const tasksText = document.getElementById('tasks-input').value.trim();
 
             // Update display
             document.getElementById('class-name').textContent = selectedClass;
             document.getElementById('objective-display').textContent = objective;
 
-            // Update checklist
-            const checklist = document.getElementById('checklist');
-            checklist.innerHTML = '';
-            selectedItems.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'checklist-item';
-                const emoji = document.querySelector(`[data-item="${item}"]`).textContent.split(' ')[0];
-                div.textContent = `${emoji} ${item}`;
-                checklist.appendChild(div);
-            });
+            // Update tasks
+            if (tasksText) {
+                const tasks = tasksText.split('\n').filter(t => t.trim());
+                const tasksList = document.getElementById('tasks-display');
+                tasksList.innerHTML = '';
+                tasks.forEach(task => {
+                    const li = document.createElement('li');
+                    li.textContent = task;
+                    tasksList.appendChild(li);
+                });
+                document.getElementById('tasks-widget').style.display = 'block';
+            } else {
+                document.getElementById('tasks-widget').style.display = 'none';
+            }
+
+            // Update "What You Need" checklist
+            const needChecklist = document.getElementById('need-checklist');
+            needChecklist.innerHTML = '';
+            if (selectedNeedItems.size > 0) {
+                selectedNeedItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'checklist-item';
+                    const emoji = document.querySelector(`[data-item="${item}"]`).textContent.split(' ')[0];
+                    div.textContent = `${emoji} ${item}`;
+                    needChecklist.appendChild(div);
+                });
+                document.getElementById('need-section').style.display = 'block';
+            } else {
+                document.getElementById('need-section').style.display = 'none';
+            }
+
+            // Update "What You'll Do" checklist
+            const doChecklist = document.getElementById('do-checklist');
+            doChecklist.innerHTML = '';
+            if (selectedDoItems.size > 0) {
+                selectedDoItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'checklist-item';
+                    const emoji = document.querySelector(`[data-item="${item}"]`).textContent.split(' ')[0];
+                    div.textContent = `${emoji} ${item}`;
+                    doChecklist.appendChild(div);
+                });
+                document.getElementById('do-section').style.display = 'block';
+            } else {
+                document.getElementById('do-section').style.display = 'none';
+            }
+
+            // Update toggle display
+            const toggleDisplay = document.getElementById('toggle-display');
+            if (activeToggle) {
+                const emoji = activeToggle === 'silence' ? '🤫' : '💬';
+                const text = activeToggle === 'silence' ? 'Silence' : 'Chat to your Partner';
+                toggleDisplay.className = 'toggle-display';
+                toggleDisplay.textContent = `${emoji} ${text}`;
+                toggleDisplay.style.display = 'block';
+            } else {
+                toggleDisplay.style.display = 'none';
+            }
 
             // Switch modes
             document.getElementById('setup-mode').style.display = 'none';
@@ -481,66 +829,87 @@
         function returnToSetup() {
             document.getElementById('setup-mode').style.display = 'block';
             document.getElementById('display-mode').classList.remove('active');
+            if (clockInterval) clearInterval(clockInterval);
             if (timerInterval) clearInterval(timerInterval);
         }
 
         function startClock() {
             updateClock();
-            timerInterval = setInterval(updateClock, 1000);
+            clockInterval = setInterval(updateClock, 1000);
         }
 
         function updateClock() {
             const now = new Date();
 
-            // Time
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('time').textContent = `${hours}:${minutes}`;
+            // Analogue clock
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourAngle = (hours * 30) + (minutes * 0.5);
+            const minuteAngle = minutes * 6;
+
+            document.getElementById('hour-hand').style.transform = `rotate(${hourAngle}deg)`;
+            document.getElementById('minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
 
             // Date
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
             document.getElementById('date').textContent = dateStr;
+        }
 
-            // Period countdown
-            const currentTime = `${hours}:${minutes}`;
-            const currentPeriod = getCurrentPeriod(currentTime);
-
-            if (currentPeriod) {
-                const endTime = parseTime(currentPeriod.end);
-                const currentMinutes = now.getHours() * 60 + now.getMinutes();
-                const minutesLeft = endTime - currentMinutes;
-
-                if (typeof currentPeriod.period === 'number') {
-                    document.getElementById('period-countdown').textContent =
-                        `Period ${currentPeriod.period} - ${minutesLeft} minute${minutesLeft !== 1 ? 's' : ''} remaining`;
-                } else {
-                    document.getElementById('period-countdown').textContent = currentPeriod.period;
+        // Timer functions
+        function startTimer(seconds) {
+            stopTimer();
+            timerSeconds = seconds;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                if (timerSeconds <= 0) {
+                    stopTimer();
+                    timerSeconds = 0;
                 }
-            } else {
-                document.getElementById('period-countdown').textContent = 'Outside school hours';
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
             }
         }
 
-        function getCurrentPeriod(currentTime) {
-            const current = parseTime(currentTime);
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            const display = document.getElementById('timer-display');
+            display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-            for (let slot of timetable) {
-                const start = parseTime(slot.start);
-                const end = parseTime(slot.end);
-
-                if (current >= start && current < end) {
-                    return slot;
-                }
+            display.classList.remove('warning', 'danger');
+            if (timerSeconds > 0 && timerSeconds <= 10) {
+                display.classList.add('danger');
+            } else if (timerSeconds > 10 && timerSeconds <= 30) {
+                display.classList.add('warning');
             }
-
-            return null;
         }
 
-        function parseTime(timeStr) {
-            const [hours, minutes] = timeStr.split(':').map(Number);
-            return hours * 60 + minutes;
+        // Random student picker
+        function pickRandomStudent() {
+            const result = document.getElementById('randomiser-result');
+            result.classList.add('spinning');
+
+            let spinCount = 0;
+            const spinInterval = setInterval(() => {
+                result.textContent = Math.floor(Math.random() * 30) + 1;
+                spinCount++;
+                if (spinCount > 20) {
+                    clearInterval(spinInterval);
+                    result.textContent = Math.floor(Math.random() * 30) + 1;
+                    result.classList.remove('spinning');
+                }
+            }, 100);
         }
     </script>
 </body>
