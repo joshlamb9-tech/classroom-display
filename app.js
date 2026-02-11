@@ -61,10 +61,19 @@ async function loadAllContent() {
 // Update clock
 function updateClock() {
     const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     const dateStr = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 
-    document.getElementById('time').textContent = timeStr;
+    // Update analogue clock
+    const hours = now.getHours() % 12;
+    const minutes = now.getMinutes();
+    const hourAngle = (hours * 30) + (minutes * 0.5);
+    const minuteAngle = minutes * 6;
+
+    const hourHand = document.getElementById('hour-hand');
+    const minuteHand = document.getElementById('minute-hand');
+    if (hourHand) hourHand.style.transform = `rotate(${hourAngle}deg)`;
+    if (minuteHand) minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+
     document.getElementById('date').textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
 
     updateCountdown(now);
