@@ -5,38 +5,22 @@
         "Ava", "Sami", "Rory", "Emma"
     ],
     "objectives": [
-        "Read a French map of a town",
-        "Identify places using French vocabulary",
-        "Understand prepositions of place"
+        "Complete end of unit assessment",
+        "Demonstrate understanding of unit content",
+        "Work independently and quietly"
     ],
-    "vocabulary": [
-        {"french": "une ville", "english": "a town"},
-        {"french": "il y a", "english": "there is/are"},
-        {"french": "une église", "english": "a church"},
-        {"french": "un marché", "english": "a market"},
-        {"french": "une boulangerie", "english": "a bakery"},
-        {"french": "près de", "english": "near"},
-        {"french": "loin de", "english": "far from"},
-        {"french": "à côté de", "english": "next to"}
-    ],
-    "sentenceBuilder": {
-        "headers": ["Starter", "Place", "Position"],
-        "columns": [
-            ["Dans la ville, il y a", "Je vois"],
-            ["une église", "un marché", "une boulangerie", "un parc", "une piscine"],
-            ["près du centre", "loin de l'école", "à côté de la gare"]
-        ]
-    },
+    "vocabulary": [],
+    "sentenceBuilder": null,
     "tasks": [
-        "Go through your prep",
-        "Create your street",
-        "Unprompted speaking tasks based on your street"
+        "Complete end of unit assessment",
+        "Check your work carefully",
+        "Read quietly if you finish early"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Look at the map - identify 5 places in French",
-    "exitTicket": "Write 3 sentences about where places are located (using près de, à côté de, loin de)"
+    "doNow": "Clear your desk - assessment conditions",
+    "exitTicket": "Hand in your assessment paper"
 }

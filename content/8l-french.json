@@ -5,49 +5,23 @@
         "Amelie", "Isla", "Flora", "Henry", "Fredrik", "Martha", "Edwin"
     ],
     "objectives": [
-        "Form the perfect tense with avoir and être",
-        "Use time expressions for past events",
-        "Describe past activities accurately"
+        "Explore the Y8 French revision website",
+        "Familiarize yourself with revision resources",
+        "Identify topics you need to revise"
     ],
-    "vocabulary": [
-        {"french": "hier", "english": "yesterday"},
-        {"french": "avant-hier", "english": "the day before yesterday"},
-        {"french": "la semaine dernière", "english": "last week"},
-        {"french": "le week-end dernier", "english": "last weekend"},
-        {"french": "il y a trois jours", "english": "three days ago"},
-        {"french": "j'ai acheté", "english": "I bought"},
-        {"french": "j'ai fait", "english": "I did"},
-        {"french": "j'ai joué", "english": "I played"},
-        {"french": "j'ai visité", "english": "I visited"},
-        {"french": "j'ai regardé", "english": "I watched"},
-        {"french": "j'ai vu", "english": "I saw"},
-        {"french": "je suis allé(e)", "english": "I went"},
-        {"french": "au cinéma", "english": "to the cinema"},
-        {"french": "au parc", "english": "to the park"},
-        {"french": "au centre commercial", "english": "to the shopping centre"},
-        {"french": "dans le centre-ville", "english": "in the town centre"}
-    ],
-    "sentenceBuilder": {
-        "headers": ["Time", "Subject + Auxiliary", "Activity", "Place"],
-        "columns": [
-            ["Hier", "Avant-hier", "La semaine dernière", "Le week-end dernier", "Il y a trois jours"],
-            ["j'ai", "je suis", "tu as", "tu es"],
-            ["acheté des vêtements", "fait du sport", "joué au foot", "visité un musée", "regardé un film", "allé(e)"],
-            ["au cinéma", "au parc", "au centre commercial", "dans le centre-ville", "au stade", "au château"]
-        ]
-    },
+    "vocabulary": [],
+    "sentenceBuilder": null,
     "tasks": [
-        "Mark prep",
-        "Perfect tense warm-up",
-        "Sentence builder practice",
-        "Reading comprehension",
-        "Writing: Describe what you did last weekend"
+        "Open the Y8 French revision site",
+        "Browse through the 10 topic areas",
+        "Try a practice activity",
+        "Note down topics you want to revise more"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Write 3 things you did last weekend using the perfect tense",
-    "exitTicket": "What's the difference between avoir and être in the perfect tense?"
+    "doNow": "Get your device ready and log in",
+    "exitTicket": "Which topic do you most need to revise?"
 }

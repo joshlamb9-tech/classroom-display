@@ -5,23 +5,23 @@
         "Darcey Bella", "Cecilia", "Sofia", "Arthur", "Aishpreet", "Edward"
     ],
     "objectives": [
-        "Develop reading comprehension skills",
-        "Build vocabulary through context",
-        "Complete reading tasks independently"
+        "Explore the Y8 French revision website",
+        "Familiarize yourself with revision resources",
+        "Identify topics you need to revise"
     ],
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Reading starter",
-        "Vocabulary building exercises",
-        "Reading comprehensions",
-        "Extension: Complete listening exercises"
+        "Open the Y8 French revision site",
+        "Browse through the 10 topic areas",
+        "Try a practice activity",
+        "Note down topics you want to revise more"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Complete the reading starter",
-    "exitTicket": "What new vocabulary did you learn today?"
+    "doNow": "Get your device ready and log in",
+    "exitTicket": "Which topic do you most need to revise?"
 }
