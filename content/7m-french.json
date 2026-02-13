@@ -12,10 +12,10 @@
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Receive your marked assessment",
-        "Read through feedback carefully",
-        "Correct your mistakes in green pen",
-        "Complete extension work if you finish early"
+        "Check marking",
+        "Be the teacher",
+        "Update the self assessments",
+        "Complete any outstanding work"
     ],
     "seatingPlan": {
         "rows": 4,
