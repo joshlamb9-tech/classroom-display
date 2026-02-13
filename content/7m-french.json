@@ -5,22 +5,23 @@
         "Ava", "Sami", "Rory", "Emma"
     ],
     "objectives": [
-        "Complete end of unit assessment",
-        "Demonstrate understanding of unit content",
-        "Work independently and quietly"
+        "Understand your assessment feedback",
+        "Learn from mistakes",
+        "Improve your work based on marking"
     ],
     "vocabulary": [],
     "sentenceBuilder": null,
     "tasks": [
-        "Complete end of unit assessment",
-        "Check your work carefully",
-        "Read quietly if you finish early"
+        "Receive your marked assessment",
+        "Read through feedback carefully",
+        "Correct your mistakes in green pen",
+        "Complete extension work if you finish early"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Clear your desk - assessment conditions",
-    "exitTicket": "Hand in your assessment paper"
+    "doNow": "Think about what you found difficult in the assessment",
+    "exitTicket": "Write one thing you will do differently next time"
 }
