@@ -1,0 +1,31 @@
+{
+  "workflow": "new-project",
+  "version": "1.20.5",
+  "project": "Y7&8 Pupil Tracking Dashboard",
+  "created": "2026-02-23",
+
+  "mode": "yolo",
+  "depth": "comprehensive",
+
+  "agents": {
+    "researcher": true,
+    "plan_checker": true,
+    "verifier": true
+  },
+
+  "research": {
+    "dimensions": ["stack", "features", "architecture", "pitfalls"]
+  },
+
+  "stack": {
+    "primary": "Google Sheets",
+    "supporting": ["Google Drive", "Google Apps Script", "Google Workspace MCP"]
+  },
+
+  "scope": {
+    "start_cohort": "Year 8",
+    "forms": ["8L", "8S", "7M", "7S"],
+    "pupil_count": 46,
+    "existing_data": "content/pupil-tracking/ markdown files"
+  }
+}
