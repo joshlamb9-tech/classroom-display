@@ -11,35 +11,35 @@
     ],
     "formTime": {
         "onThisDay": [
-            "1709 - Alexander Selkirk rescued after 4 years alone on a desert island (inspired Robinson Crusoe)",
-            "1935 - First lie detector test used in court",
-            "1990 - Nelson Mandela released from prison after 27 years"
+            "1945 - US soldiers raised the flag on Iwo Jima in one of the most iconic photographs ever taken",
+            "1954 - Children received the first ever polio vaccine injections, leading to a 99% reduction in cases worldwide",
+            "1868 - W.E.B. Du Bois was born — he became one of the most influential civil rights leaders in history"
         ],
         "discussionQuestions": [
-            "If you could have any superpower for just one day, what would you choose and why?",
-            "What's one thing you're looking forward to this week?",
-            "If you could travel anywhere in the world, where would you go?"
+            "What was the highlight of your half term?",
+            "If you could solve one problem in the world, what would it be?",
+            "What's one thing you want to achieve before the end of this term?"
         ],
         "newsHeadlines": [
             {
-                "headline": "Dinosaur footprints discovered in Oxfordshire",
-                "source": "BBC News",
-                "summary": "Scientists have uncovered a trail of footprints from 166 million years ago - the Middle Jurassic Period!"
+                "headline": "Team USA win first men's ice hockey gold since 1980 at Winter Olympics",
+                "source": "NBC Olympics",
+                "summary": "The US men's hockey team beat Canada in overtime at the Milano Cortina 2026 Winter Games — their first Olympic gold in 46 years"
             },
             {
-                "headline": "Carlos Alcaraz wins Australian Open at just 22",
-                "source": "Sky Sports",
-                "summary": "The Spanish tennis star becomes the youngest player ever to complete a Career Grand Slam"
+                "headline": "Young innovators from 47 countries compete to solve real-world problems",
+                "source": "NFTE",
+                "summary": "Nearly 4,000 young people created solutions for issues like financial literacy and AI-powered health tools in a global competition"
             },
             {
-                "headline": "England reach U19 Cricket World Cup semi-finals",
-                "source": "BBC Sport",
-                "summary": "Thomas Rew's brilliant century helped England fight back against Australia in the knockout stages"
+                "headline": "California grants new protections to endangered mountain lions",
+                "source": "CalMatters",
+                "summary": "Wildlife officials approved new laws to protect coastal mountain lions facing extinction due to habitat loss and road accidents"
             }
         ],
         "quoteOfTheDay": {
-            "quote": "The only way to do great work is to love what you do.",
-            "author": "Steve Jobs"
+            "quote": "Education is the most powerful weapon which you can use to change the world.",
+            "author": "Nelson Mandela"
         }
     }
 }
