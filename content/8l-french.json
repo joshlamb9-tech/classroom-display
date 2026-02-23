@@ -5,23 +5,32 @@
         "Amelie", "Isla", "Flora", "Henry", "Fredrik", "Martha", "Edwin"
     ],
     "objectives": [
-        "Explore the Y8 French revision website",
-        "Familiarize yourself with revision resources",
-        "Identify topics you need to revise"
+        "Reconnect with key vocabulary and phrases from your revision topics",
+        "Identify errors in French sentences involving past tense verbs",
+        "Know which topics you remember well and which need more work"
     ],
-    "vocabulary": [],
+    "vocabulary": [
+        { "french": "je suis allé(e)", "english": "I went" },
+        { "french": "je me suis couché(e)", "english": "I went to bed" },
+        { "french": "c'était", "english": "it was" },
+        { "french": "nous sommes allés", "english": "we went" },
+        { "french": "il faisait beau", "english": "the weather was nice" },
+        { "french": "on a visité", "english": "we visited" }
+    ],
     "sentenceBuilder": null,
     "tasks": [
-        "Mark prep",
-        "Learn about the Revision site",
-        "Explore the revision site",
-        "Complete a revision activity from the site"
+        "Do Now: 8-sentence translation — no notes",
+        "Listening: follow the French text as Mr Lamb reads",
+        "Section B: spot the 3 wrong English translations",
+        "Section C: find the grammar errors in the paragraph",
+        "Pairs: sentence builder retrieval — English to French from memory",
+        "Exit: write 3 things on the back of your worksheet"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Get your device ready and log in",
-    "exitTicket": "Which topic do you most need to revise?"
+    "doNow": "Translate these 8 sentences into French — no notes, no help. Write in your book: (1) I play football at the weekend. (2) I go to bed at 10 o'clock. (3) My favourite subject is history. (4) I have brown hair and blue eyes. (5) I went to Spain last summer. (6) We visited a museum. (7) I love swimming — it's exciting. (8) I get up at seven o'clock.",
+    "exitTicket": "Which topic do you most need to look at tonight on the revision website — and why?"
 }
