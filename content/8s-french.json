@@ -5,32 +5,33 @@
         "Darcey Bella", "Cecilia", "Sofia", "Arthur", "Aishpreet", "Edward"
     ],
     "objectives": [
-        "Reconnect with key vocabulary and phrases from your revision topics",
-        "Identify errors in French sentences involving past tense verbs",
-        "Know which topics you remember well and which need more work"
+        "Write 80–100 words using être verbs, imperfect chunks, and object pronouns correctly",
+        "Answer listening and reading comprehension questions under exam conditions",
+        "Speak spontaneously on a CE topic for at least one minute"
     ],
     "vocabulary": [
         { "french": "je suis allé(e)", "english": "I went" },
-        { "french": "je me suis couché(e)", "english": "I went to bed" },
-        { "french": "c'était", "english": "it was" },
-        { "french": "nous sommes allés", "english": "we went" },
-        { "french": "il faisait beau", "english": "the weather was nice" },
-        { "french": "on a visité", "english": "we visited" }
+        { "french": "nous sommes partis", "english": "we left / we set off" },
+        { "french": "c'était fantastique", "english": "it was fantastic" },
+        { "french": "il faisait chaud", "english": "the weather was hot" },
+        { "french": "je me suis levé(e)", "english": "I got up" },
+        { "french": "je l'ai trouvé ennuyeux", "english": "I found it boring" }
     ],
     "sentenceBuilder": null,
     "tasks": [
-        "Do Now: 8-sentence translation — no notes",
-        "Listening: follow the French text as Mr Lamb reads",
-        "Section B: spot the 3 wrong English translations",
-        "Section C: find the grammar errors in the paragraph",
-        "Pairs: sentence builder retrieval — English to French from memory",
-        "Exit: write 3 things on the back of your worksheet"
+        "Part 1 — Do Now: oral drill from Worksheet 2, Section A",
+        "Part 1 — Write your paragraph: 80–100 words, Worksheet 2 Section B",
+        "Part 1 — Self-edit: use the checklist on Worksheet 2 Section C",
+        "SWITCH — pick up Worksheet 3 when Mr Lamb says",
+        "Part 2 — Listening: answer 8 questions, Worksheet 3 Section A",
+        "Part 2 — Reading: work through the Baptiste text, Worksheet 3 Section B",
+        "Part 2 — Speaking: prepare your card, then speak for 2 minutes"
     ],
     "seatingPlan": {
         "rows": 4,
         "cols": 6,
         "seats": []
     },
-    "doNow": "Translate these 8 sentences into French — no notes, no help. Write in your book: (1) I play football at the weekend. (2) I go to bed at 10 o'clock. (3) My favourite subject is history. (4) I have brown hair and blue eyes. (5) I went to Spain last summer. (6) We visited a museum. (7) I love swimming — it's exciting. (8) I get up at seven o'clock.",
-    "exitTicket": "Which topic do you most need to look at tonight on the revision website — and why?"
+    "doNow": "Worksheet 2 is on your desk. Turn to Section A. For each English sentence, write the French — no notes. Grammar target is printed next to each one as a hint. Start at sentence 1.",
+    "exitTicket": "Look at the 10 CE topics on the board. Which ONE do you feel most confident about? Which ONE is your weakest? Write both on the back of Worksheet 3."
 }
