@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme 4 — Modern Hessian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Dosis', 'Segoe UI', sans-serif;
+            background-color: #b8a88a;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a8865a' fill-opacity='0.25'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 15px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px;
+            background: rgba(32, 27, 20, 0.97);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            color: #fff;
+            border-left: 4px solid #4a6fa5;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+        }
+
+        .analogue-clock { width: 96px; height: 96px; position: relative; }
+        .clock-face {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: rgba(74,111,165,0.1);
+            border: 2px solid #4a6fa5;
+            position: relative;
+        }
+        .clock-hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom center; border-radius: 2px; }
+        .hour-hand { width: 4px; height: 24px; margin-left: -2px; background: #fff; transform: rotate(305deg); }
+        .minute-hand { width: 3px; height: 36px; margin-left: -1.5px; background: #4a6fa5; transform: rotate(60deg); }
+        .clock-center { position: absolute; width: 8px; height: 8px; background: #4a6fa5; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 3; }
+
+        #class-info { text-align: center; }
+        #class-name { font-size: 1.9rem; font-weight: 600; display: block; letter-spacing: 0.5px; }
+        #period-info { font-size: 0.9rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+        #date-display { font-size: 1rem; color: rgba(255,255,255,0.6); text-align: right; line-height: 1.8; font-weight: 300; }
+
+        #dashboard {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            min-height: 0;
+        }
+
+        .column { display: flex; flex-direction: column; gap: 20px; }
+
+        .widget {
+            background: #242018;
+            border-radius: 4px;
+            padding: 22px;
+            color: #fff;
+            border: none;
+        }
+
+        /* Rounded variants for timer + randomiser */
+        .widget.rounded { border-radius: 18px; }
+
+        .widget h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            margin-bottom: 16px;
+            color: #fff;
+            padding-left: 12px;
+            border-left: 3px solid #4a6fa5;
+        }
+
+        /* Objectives */
+        .obj-list { list-style: none; }
+        .obj-list li {
+            padding: 10px 14px;
+            background: rgba(74,111,165,0.12);
+            border-radius: 4px;
+            margin: 8px 0;
+            border-left: 3px solid #4a6fa5;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* Vocab */
+        .vocab-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 9px 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            margin: 6px 0;
+        }
+        .vocab-fr { font-size: 1.05rem; font-weight: 600; }
+        .vocab-en { font-size: 0.88rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+        /* Sentence builder */
+        .sb-grid { display: flex; gap: 10px; }
+        .sb-col { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; padding: 12px; }
+        .sb-header {
+            font-size: 0.78rem; font-weight: 600; color: #4a6fa5;
+            margin-bottom: 10px; letter-spacing: 0.5px;
+        }
+        .sb-item { font-size: 0.95rem; font-weight: 300; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .sb-item:last-child { border-bottom: none; }
+
+        /* Traffic */
+        .traffic-wrap { display: flex; justify-content: center; align-items: center; padding: 12px; }
+        .traffic-light { background: #111; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+        .light { width: 60px; height: 60px; border-radius: 50%; opacity: 0.2; }
+        .light.red { background: #f44336; }
+        .light.amber { background: #ff9800; }
+        .light.green { background: #4caf50; opacity: 1; box-shadow: 0 0 22px rgba(76,175,80,0.7); }
+
+        /* Timer */
+        .timer-wrap { text-align: center; padding: 20px 22px; }
+        .timer-display { font-size: 5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .timer-btns { margin-top: 16px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 8px 16px; font-size: 0.95rem; border: none; border-radius: 6px;
+            background: #4a6fa5; color: #fff; cursor: pointer; font-family: inherit; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #3a5a8c; }
+
+        /* Randomiser */
+        .rand-wrap { text-align: center; padding: 20px 22px; }
+        .rand-result {
+            font-size: 2.5rem; font-weight: 700; padding: 18px;
+            background: rgba(74,111,165,0.1); border-radius: 10px; margin: 12px 0;
+            min-height: 80px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(74,111,165,0.25);
+        }
+
+        /* Scoreboard */
+        .score-wrap { text-align: center; }
+        .scoreboard { display: flex; gap: 14px; margin-bottom: 14px; }
+        .team { flex: 1; background: rgba(74,111,165,0.1); border-radius: 4px; padding: 14px; border: 1px solid rgba(74,111,165,0.2); }
+        .team-name { display: block; font-size: 0.85rem; font-weight: 300; margin-bottom: 5px; color: rgba(255,255,255,0.7); }
+        .team-score { display: block; font-size: 3rem; font-weight: 700; color: #fff; margin: 8px 0; }
+        .score-btns { display: flex; gap: 8px; justify-content: center; }
+        .score-btns .btn { padding: 5px 13px; font-size: 1rem; }
+
+        .badge {
+            position: fixed; bottom: 18px; right: 20px;
+            background: #4a6fa5; color: #fff;
+            padding: 6px 18px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="analogue-clock">
+                <div class="clock-face">
+                    <div class="clock-hand hour-hand"></div>
+                    <div class="clock-hand minute-hand"></div>
+                    <div class="clock-center"></div>
+                </div>
+            </div>
+            <div id="class-info">
+                <span id="class-name">8L French</span>
+                <span id="period-info">Period 4 &nbsp;·&nbsp; 39 min remaining</span>
+            </div>
+            <div id="date-display">Wednesday<br>25 February 2026</div>
+        </header>
+
+        <main id="dashboard">
+            <div class="column">
+                <div class="widget">
+                    <h3>Learning Objectives</h3>
+                    <ul class="obj-list">
+                        <li>Describe activities using the perfect tense</li>
+                        <li>Use time markers: <em>hier, ce matin, la semaine dernière</em></li>
+                        <li>Give opinions using <em>c'était</em> + adjective</li>
+                    </ul>
+                </div>
+                <div class="widget" style="flex:1;overflow-y:auto">
+                    <h3>Key Vocabulary</h3>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai joué</span><span class="vocab-en">I played</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai mangé</span><span class="vocab-en">I ate</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai regardé</span><span class="vocab-en">I watched</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">je suis allé(e)</span><span class="vocab-en">I went</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">c'était</span><span class="vocab-en">it was</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">génial / nul</span><span class="vocab-en">great / rubbish</span></div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="widget" style="flex:1;overflow-y:auto">
+                    <h3>Sentence Builder</h3>
+                    <div class="sb-grid">
+                        <div class="sb-col">
+                            <div class="sb-header">Sujet</div>
+                            <div class="sb-item">J'</div>
+                            <div class="sb-item">Il / Elle</div>
+                            <div class="sb-item">Nous</div>
+                            <div class="sb-item">Ils / Elles</div>
+                        </div>
+                        <div class="sb-col">
+                            <div class="sb-header">Verbe</div>
+                            <div class="sb-item">ai joué</div>
+                            <div class="sb-item">ai mangé</div>
+                            <div class="sb-item">est allé(e)</div>
+                            <div class="sb-item">a regardé</div>
+                        </div>
+                        <div class="sb-col">
+                            <div class="sb-header">Complément</div>
+                            <div class="sb-item">au foot</div>
+                            <div class="sb-item">une pizza</div>
+                            <div class="sb-item">au cinéma</div>
+                            <div class="sb-item">la télé</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="traffic-wrap">
+                        <div class="traffic-light">
+                            <div class="light red"></div>
+                            <div class="light amber"></div>
+                            <div class="light green"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="widget rounded timer-wrap">
+                    <div class="timer-display">05:00</div>
+                    <div class="timer-btns">
+                        <button class="btn">1m</button>
+                        <button class="btn">2m</button>
+                        <button class="btn">5m</button>
+                        <button class="btn">10m</button>
+                        <button class="btn">Stop</button>
+                    </div>
+                </div>
+                <div class="widget rounded rand-wrap">
+                    <h3>Random Student</h3>
+                    <div class="rand-result">?</div>
+                    <button class="btn" style="padding:10px 28px;font-size:1rem">Pick</button>
+                </div>
+                <div class="widget score-wrap">
+                    <h3>Scoreboard</h3>
+                    <div class="scoreboard">
+                        <div class="team">
+                            <span class="team-name">Pomme de Terre</span>
+                            <span class="team-score">4</span>
+                            <div class="score-btns">
+                                <button class="btn">+1</button>
+                                <button class="btn">−1</button>
+                            </div>
+                        </div>
+                        <div class="team">
+                            <span class="team-name">Haricot Vert</span>
+                            <span class="team-score">2</span>
+                            <div class="score-btns">
+                                <button class="btn">+1</button>
+                                <button class="btn">−1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" style="font-size:0.82rem;padding:6px 14px">Reset Scores</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="badge">Theme 4 — Modern Hessian</div>
+</body>
+</html>

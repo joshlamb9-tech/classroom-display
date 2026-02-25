@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme 2 — Dark Hessian Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Dosis', 'Segoe UI', sans-serif;
+            background-color: #0f0d0a;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 15px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(8, 6, 4, 0.98);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            color: #fff;
+            border: 1px solid rgba(212,160,86,0.3);
+            border-top: 1px solid rgba(212,160,86,0.5);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+        }
+
+        .analogue-clock { width: 100px; height: 100px; position: relative; }
+        .clock-face {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: rgba(212,160,86,0.05);
+            border: 2px solid #d4a056;
+            position: relative;
+        }
+        .clock-hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom center; border-radius: 3px; }
+        .hour-hand { width: 4px; height: 25px; margin-left: -2px; background: #fff; transform: rotate(305deg); }
+        .minute-hand { width: 3px; height: 38px; margin-left: -1.5px; background: #d4a056; transform: rotate(60deg); }
+        .clock-center { position: absolute; width: 8px; height: 8px; background: #d4a056; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 3; box-shadow: 0 0 8px rgba(212,160,86,0.8); }
+
+        #class-info { text-align: center; }
+        #class-name { font-size: 2rem; font-weight: 700; display: block; color: #d4a056; }
+        #period-info { font-size: 1rem; color: rgba(255,255,255,0.55); }
+        #date-display { font-size: 1.1rem; color: rgba(255,255,255,0.6); text-align: right; line-height: 1.7; }
+
+        #dashboard {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            min-height: 0;
+        }
+
+        .column { display: flex; flex-direction: column; gap: 15px; }
+
+        .widget {
+            background: rgba(18, 14, 9, 0.98);
+            border-radius: 10px;
+            padding: 18px;
+            color: #fff;
+            border: 1px solid rgba(212,160,86,0.2);
+        }
+
+        .widget h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+            color: #d4a056;
+            font-weight: 700;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212,160,86,0.25);
+        }
+
+        /* Objectives */
+        .obj-list { list-style: none; }
+        .obj-list li {
+            padding: 9px 14px;
+            background: rgba(212,160,86,0.07);
+            border-radius: 6px;
+            margin: 7px 0;
+            border-left: 3px solid #d4a056;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Vocab */
+        .vocab-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 9px 12px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 6px;
+            margin: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .vocab-item:last-child { border-bottom: none; }
+        .vocab-fr { font-size: 1.1rem; font-weight: 600; color: #fff; }
+        .vocab-en { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+
+        /* Sentence builder */
+        .sb-grid { display: flex; gap: 8px; }
+        .sb-col { flex: 1; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 10px; border: 1px solid rgba(212,160,86,0.12); }
+        .sb-header { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: #d4a056; font-weight: 700; margin-bottom: 9px; }
+        .sb-item { font-size: 0.95rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
+        .sb-item:last-child { border-bottom: none; }
+
+        /* Traffic */
+        .traffic-wrap { display: flex; justify-content: center; align-items: center; padding: 12px; }
+        .traffic-light { background: #050403; border-radius: 16px; padding: 15px; display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(255,255,255,0.08); }
+        .light { width: 60px; height: 60px; border-radius: 50%; opacity: 0.18; }
+        .light.red { background: #f44336; }
+        .light.amber { background: #ff9800; }
+        .light.green { background: #1a7a6e; opacity: 1; box-shadow: 0 0 26px rgba(26,122,110,0.8); }
+
+        /* Timer */
+        .timer-wrap { text-align: center; padding: 20px; }
+        .timer-display { font-size: 5rem; font-weight: 700; font-variant-numeric: tabular-nums; color: #d4a056; }
+        .timer-btns { margin-top: 15px; display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 7px 15px; font-size: 0.95rem; border: 1px solid rgba(212,160,86,0.4);
+            border-radius: 6px; background: rgba(212,160,86,0.08); color: #d4a056;
+            cursor: pointer; font-family: inherit; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: rgba(212,160,86,0.2); border-color: #d4a056; }
+
+        /* Randomiser */
+        .rand-wrap { text-align: center; padding: 18px; }
+        .rand-result {
+            font-size: 2.5rem; font-weight: 700; padding: 18px;
+            background: rgba(212,160,86,0.06); border-radius: 10px; margin: 12px 0;
+            min-height: 80px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(212,160,86,0.15);
+        }
+        .pick-btn { padding: 10px 28px; font-size: 1.1rem; }
+
+        /* Scoreboard */
+        .score-wrap { text-align: center; }
+        .scoreboard { display: flex; gap: 12px; margin-bottom: 12px; }
+        .team { flex: 1; background: rgba(26,122,110,0.12); border-radius: 10px; padding: 14px; border: 1px solid rgba(26,122,110,0.3); }
+        .team-name { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: rgba(255,255,255,0.75); }
+        .team-score { display: block; font-size: 3.2rem; font-weight: 700; color: #d4a056; margin: 8px 0; }
+        .score-btns { display: flex; gap: 8px; justify-content: center; }
+        .score-btns .btn { padding: 5px 13px; font-size: 1rem; }
+
+        .badge {
+            position: fixed; bottom: 18px; right: 20px;
+            background: rgba(212,160,86,0.15); color: #d4a056;
+            padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; z-index: 100;
+            border: 1px solid rgba(212,160,86,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="analogue-clock">
+                <div class="clock-face">
+                    <div class="clock-hand hour-hand"></div>
+                    <div class="clock-hand minute-hand"></div>
+                    <div class="clock-center"></div>
+                </div>
+            </div>
+            <div id="class-info">
+                <span id="class-name">8L French</span>
+                <span id="period-info">Period 4 &nbsp;·&nbsp; 39 min remaining</span>
+            </div>
+            <div id="date-display">Wednesday<br>25 February 2026</div>
+        </header>
+
+        <main id="dashboard">
+            <div class="column">
+                <div class="widget">
+                    <h3>Learning Objectives</h3>
+                    <ul class="obj-list">
+                        <li>Describe activities using the perfect tense</li>
+                        <li>Use time markers: <em>hier, ce matin, la semaine dernière</em></li>
+                        <li>Give opinions using <em>c'était</em> + adjective</li>
+                    </ul>
+                </div>
+                <div class="widget" style="flex:1;overflow-y:auto">
+                    <h3>Key Vocabulary</h3>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai joué</span><span class="vocab-en">I played</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai mangé</span><span class="vocab-en">I ate</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">j'ai regardé</span><span class="vocab-en">I watched</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">je suis allé(e)</span><span class="vocab-en">I went</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">c'était</span><span class="vocab-en">it was</span></div>
+                    <div class="vocab-item"><span class="vocab-fr">génial / nul</span><span class="vocab-en">great / rubbish</span></div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="widget" style="flex:1;overflow-y:auto">
+                    <h3>Sentence Builder</h3>
+                    <div class="sb-grid">
+                        <div class="sb-col">
+                            <div class="sb-header">Sujet</div>
+                            <div class="sb-item">J'</div>
+                            <div class="sb-item">Il / Elle</div>
+                            <div class="sb-item">Nous</div>
+                            <div class="sb-item">Ils / Elles</div>
+                        </div>
+                        <div class="sb-col">
+                            <div class="sb-header">Verbe</div>
+                            <div class="sb-item">ai joué</div>
+                            <div class="sb-item">ai mangé</div>
+                            <div class="sb-item">est allé(e)</div>
+                            <div class="sb-item">a regardé</div>
+                        </div>
+                        <div class="sb-col">
+                            <div class="sb-header">Complément</div>
+                            <div class="sb-item">au foot</div>
+                            <div class="sb-item">une pizza</div>
+                            <div class="sb-item">au cinéma</div>
+                            <div class="sb-item">la télé</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget traffic-wrap">
+                    <div class="traffic-light">
+                        <div class="light red"></div>
+                        <div class="light amber"></div>
+                        <div class="light green"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="widget timer-wrap">
+                    <div class="timer-display">05:00</div>
+                    <div class="timer-btns">
+                        <button class="btn">1m</button>
+                        <button class="btn">2m</button>
+                        <button class="btn">5m</button>
+                        <button class="btn">10m</button>
+                        <button class="btn">Stop</button>
+                    </div>
+                </div>
+                <div class="widget rand-wrap">
+                    <h3>Random Student</h3>
+                    <div class="rand-result">?</div>
+                    <button class="btn pick-btn">Pick</button>
+                </div>
+                <div class="widget score-wrap">
+                    <h3>Scoreboard</h3>
+                    <div class="scoreboard">
+                        <div class="team">
+                            <span class="team-name">Pomme de Terre</span>
+                            <span class="team-score">4</span>
+                            <div class="score-btns">
+                                <button class="btn">+1</button>
+                                <button class="btn">−1</button>
+                            </div>
+                        </div>
+                        <div class="team">
+                            <span class="team-name">Haricot Vert</span>
+                            <span class="team-score">2</span>
+                            <div class="score-btns">
+                                <button class="btn">+1</button>
+                                <button class="btn">−1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" style="font-size:0.82rem;padding:6px 14px;margin-top:4px">Reset Scores</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="badge">Theme 2 — Dark Hessian Pro</div>
+</body>
+</html>
