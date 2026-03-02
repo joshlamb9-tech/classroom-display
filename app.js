@@ -37,7 +37,7 @@ async function loadTimetable() {
 
 // Load all class content
 async function loadAllContent() {
-    const classes = ['form-time', '8s-french', '8l-french', '3j-french', '6t-french', '7s-french', '7m-french'];
+    const classes = ['form-time', 'scholars', '8s-french', '8l-french', '3j-french', '6t-french', '7s-french', '7m-french'];
     for (const cls of classes) {
         try {
             const response = await fetch(`content/${cls}.json`);
@@ -164,11 +164,12 @@ function setClass(classId) {
     const content = classContent[classId];
     if (!content) return;
 
-    // Toggle form time mode
-    if (classId === 'form-time') {
-        document.body.classList.add('form-time-mode');
-    } else {
-        document.body.classList.remove('form-time-mode');
+    // Toggle display modes
+    document.body.classList.toggle('form-time-mode', classId === 'form-time');
+    document.body.classList.toggle('scholars-mode', classId === 'scholars');
+    if (classId !== 'scholars' && scholarsFactInterval) {
+        clearInterval(scholarsFactInterval);
+        scholarsFactInterval = null;
     }
 
     document.getElementById('class-name').textContent = content.className || classId;
@@ -177,6 +178,7 @@ function setClass(classId) {
     renderSentenceBuilder(content.sentenceBuilder);
     renderTasks(content.tasks);
     renderFormTime(content.formTime);
+    renderScholars(content.scholars, content.students);
 }
 
 // Render objectives
@@ -685,6 +687,192 @@ function loadWidgetLayout() {
 function resetWidgetLayout() {
     localStorage.removeItem('widget-layout');
     location.reload();
+}
+
+// ── Scholars ──────────────────────────────────────────
+
+let scholarsFactInterval = null;
+let scholarsFactIndex = 0;
+
+const SCHOLARS_FACTS = [
+    { category: 'Science', text: 'Honey never spoils. Archaeologists have found 3,000-year-old honey in Egyptian tombs — still perfectly edible.' },
+    { category: 'Maths', text: 'There are more possible games of chess than there are atoms in the observable universe.' },
+    { category: 'Language', text: 'Shakespeare invented over 1,700 words we still use today — including "bedroom", "lonely", "generous" and "obscene".' },
+    { category: 'Geography', text: 'Russia spans 11 time zones. When it\'s midnight in Kaliningrad, it\'s already 9am the next day in Kamchatka.' },
+    { category: 'Science', text: 'A single bolt of lightning is around five times hotter than the surface of the Sun.' },
+    { category: 'History', text: 'The Eastern Roman Empire survived for over 1,000 years after the fall of Rome in the West, finally ending in 1453.' },
+    { category: 'Philosophy', text: 'The Ship of Theseus: if every plank is replaced one by one, is it still the same ship? This ancient paradox still divides philosophers today.' },
+    { category: 'Science', text: 'Octopuses have three hearts, blue blood, and nine brains — one central brain and one in each arm.' },
+    { category: 'Language', text: 'The word "salary" comes from the Latin "salarium" — Roman soldiers were sometimes paid in salt, which was extremely valuable.' },
+    { category: 'Maths', text: 'If you shuffle a deck of cards properly, the exact order you\'ve created has almost certainly never existed before in the history of the universe.' },
+    { category: 'Geography', text: 'The Sahara Desert is roughly the same size as the United States — and it was green, with lakes, just 10,000 years ago.' },
+    { category: 'History', text: 'Cleopatra lived closer in time to the Moon landings than to the construction of the Great Pyramid of Giza.' },
+    { category: 'Science', text: 'There are more trees on Earth than stars in the Milky Way: approximately 3 trillion trees to 100–400 billion stars.' },
+    { category: 'Philosophy', text: 'Plato argued that the physical world is just a shadow of a higher reality — like people watching shadows on a cave wall and mistaking them for real things.' },
+    { category: 'Language', text: 'The longest word in a major English dictionary is "pneumonoultramicroscopicsilicovolcanoconiosis" — a lung disease caused by inhaling volcanic ash.' }
+];
+
+const SCHOLARS_MOTIONS = [
+    'social media does more harm than good.',
+    'zoos should not exist.',
+    'artificial intelligence is a greater threat than an opportunity.',
+    'the arts are as important as STEM subjects.',
+    'homework should be abolished.',
+    'voting should be compulsory for all citizens.',
+    'the exploration of space is a waste of money.',
+    'animals should have legal rights.',
+    'private schools should be abolished.',
+    'we should prioritise the environment over economic growth.',
+    'celebrities have too much influence over young people.',
+    'history is more important than science.',
+    'a universal basic income should be introduced.',
+    'standardised testing does more harm than good.',
+    'great leaders are born, not made.',
+    'books are more valuable than screens for education.'
+];
+
+const SCHOLARS_CHECKLIST = [
+    'Define your key terms clearly',
+    'State your main argument in one sentence',
+    'Give at least one specific piece of evidence',
+    'Anticipate and rebut the opposing view',
+    'Conclude with a memorable line'
+];
+
+let lastScholarsMotion = -1;
+
+function renderScholars(scholarsData, students) {
+    if (!scholarsData && !students) return;
+
+    // Sign in
+    renderScholarsSignIn(students || []);
+
+    // Dates
+    if (scholarsData?.oundleDates) {
+        renderScholarsDates(scholarsData.oundleDates);
+    }
+
+    // Facts — start on a random one
+    scholarsFactIndex = Math.floor(Math.random() * SCHOLARS_FACTS.length);
+    showScholarFact(scholarsFactIndex);
+    if (scholarsFactInterval) clearInterval(scholarsFactInterval);
+    scholarsFactInterval = setInterval(nextScholarFact, 45000);
+
+    // Motion
+    newScholarsMotion();
+
+    // Checklist
+    const list = document.getElementById('scholars-checklist-list');
+    list.innerHTML = '';
+    SCHOLARS_CHECKLIST.forEach(item => {
+        const li = document.createElement('li');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.onchange = () => {
+            li.style.textDecoration = cb.checked ? 'line-through' : '';
+            li.style.color = cb.checked ? 'rgba(255,255,255,0.35)' : '';
+        };
+        li.appendChild(cb);
+        li.appendChild(document.createTextNode(item));
+        list.appendChild(li);
+    });
+}
+
+function renderScholarsSignIn(students) {
+    const grid = document.getElementById('scholars-signin-grid');
+    if (!grid) return;
+
+    const today = new Date().toISOString().split('T')[0];
+    const key = `scholars-signin-${today}`;
+    const signedIn = JSON.parse(localStorage.getItem(key) || '[]');
+
+    grid.innerHTML = '';
+    students.forEach(name => {
+        const btn = document.createElement('button');
+        btn.className = 'scholar-signin-btn' + (signedIn.includes(name) ? ' signed-in' : '');
+        btn.innerHTML = `<span class="scholar-signin-initial">${name[0]}</span><span class="scholar-signin-name">${name}</span>`;
+        btn.onclick = () => toggleScholarSignIn(name, students);
+        grid.appendChild(btn);
+    });
+
+    updateScholarsSignInStatus(students, signedIn);
+}
+
+function toggleScholarSignIn(name, students) {
+    const today = new Date().toISOString().split('T')[0];
+    const key = `scholars-signin-${today}`;
+    let signedIn = JSON.parse(localStorage.getItem(key) || '[]');
+
+    if (signedIn.includes(name)) {
+        signedIn = signedIn.filter(s => s !== name);
+    } else {
+        signedIn.push(name);
+    }
+    localStorage.setItem(key, JSON.stringify(signedIn));
+    renderScholarsSignIn(students);
+}
+
+function updateScholarsSignInStatus(students, signedIn) {
+    const status = document.getElementById('scholars-signin-status');
+    if (!status) return;
+    if (signedIn.length === 0) {
+        status.textContent = 'Waiting for sign in...';
+        status.style.color = '';
+    } else if (signedIn.length === students.length) {
+        status.textContent = 'All scholars present ✓';
+        status.style.color = '#4caf50';
+    } else {
+        const absent = students.filter(s => !signedIn.includes(s));
+        status.textContent = `${signedIn.length}/${students.length} here — waiting for: ${absent.join(', ')}`;
+        status.style.color = '';
+    }
+}
+
+function renderScholarsDates(dates) {
+    const list = document.getElementById('scholars-dates-list');
+    if (!list) return;
+    list.innerHTML = '';
+    dates.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'scholars-date-item';
+        div.innerHTML = `
+            <span class="scholars-date-badge ${d.status}">${d.label}</span>
+            <span class="scholars-date-info">
+                <span class="scholars-date-title">${d.date}</span>
+                <span class="scholars-date-desc">${d.detail}</span>
+            </span>
+        `;
+        list.appendChild(div);
+    });
+}
+
+function showScholarFact(index) {
+    const f = SCHOLARS_FACTS[index];
+    const cat = document.getElementById('scholars-fact-category');
+    const text = document.getElementById('scholars-fact-text');
+    const counter = document.getElementById('scholars-fact-counter');
+    if (cat) cat.textContent = f.category;
+    if (text) text.textContent = f.text;
+    if (counter) counter.textContent = `${index + 1} / ${SCHOLARS_FACTS.length}`;
+}
+
+function nextScholarFact() {
+    scholarsFactIndex = (scholarsFactIndex + 1) % SCHOLARS_FACTS.length;
+    showScholarFact(scholarsFactIndex);
+}
+
+function prevScholarFact() {
+    scholarsFactIndex = (scholarsFactIndex - 1 + SCHOLARS_FACTS.length) % SCHOLARS_FACTS.length;
+    showScholarFact(scholarsFactIndex);
+}
+
+function newScholarsMotion() {
+    let idx;
+    do { idx = Math.floor(Math.random() * SCHOLARS_MOTIONS.length); }
+    while (idx === lastScholarsMotion && SCHOLARS_MOTIONS.length > 1);
+    lastScholarsMotion = idx;
+    const el = document.getElementById('scholars-motion-text');
+    if (el) el.textContent = SCHOLARS_MOTIONS[idx];
 }
 
 // Keyboard shortcuts

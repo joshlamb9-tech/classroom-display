@@ -3,6 +3,7 @@
     {"class": "3j-french", "start": "12:20", "end": "12:55", "days": ["monday"]},
     {"class": "6t-french", "start": "16:05", "end": "16:40", "days": ["monday"]},
     {"class": "7s-french", "start": "16:40", "end": "17:15", "days": ["monday"]},
+    {"class": "scholars", "start": "17:15", "end": "18:15", "days": ["monday"]},
 
     {"class": "3j-french", "start": "10:05", "end": "10:40", "days": ["tuesday"]},
 

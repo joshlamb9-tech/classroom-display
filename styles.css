@@ -87,7 +87,7 @@ header {
     height: 100%;
     border-radius: 50%;
     background: rgba(255,255,255,0.1);
-    border: 3px solid #d4a056;
+    border: 3px solid #81001C;
     position: relative;
 }
 
@@ -95,7 +95,7 @@ header {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #d4a056;
+    background: #81001C;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -122,7 +122,7 @@ header {
     width: 3px;
     height: 45px;
     margin-left: -1.5px;
-    background: #d4a056;
+    background: #81001C;
 }
 
 /* Dashboard Grid */
@@ -197,7 +197,7 @@ body.form-time-mode #quote-of-day {
 
 #widget-toggles h3 {
     margin-bottom: 15px;
-    color: #d4a056;
+    color: #81001C;
     font-size: 1.1rem;
 }
 
@@ -216,7 +216,7 @@ body.form-time-mode #quote-of-day {
 #widget-toggles button {
     margin-top: 15px;
     padding: 8px 20px;
-    background: #2c3e2d;
+    background: #00534C;
     border: none;
     border-radius: 6px;
     color: #e8dcc8;
@@ -256,8 +256,8 @@ body.form-time-mode #quote-of-day {
 
 .widget-ghost {
     opacity: 0.4;
-    background: rgba(212, 160, 86, 0.3) !important;
-    border: 2px dashed #d4a056 !important;
+    background: rgba(129, 0, 28, 0.3) !important;
+    border: 2px dashed #81001C !important;
 }
 
 .widget-chosen {
@@ -275,7 +275,7 @@ body.form-time-mode #quote-of-day {
 }
 
 .column.sortable-chosen {
-    background: rgba(212, 160, 86, 0.1);
+    background: rgba(129, 0, 28, 0.1);
     border-radius: 12px;
 }
 
@@ -304,7 +304,7 @@ body.form-time-mode #quote-of-day {
     margin: -15px -15px 14px -15px;
     padding: 10px 15px;
     color: #e8dcc8;
-    background: #2c3e2d;
+    background: #00534C;
     border-radius: 6px 6px 0 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 8px rgba(232, 220, 200, 0.12);
@@ -326,7 +326,7 @@ body.form-time-mode #quote-of-day {
     background: rgba(255,255,255,0.1);
     border-radius: 8px;
     margin: 6px 0;
-    border-left: 4px solid #d4a056;
+    border-left: 4px solid #81001C;
 }
 
 /* Vocabulary */
@@ -401,7 +401,7 @@ body.form-time-mode #quote-of-day {
     font-size: 1rem;
     border: none;
     border-radius: 6px;
-    background: #2c3e2d;
+    background: #00534C;
     color: #e8dcc8;
     cursor: pointer;
     font-family: inherit;
@@ -409,7 +409,7 @@ body.form-time-mode #quote-of-day {
 }
 
 #timer-controls button:hover {
-    background: #3a5240;
+    background: #006b61;
 }
 
 /* Randomiser */
@@ -483,7 +483,7 @@ body.form-time-mode #quote-of-day {
     font-size: 1.2rem;
     border: none;
     border-radius: 8px;
-    background: #2c3e2d;
+    background: #00534C;
     color: #e8dcc8;
     cursor: pointer;
     font-family: inherit;
@@ -491,7 +491,7 @@ body.form-time-mode #quote-of-day {
 }
 
 #widget-randomiser button:hover {
-    background: #3a5240;
+    background: #006b61;
 }
 
 /* Overlay for expanded randomiser */
@@ -534,7 +534,7 @@ body.form-time-mode #quote-of-day {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
-    color: #d4a056;
+    color: #81001C;
     font-weight: 700;
 }
 
@@ -667,13 +667,13 @@ body.form-time-mode #quote-of-day {
     background: rgba(255,255,255,0.1);
     border-radius: 8px;
     margin: 6px 0;
-    border-left: 4px solid #d4a056;
+    border-left: 4px solid #81001C;
 }
 
 #tasks-list li::before {
     content: counter(task-counter) ". ";
     font-weight: 700;
-    color: #d4a056;
+    color: #81001C;
 }
 
 /* Editable tasks area */
@@ -698,7 +698,7 @@ body.form-time-mode #quote-of-day {
 }
 
 #tasks-editable:focus {
-    border-color: #d4a056;
+    border-color: #81001C;
     background: rgba(255,255,255,0.15);
 }
 
@@ -728,7 +728,7 @@ body:hover #controls {
     font-size: 0.9rem;
     border: none;
     border-radius: 5px;
-    background: #2c3e2d;
+    background: #00534C;
     color: #e8dcc8;
     cursor: pointer;
     font-weight: 600;
@@ -800,7 +800,7 @@ body.form-time-mode #widget-discussion {
 }
 
 #discussion-list li {
-    border-left: 4px solid #d4a056;
+    border-left: 4px solid #81001C;
 }
 
 .news-item {
@@ -820,7 +820,7 @@ body.form-time-mode #widget-discussion {
 .news-source {
     display: block;
     font-size: 0.8rem;
-    color: #d4a056;
+    color: #81001C;
     margin: 4px 0;
 }
 
@@ -844,7 +844,7 @@ body.form-time-mode #widget-discussion {
     font-size: 1rem;
     font-style: normal;
     margin-top: 10px;
-    color: #d4a056;
+    color: #81001C;
 }
 
 /* Sign In */
@@ -882,7 +882,283 @@ body.form-time-mode #widget-discussion {
 #signin-status {
     text-align: center;
     font-size: 1.1rem;
-    color: #d4a056;
+    color: #81001C;
     padding-top: 8px;
     border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── Scholars Mode ─────────────────────────────────── */
+
+body.scholars-mode .lesson-only {
+    display: none !important;
+}
+
+body.scholars-mode #widget-randomiser,
+body.scholars-mode #widget-scoreboard,
+body.scholars-mode #widget-tasks {
+    display: none !important;
+}
+
+body.scholars-mode .scholars-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+}
+
+body.scholars-mode #scholars-left,
+body.scholars-mode #scholars-center {
+    flex: 1;
+    min-height: 0;
+}
+
+body.scholars-mode #widget-scholars-dates,
+body.scholars-mode #widget-scholars-facts {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Scholar sign-in buttons */
+#scholars-signin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.scholar-signin-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    transition: all 0.2s ease;
+    gap: 4px;
+}
+
+.scholar-signin-btn:hover {
+    background: rgba(255,255,255,0.18);
+    transform: scale(1.03);
+}
+
+.scholar-signin-initial {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.scholar-signin-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.scholar-signin-btn.signed-in {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: #4caf50;
+    box-shadow: 0 0 14px rgba(76, 175, 80, 0.3);
+}
+
+.scholar-signin-btn.signed-in .scholar-signin-initial {
+    color: #4caf50;
+}
+
+#scholars-signin-status {
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Scholars dates list */
+.scholars-date-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.scholars-date-item:last-child { border-bottom: none; }
+
+.scholars-date-badge {
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.scholars-date-badge.past {
+    background: rgba(80,80,80,0.4);
+    color: rgba(255,255,255,0.4);
+}
+
+.scholars-date-badge.upcoming {
+    background: #00534C;
+    color: #e8dcc8;
+}
+
+.scholars-date-info { flex: 1; }
+
+.scholars-date-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e8dcc8;
+    display: block;
+}
+
+.scholars-date-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.scholars-date-when {
+    font-size: 0.85rem;
+    color: #e8dcc8;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Scholars facts */
+#widget-scholars-facts {
+    overflow-y: auto;
+}
+
+#scholars-fact-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    padding: 10px 5px;
+    min-height: 200px;
+}
+
+#scholars-fact-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #81001C;
+    background: rgba(129, 0, 28, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+#scholars-fact-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #fff;
+    max-width: 95%;
+}
+
+.scholars-fact-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.scholars-fact-nav button {
+    padding: 7px 16px;
+    border: none;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.12);
+    color: #e8dcc8;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.scholars-fact-nav button:hover { background: rgba(255,255,255,0.22); }
+
+#scholars-fact-counter {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Scholars debate */
+#scholars-motion-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    padding: 10px 5px;
+    min-height: 150px;
+}
+
+.scholars-motion-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+}
+
+#scholars-motion-text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #fff;
+    font-style: italic;
+    max-width: 95%;
+}
+
+.scholars-motion-btn {
+    padding: 9px 22px;
+    border: none;
+    border-radius: 7px;
+    background: #00534C;
+    color: #e8dcc8;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.scholars-motion-btn:hover { background: #006b61; }
+
+/* Scholars checklist */
+#scholars-checklist-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#scholars-checklist-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.75);
+    cursor: pointer;
+    user-select: none;
+}
+
+#scholars-checklist-list li input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #00534C;
+    cursor: pointer;
+    flex-shrink: 0;
 }

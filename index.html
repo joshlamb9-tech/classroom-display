@@ -55,6 +55,19 @@
                     <div id="vocab-grid"></div>
                 </div>
 
+                <!-- Scholars Content LEFT -->
+                <div id="scholars-left" class="scholars-content" style="display: none;">
+                    <div class="widget" id="widget-scholars-signin">
+                        <h3>Sign In</h3>
+                        <div id="scholars-signin-grid"></div>
+                        <div id="scholars-signin-status"></div>
+                    </div>
+                    <div class="widget" id="widget-scholars-dates">
+                        <h3>Oundle All Rounder — Key Dates</h3>
+                        <div id="scholars-dates-list"></div>
+                    </div>
+                </div>
+
                 <!-- Form Time Content LEFT (form time only) -->
                 <div id="form-time-left" class="form-time-content" style="display: none;">
                     <div class="widget" id="widget-signin">
@@ -79,6 +92,22 @@
                 <div class="widget lesson-only" id="widget-sentence-builder">
                     <h3>Sentence Builder</h3>
                     <div id="sentence-builder"></div>
+                </div>
+
+                <!-- Scholars Content CENTER -->
+                <div id="scholars-center" class="scholars-content" style="display: none;">
+                    <div class="widget" id="widget-scholars-facts">
+                        <h3>Did You Know?</h3>
+                        <div id="scholars-fact-display">
+                            <div id="scholars-fact-category"></div>
+                            <div id="scholars-fact-text"></div>
+                            <div class="scholars-fact-nav">
+                                <button onclick="prevScholarFact()">&#8592; Prev</button>
+                                <span id="scholars-fact-counter"></span>
+                                <button onclick="nextScholarFact()">Next &#8594;</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Traffic Light (lessons only) -->
@@ -141,6 +170,22 @@
                     <h3>Tasks for Today</h3>
                     <ol id="tasks-list"></ol>
                     <div id="tasks-editable" contenteditable="true" placeholder="Or type tasks here..."></div>
+                </div>
+
+                <!-- Scholars Content RIGHT -->
+                <div id="scholars-right" class="scholars-content" style="display: none;">
+                    <div class="widget" id="widget-scholars-debate">
+                        <h3>Today's Motion</h3>
+                        <div id="scholars-motion-display">
+                            <div class="scholars-motion-label">This house believes that...</div>
+                            <div id="scholars-motion-text"></div>
+                            <button class="scholars-motion-btn" onclick="newScholarsMotion()">New Motion</button>
+                        </div>
+                    </div>
+                    <div class="widget" id="widget-scholars-checklist">
+                        <h3>Debate Checklist</h3>
+                        <ul id="scholars-checklist-list"></ul>
+                    </div>
                 </div>
 
                 <!-- Form Time Content RIGHT (form time only) -->
