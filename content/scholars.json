@@ -8,7 +8,6 @@
     "scholars": {
         "oundleDates": [
             {"label": "Registration", "date": "Jan 2026", "status": "past", "detail": "Application submitted to Oundle"},
-            {"label": "Academic Papers", "date": "Feb 2026", "status": "past", "detail": "English, Maths & Reasoning"},
             {"label": "Assessment Day", "date": "16 Mar 2026", "status": "upcoming", "detail": "Interview + practical activities"},
             {"label": "Results", "date": "Apr 2026", "status": "upcoming", "detail": "Offers communicated to families"}
         ]
