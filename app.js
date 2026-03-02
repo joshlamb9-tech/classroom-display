@@ -646,6 +646,9 @@ function loadWidgetPreferences() {
 
 // Draggable widgets with SortableJS
 function initDraggableWidgets() {
+    // Don't enable drag on touch devices — it fights with scrolling
+    if ('ontouchstart' in window) return;
+
     const columns = document.querySelectorAll('.column');
 
     columns.forEach(column => {
@@ -852,7 +855,7 @@ const SCHOLARS_CHECKLIST = [
 let lastScholarsMotion = -1;
 
 function renderScholars(scholarsData, students) {
-    if (!scholarsData && !students) return;
+    if (!scholarsData) return; // only run for the actual scholars class
 
     // Sign in
     renderScholarsSignIn(students || []);

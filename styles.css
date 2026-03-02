@@ -723,6 +723,16 @@ body:hover #controls {
     opacity: 1;
 }
 
+@media (max-width: 768px) {
+    #controls {
+        opacity: 1;
+        position: static;
+        transform: none;
+        margin-top: 8px;
+        justify-content: center;
+    }
+}
+
 #controls button {
     padding: 8px 16px;
     font-size: 0.9rem;
@@ -1020,6 +1030,11 @@ body.form-time-mode #widget-discussion {
 }
 
 /* ── Scholars Mode ─────────────────────────────────── */
+
+/* Hard-hide scholars content outside scholars mode */
+.scholars-content {
+    display: none !important;
+}
 
 body.scholars-mode .lesson-only {
     display: none !important;
