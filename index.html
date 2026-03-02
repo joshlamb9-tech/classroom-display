@@ -20,6 +20,7 @@
         <label><input type="checkbox" id="toggle-scoreboard" checked onchange="toggleWidget('widget-scoreboard', this.checked)"> Scoreboard</label>
         <label><input type="checkbox" id="toggle-traffic" checked onchange="toggleWidget('widget-traffic', this.checked)"> Traffic Light</label>
         <label><input type="checkbox" id="toggle-tasks" checked onchange="toggleWidget('widget-tasks', this.checked)"> Tasks</label>
+        <label><input type="checkbox" id="toggle-maths-leaderboard" onchange="toggleWidget('widget-maths-leaderboard', this.checked)"> Maths Leaderboard</label>
         <button onclick="hideWidgetToggles()">Done</button>
         <button onclick="resetWidgetLayout()" style="margin-left: 10px; background: #a04040;">Reset Layout</button>
     </div>
@@ -170,6 +171,19 @@
                     <h3>Tasks for Today</h3>
                     <ol id="tasks-list"></ol>
                     <div id="tasks-editable" contenteditable="true" placeholder="Or type tasks here..."></div>
+                </div>
+
+                <!-- Maths Leaderboard -->
+                <div class="widget" id="widget-maths-leaderboard">
+                    <h3>Mental Maths — Top 10</h3>
+                    <div id="lb-tabs">
+                        <button class="lb-tab active" onclick="setLbTotal(10)">10Q</button>
+                        <button class="lb-tab" onclick="setLbTotal(15)">15Q</button>
+                        <button class="lb-tab" onclick="setLbTotal(30)">30Q</button>
+                        <button class="lb-tab" onclick="setLbTotal(40)">40Q</button>
+                    </div>
+                    <ol id="lb-list"></ol>
+                    <div id="lb-updated"></div>
                 </div>
 
                 <!-- Scholars Content RIGHT -->

@@ -1,6 +1,10 @@
 // Classroom Display App
 // =====================
 
+// Maths leaderboard — Supabase
+const LB_URL = 'https://jkbfvfoepmhwyzhleifh.supabase.co';
+const LB_KEY = 'sb_publishable_q9qOX43dA9SoxZ3Bq2p2Pw_c-GUaYw_';
+
 let currentClass = null;
 let classContent = {};
 let timetable = [];
@@ -22,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initDraggableWidgets();
     loadWidgetLayout();
     setLight('green'); // Default to green
+    initLeaderboard();
 });
 
 // Load timetable
@@ -618,7 +623,8 @@ function toggleWidget(widgetId, show) {
 
 function loadWidgetPreferences() {
     const widgets = ['widget-objectives', 'widget-vocab', 'widget-sentence-builder', 'widget-timer',
-                     'widget-randomiser', 'widget-scoreboard', 'widget-traffic', 'widget-tasks'];
+                     'widget-randomiser', 'widget-scoreboard', 'widget-traffic', 'widget-tasks',
+                     'widget-maths-leaderboard'];
 
     widgets.forEach(widgetId => {
         const pref = localStorage.getItem(`widget-${widgetId}`);
@@ -628,6 +634,14 @@ function loadWidgetPreferences() {
             if (checkbox) checkbox.checked = false;
         }
     });
+
+    // Leaderboard is hidden by default unless user has explicitly shown it
+    const lbPref = localStorage.getItem('widget-widget-maths-leaderboard');
+    if (lbPref !== 'visible') {
+        document.getElementById('widget-maths-leaderboard')?.classList.add('hidden-widget');
+        const lbCb = document.getElementById('toggle-maths-leaderboard');
+        if (lbCb) lbCb.checked = false;
+    }
 }
 
 // Draggable widgets with SortableJS
@@ -687,6 +701,102 @@ function loadWidgetLayout() {
 function resetWidgetLayout() {
     localStorage.removeItem('widget-layout');
     location.reload();
+}
+
+// ── Maths Leaderboard ─────────────────────────────────
+
+let lbTotal = 10;
+
+function initLeaderboard() {
+    fetchLeaderboard();
+    setInterval(() => {
+        if (!document.getElementById('widget-maths-leaderboard')?.classList.contains('hidden-widget')) {
+            fetchLeaderboard();
+        }
+    }, 60000);
+}
+
+function setLbTotal(total) {
+    lbTotal = total;
+    document.querySelectorAll('.lb-tab').forEach(t => {
+        t.classList.toggle('active', t.textContent === total + 'Q');
+    });
+    fetchLeaderboard();
+}
+
+async function fetchLeaderboard() {
+    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const url = `${LB_URL}/rest/v1/ma_scores` +
+        `?select=initials,score,total,time_seconds,percentage` +
+        `&total=eq.${lbTotal}` +
+        `&created_at=gte.${encodeURIComponent(since)}` +
+        `&order=percentage.desc,time_seconds.asc` +
+        `&limit=100`;
+    try {
+        const res = await fetch(url, {
+            headers: { 'apikey': LB_KEY, 'Authorization': `Bearer ${LB_KEY}` }
+        });
+        const data = await res.json();
+        renderLeaderboard(deduplicateLb(data));
+        const updated = document.getElementById('lb-updated');
+        if (updated) updated.textContent = `Updated ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`;
+    } catch (e) {
+        const list = document.getElementById('lb-list');
+        if (list) list.innerHTML = '<li class="lb-empty">Could not load scores</li>';
+    }
+}
+
+function deduplicateLb(scores) {
+    const best = {};
+    scores.forEach(s => {
+        const pct = s.percentage != null ? parseFloat(s.percentage) : s.score / s.total * 100;
+        const existing = best[s.initials];
+        if (!existing) { best[s.initials] = s; return; }
+        const ePct = existing.percentage != null ? parseFloat(existing.percentage) : existing.score / existing.total * 100;
+        if (pct > ePct || (pct === ePct && s.time_seconds < existing.time_seconds)) {
+            best[s.initials] = s;
+        }
+    });
+    return Object.values(best)
+        .sort((a, b) => {
+            const ap = a.percentage != null ? parseFloat(a.percentage) : a.score / a.total * 100;
+            const bp = b.percentage != null ? parseFloat(b.percentage) : b.score / b.total * 100;
+            if (bp !== ap) return bp - ap;
+            return a.time_seconds - b.time_seconds;
+        })
+        .slice(0, 10);
+}
+
+function renderLeaderboard(scores) {
+    const list = document.getElementById('lb-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    if (!scores.length) {
+        list.innerHTML = '<li class="lb-empty">No scores this week</li>';
+        return;
+    }
+
+    const medals = ['🥇', '🥈', '🥉'];
+    const classes = ['lb-gold', 'lb-silver', 'lb-bronze'];
+
+    scores.forEach((s, i) => {
+        const pct = s.percentage != null ? parseFloat(s.percentage).toFixed(0) : Math.round(s.score / s.total * 100);
+        const mins = Math.floor(s.time_seconds / 60);
+        const secs = s.time_seconds % 60;
+        const li = document.createElement('li');
+        li.className = 'lb-row' + (i < 3 ? ` ${classes[i]}` : '');
+        li.innerHTML = i < 3
+            ? `<span class="lb-medal">${medals[i]}</span>`
+            : `<span class="lb-pos">${i + 1}</span>`;
+        li.innerHTML += `
+            <span class="lb-initials">${s.initials}</span>
+            <span class="lb-score">${s.score}/${s.total}</span>
+            <span class="lb-pct">${pct}%</span>
+            <span class="lb-time">${mins}:${secs.toString().padStart(2, '0')}</span>
+        `;
+        list.appendChild(li);
+    });
 }
 
 // ── Scholars ──────────────────────────────────────────
