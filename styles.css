@@ -739,7 +739,7 @@ body:hover #controls {
     font-size: 0.85rem;
 }
 
-/* Responsive */
+/* Responsive — tablet */
 @media (max-width: 1200px) {
     #dashboard {
         grid-template-columns: 1fr 1fr;
@@ -750,14 +750,71 @@ body:hover #controls {
     }
 }
 
+/* Responsive — mobile (iPhone) */
 @media (max-width: 768px) {
+    /* Allow the page to scroll naturally instead of clipping */
+    body {
+        overflow-y: auto;
+        min-height: 100dvh;
+        height: auto;
+    }
+
+    #app {
+        height: auto;
+        min-height: 100dvh;
+        overflow: visible;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    /* Compact header */
+    header {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .analogue-clock {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hour-hand  { height: 16px; }
+    .minute-hand { height: 24px; }
+
+    #class-name       { font-size: 1.2rem; }
+    #period-countdown { font-size: 0.8rem; }
+    #date             { font-size: 0.8rem; }
+
+    /* Single-column scrollable dashboard */
     #dashboard {
         grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+        gap: 8px;
     }
+
     .column.right {
         grid-column: span 1;
         flex-direction: column;
     }
+
+    /* Scale down oversized elements */
+    #timer-display      { font-size: 2.8rem; }
+    #randomiser-result  { font-size: 1.6rem; min-height: 50px; }
+    .team-score         { font-size: 2rem; }
+
+    /* Compact widgets */
+    .widget { padding: 10px; }
+    .widget h3 { margin: -10px -10px 10px -10px; padding: 8px 10px; font-size: 0.85rem; }
+
+    /* Cap scrollable widget heights so they don't take over */
+    #widget-vocab,
+    #widget-sentence-builder,
+    #widget-tasks { max-height: 220px; }
+
+    /* Scholar sign-in buttons — stay usable on small screens */
+    .scholar-signin-initial { font-size: 2rem; }
+    .scholar-signin-name    { font-size: 1rem; }
 }
 
 /* Hide form-time-only widgets when not in form time mode */
