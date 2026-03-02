@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Dosis', 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 14px;
+            gap: 14px;
+        }
+
+        /* ── Header ── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            background: rgba(15, 10, 40, 0.97);
+            border-radius: 10px;
+            border: 2px solid rgba(100, 80, 200, 0.4);
+            flex-shrink: 0;
+        }
+
+        .header-clock {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .analogue-clock {
+            width: 90px;
+            height: 90px;
+            position: relative;
+        }
+        .clock-face {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 3px solid #6c3fc5;
+            position: relative;
+        }
+        .clock-center {
+            position: absolute; width: 10px; height: 10px;
+            background: #6c3fc5; border-radius: 50%;
+            top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;
+        }
+        .clock-hand {
+            position: absolute; bottom: 50%; left: 50%;
+            transform-origin: bottom center;
+            background: #fff; border-radius: 3px;
+        }
+        .hour-hand { width: 4px; height: 22px; margin-left: -2px; }
+        .minute-hand { width: 3px; height: 33px; margin-left: -1.5px; background: #6c3fc5; }
+
+        .header-title {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #e8d9ff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(108, 63, 197, 0.6);
+        }
+
+        .header-title .subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        #date {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            text-align: right;
+        }
+
+        /* ── Main grid ── */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 14px;
+            min-height: 0;
+        }
+
+        /* ── Widget base ── */
+        .widget {
+            background: rgba(15, 10, 40, 0.95);
+            border-radius: 10px;
+            border: 2px solid rgba(100, 80, 200, 0.35);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .widget h3 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 16px;
+            background: #3d1a8a;
+            color: #e8d9ff;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .widget-body {
+            flex: 1;
+            padding: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Sign In ── */
+        #widget-signin { flex: 0 0 auto; }
+
+        #signin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .scholar-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(108, 63, 197, 0.25);
+            border: 2px solid rgba(108, 63, 197, 0.5);
+            color: #e8d9ff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            transition: all 0.2s ease;
+            gap: 6px;
+        }
+
+        .scholar-btn:hover {
+            background: rgba(108, 63, 197, 0.45);
+            transform: scale(1.03);
+        }
+
+        .scholar-btn .scholar-initial {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .scholar-btn .scholar-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .scholar-btn.signed-in {
+            background: rgba(76, 175, 80, 0.35);
+            border-color: #4caf50;
+            color: #a5d6a7;
+            box-shadow: 0 0 18px rgba(76, 175, 80, 0.3);
+        }
+
+        .scholar-btn.signed-in .scholar-initial {
+            color: #4caf50;
+        }
+
+        #signin-status {
+            margin-top: 12px;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ── Oundle Dates ── */
+        .date-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .date-item:last-child { border-bottom: none; }
+
+        .date-badge {
+            background: #3d1a8a;
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #c9b5ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .date-badge.past { background: rgba(80,80,80,0.4); color: rgba(255,255,255,0.4); }
+        .date-badge.upcoming { background: #3d1a8a; color: #c9b5ff; }
+        .date-badge.today { background: #6c3fc5; color: #fff; box-shadow: 0 0 10px rgba(108,63,197,0.6); }
+
+        .date-info { flex: 1; }
+        .date-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e8d9ff;
+            display: block;
+        }
+        .date-desc {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+        .date-when {
+            font-size: 0.9rem;
+            color: #c9b5ff;
+            font-weight: 600;
+        }
+
+        /* ── Facts ── */
+        #widget-facts { flex: 1; }
+
+        .fact-display {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+        }
+
+        .fact-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6c3fc5;
+            background: rgba(108,63,197,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .fact-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #e8d9ff;
+            font-weight: 400;
+            max-width: 95%;
+        }
+
+        .fact-nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .fact-nav button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(108,63,197,0.3);
+            color: #c9b5ff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .fact-nav button:hover { background: rgba(108,63,197,0.55); }
+
+        .fact-counter {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ── Debate ── */
+        #widget-debate { flex: 1; }
+
+        .motion-display {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .motion-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .motion-text {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: #fff;
+            font-style: italic;
+            max-width: 95%;
+        }
+
+        .motion-text .this-house {
+            display: block;
+            font-size: 0.85rem;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6c3fc5;
+            margin-bottom: 6px;
+        }
+
+        .motion-btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #3d1a8a;
+            color: #e8d9ff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+        }
+        .motion-btn:hover { background: #5828b5; }
+
+        /* ── Timer ── */
+        #widget-timer {
+            flex: 0 0 auto;
+        }
+
+        #timer-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            color: #fff;
+            padding: 8px 0 4px;
+        }
+
+        #timer-display.warning { color: #ff9800; }
+        #timer-display.danger { color: #f44336; animation: pulse 1s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        #timer-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 4px 4px;
+        }
+
+        #timer-controls button {
+            padding: 6px 14px;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 6px;
+            background: rgba(108,63,197,0.3);
+            color: #c9b5ff;
+            cursor: pointer;
+            font-family: 'Dosis', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        #timer-controls button:hover { background: rgba(108,63,197,0.55); }
+
+        /* ── Column layout ── */
+        .col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <!-- Header -->
+    <header>
+        <div class="header-clock">
+            <div class="analogue-clock">
+                <div class="clock-face">
+                    <div class="clock-hand hour-hand" id="hour-hand"></div>
+                    <div class="clock-hand minute-hand" id="minute-hand"></div>
+                    <div class="clock-center"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-title">
+            <h1>Scholars</h1>
+            <div class="subtitle">Mowden Hall School</div>
+        </div>
+
+        <div id="date">--</div>
+    </header>
+
+    <!-- Main -->
+    <main>
+
+        <!-- Left: Sign In + Dates -->
+        <div class="col">
+            <div class="widget" id="widget-signin">
+                <h3>Sign In</h3>
+                <div class="widget-body">
+                    <div id="signin-grid">
+                        <button class="scholar-btn" id="btn-Louis" onclick="toggleScholar('Louis')">
+                            <span class="scholar-initial">L</span>
+                            <span class="scholar-name">Louis</span>
+                        </button>
+                        <button class="scholar-btn" id="btn-Arthur" onclick="toggleScholar('Arthur')">
+                            <span class="scholar-initial">A</span>
+                            <span class="scholar-name">Arthur</span>
+                        </button>
+                        <button class="scholar-btn" id="btn-Molly" onclick="toggleScholar('Molly')">
+                            <span class="scholar-initial">M</span>
+                            <span class="scholar-name">Molly</span>
+                        </button>
+                        <button class="scholar-btn" id="btn-Matilda" onclick="toggleScholar('Matilda')">
+                            <span class="scholar-initial">M</span>
+                            <span class="scholar-name">Matilda</span>
+                        </button>
+                    </div>
+                    <div id="signin-status">Waiting for sign in...</div>
+                </div>
+            </div>
+
+            <div class="widget" style="flex:1;">
+                <h3>Oundle All Rounder — Key Dates</h3>
+                <div class="widget-body" style="gap:0; padding: 12px 16px;">
+                    <div class="date-item">
+                        <div class="date-badge past">Done</div>
+                        <div class="date-info">
+                            <span class="date-title">Registration Deadline</span>
+                            <span class="date-desc">Application submitted to Oundle</span>
+                        </div>
+                        <span class="date-when">Jan 2026</span>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-badge past">Done</div>
+                        <div class="date-info">
+                            <span class="date-title">Academic Papers</span>
+                            <span class="date-desc">English, Maths, Reasoning</span>
+                        </div>
+                        <span class="date-when">Feb 2026</span>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-badge upcoming">Soon</div>
+                        <div class="date-info">
+                            <span class="date-title">Assessment Day</span>
+                            <span class="date-desc">Interview + practical activities</span>
+                        </div>
+                        <span class="date-when">16 Mar 2026</span>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-badge upcoming">Soon</div>
+                        <div class="date-info">
+                            <span class="date-title">Results Notified</span>
+                            <span class="date-desc">Offers communicated to families</span>
+                        </div>
+                        <span class="date-when">Apr 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centre: Rotating Facts -->
+        <div class="col">
+            <div class="widget" id="widget-facts" style="flex:1;">
+                <h3>Did You Know?</h3>
+                <div class="widget-body">
+                    <div class="fact-display">
+                        <div class="fact-category" id="fact-category">Science</div>
+                        <div class="fact-text" id="fact-text">Loading...</div>
+                        <div class="fact-nav">
+                            <button onclick="prevFact()">&#8592; Prev</button>
+                            <span class="fact-counter" id="fact-counter">1 / 12</span>
+                            <button onclick="nextFact()">Next &#8594;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget" id="widget-timer">
+                <h3>Timer</h3>
+                <div class="widget-body" style="padding: 10px 14px;">
+                    <div id="timer-display">--:--</div>
+                    <div id="timer-controls">
+                        <button onclick="startTimer(60)">1m</button>
+                        <button onclick="startTimer(120)">2m</button>
+                        <button onclick="startTimer(300)">5m</button>
+                        <button onclick="startTimer(600)">10m</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Debate -->
+        <div class="col">
+            <div class="widget" id="widget-debate" style="flex:1;">
+                <h3>Today's Motion</h3>
+                <div class="widget-body">
+                    <div class="motion-display">
+                        <div class="motion-label">This house believes that...</div>
+                        <div class="motion-text" id="motion-text">Loading...</div>
+                        <button class="motion-btn" onclick="newMotion()">New Motion</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget" style="flex:0 0 auto;">
+                <h3>Preparation Checklist</h3>
+                <div class="widget-body" style="padding: 12px 16px; gap: 6px;">
+                    <label class="check-item"><input type="checkbox"> Define your key terms</label>
+                    <label class="check-item"><input type="checkbox"> State your main argument clearly</label>
+                    <label class="check-item"><input type="checkbox"> Give at least one piece of evidence</label>
+                    <label class="check-item"><input type="checkbox"> Anticipate and rebut the opposition</label>
+                    <label class="check-item"><input type="checkbox"> Conclude with a memorable line</label>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<style>
+    .check-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: rgba(255,255,255,0.05);
+        cursor: pointer;
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.75);
+        transition: all 0.2s;
+        user-select: none;
+    }
+    .check-item:hover { background: rgba(255,255,255,0.1); }
+    .check-item input[type="checkbox"] {
+        width: 18px; height: 18px;
+        accent-color: #6c3fc5;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .check-item:has(input:checked) {
+        color: rgba(255,255,255,0.35);
+        text-decoration: line-through;
+    }
+</style>
+
+<script>
+// ── Facts ──────────────────────────────────────────────
+const facts = [
+    { category: "Science", text: "Honey never spoils. Archaeologists have found 3,000-year-old honey in Egyptian tombs — still perfectly edible." },
+    { category: "Maths", text: "There are more possible games of chess than there are atoms in the observable universe." },
+    { category: "Language", text: "Shakespeare invented over 1,700 words we still use today, including 'bedroom', 'lonely', 'generous', and 'obscene'." },
+    { category: "Geography", text: "Russia spans 11 time zones — when it's midnight in Kaliningrad, it's already 9am the next day in Kamchatka." },
+    { category: "Science", text: "A single bolt of lightning is around five times hotter than the surface of the Sun." },
+    { category: "History", text: "The Eastern Roman Empire (Byzantium) survived for over 1,000 years after the fall of Rome in the West, finally ending in 1453." },
+    { category: "Philosophy", text: "The Ship of Theseus: if every plank is replaced, is it still the same ship? This ancient paradox still divides philosophers today." },
+    { category: "Science", text: "Octopuses have three hearts, blue blood, and nine brains — one central brain and one in each arm." },
+    { category: "Language", text: "The word 'salary' comes from the Latin 'salarium' — Roman soldiers were sometimes paid in salt, which was extremely valuable." },
+    { category: "Maths", text: "If you shuffle a deck of cards properly, the order you've created has almost certainly never existed before in the history of the universe." },
+    { category: "Geography", text: "The Sahara Desert is roughly the same size as the United States. It was green and had lakes just 10,000 years ago." },
+    { category: "History", text: "Cleopatra lived closer in time to the Moon landings than to the construction of the Great Pyramid of Giza." },
+    { category: "Science", text: "There are more trees on Earth than stars in the Milky Way — approximately 3 trillion trees to 100-400 billion stars." },
+    { category: "Philosophy", text: "Plato argued that the physical world is just a shadow of a higher reality — like people watching shadows on a cave wall and mistaking them for real things." },
+    { category: "Language", text: "The longest word in a major English dictionary is 'pneumonoultramicroscopicsilicovolcanoconiosis' — a lung disease caused by inhaling volcanic ash." }
+];
+
+let currentFact = 0;
+
+function showFact(index) {
+    const f = facts[index];
+    document.getElementById('fact-category').textContent = f.category;
+    document.getElementById('fact-text').textContent = f.text;
+    document.getElementById('fact-counter').textContent = `${index + 1} / ${facts.length}`;
+}
+
+function nextFact() {
+    currentFact = (currentFact + 1) % facts.length;
+    showFact(currentFact);
+}
+
+function prevFact() {
+    currentFact = (currentFact - 1 + facts.length) % facts.length;
+    showFact(currentFact);
+}
+
+// Auto-rotate every 45 seconds
+setInterval(nextFact, 45000);
+
+// ── Debate Motions ──────────────────────────────────────
+const motions = [
+    "social media does more harm than good.",
+    "zoos should not exist.",
+    "artificial intelligence is a greater threat than an opportunity.",
+    "the arts are as important as STEM subjects.",
+    "homework should be abolished.",
+    "voting should be compulsory for all citizens.",
+    "the exploration of space is a waste of money.",
+    "animals should have legal rights.",
+    "private schools should be abolished.",
+    "we should prioritise the environment over economic growth.",
+    "celebrities have too much influence over young people.",
+    "history is more important than science.",
+    "a universal basic income should be introduced.",
+    "standardised testing does more harm than good.",
+    "great leaders are born, not made.",
+    "books are more valuable than screens for education."
+];
+
+let lastMotionIndex = -1;
+
+function newMotion() {
+    let idx;
+    do { idx = Math.floor(Math.random() * motions.length); }
+    while (idx === lastMotionIndex);
+    lastMotionIndex = idx;
+
+    const el = document.getElementById('motion-text');
+    el.innerHTML = `<span class="this-house">This house believes that...</span>${motions[idx]}`;
+}
+
+// ── Sign In ──────────────────────────────────────────────
+const scholars = ['Louis', 'Arthur', 'Molly', 'Matilda'];
+
+function getSignInKey() {
+    const today = new Date().toISOString().split('T')[0];
+    return `scholars-signin-${today}`;
+}
+
+function getSignedIn() {
+    return JSON.parse(localStorage.getItem(getSignInKey()) || '[]');
+}
+
+function toggleScholar(name) {
+    let signedIn = getSignedIn();
+    if (signedIn.includes(name)) {
+        signedIn = signedIn.filter(s => s !== name);
+    } else {
+        signedIn.push(name);
+    }
+    localStorage.setItem(getSignInKey(), JSON.stringify(signedIn));
+    renderSignIn();
+}
+
+function renderSignIn() {
+    const signedIn = getSignedIn();
+    scholars.forEach(name => {
+        const btn = document.getElementById(`btn-${name}`);
+        if (signedIn.includes(name)) {
+            btn.classList.add('signed-in');
+        } else {
+            btn.classList.remove('signed-in');
+        }
+    });
+
+    const status = document.getElementById('signin-status');
+    if (signedIn.length === 0) {
+        status.textContent = 'Waiting for sign in...';
+    } else if (signedIn.length === scholars.length) {
+        status.textContent = 'All scholars present ✓';
+        status.style.color = '#4caf50';
+    } else {
+        const absent = scholars.filter(s => !signedIn.includes(s));
+        status.textContent = `${signedIn.length}/${scholars.length} present — still waiting: ${absent.join(', ')}`;
+        status.style.color = '';
+    }
+}
+
+// ── Clock ──────────────────────────────────────────────
+function updateClock() {
+    const now = new Date();
+    const hours = now.getHours() % 12;
+    const minutes = now.getMinutes();
+
+    const hourAngle = (hours * 30) + (minutes * 0.5);
+    const minuteAngle = minutes * 6;
+
+    document.getElementById('hour-hand').style.transform = `rotate(${hourAngle}deg)`;
+    document.getElementById('minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
+
+    const dateStr = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('date').textContent = dateStr;
+}
+
+// ── Timer ──────────────────────────────────────────────
+let timerInterval = null;
+let timerSeconds = 0;
+
+function startTimer(seconds) {
+    clearInterval(timerInterval);
+    timerSeconds = seconds;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimerDisplay();
+        if (timerSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerFinished();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    const d = document.getElementById('timer-display');
+    d.textContent = '--:--';
+    d.className = '';
+}
+
+function updateTimerDisplay() {
+    const mins = Math.floor(timerSeconds / 60);
+    const secs = timerSeconds % 60;
+    const d = document.getElementById('timer-display');
+    d.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+    d.classList.remove('warning', 'danger');
+    if (timerSeconds <= 60 && timerSeconds > 10) d.classList.add('warning');
+    else if (timerSeconds <= 10 && timerSeconds > 0) d.classList.add('danger');
+}
+
+function timerFinished() {
+    const d = document.getElementById('timer-display');
+    d.textContent = "Time's up!";
+    d.classList.add('danger');
+
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.35, 0.7].forEach(delay => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 880;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.5, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + delay + 0.25);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.25);
+    });
+}
+
+// ── Keyboard shortcuts ──────────────────────────────────
+document.addEventListener('keydown', e => {
+    switch(e.key) {
+        case '1': startTimer(60); break;
+        case '2': startTimer(120); break;
+        case '5': startTimer(300); break;
+        case '0': stopTimer(); break;
+        case 'ArrowRight': nextFact(); break;
+        case 'ArrowLeft': prevFact(); break;
+        case 'd': newMotion(); break;
+    }
+});
+
+// ── Init ──────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    // Start on a random fact
+    currentFact = Math.floor(Math.random() * facts.length);
+    showFact(currentFact);
+    newMotion();
+    renderSignIn();
+    updateClock();
+    setInterval(updateClock, 1000);
+});
+</script>
+</body>
+</html>
