@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 8 French — Spring Mock Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Dosis', sans-serif;
+      background: #0f1c2e;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      background: #1a2744;
+      border-bottom: 3px solid #c9a84c;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      color: #c9a84c;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      background: #c9a84c;
+      color: #1a2744;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 6px 16px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 20px;
+      padding: 24px 36px;
+    }
+
+    .card {
+      background: #1a2744;
+      border-radius: 14px;
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201, 168, 76, 0.2);
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 20px;
+    }
+
+    /* Class averages card */
+    .class-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .class-label {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #b0c4de;
+      min-width: 50px;
+    }
+
+    .score-pair {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .score {
+      font-size: 2.4rem;
+      font-weight: 800;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .score.old { color: #6b8cba; }
+    .score.new { color: #fff; }
+
+    .arrow-change {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .arrow {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .change {
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    .change.up { background: rgba(76, 175, 80, 0.2); color: #81c784; }
+    .change.down { background: rgba(244, 67, 54, 0.2); color: #e57373; }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 8px 0 22px;
+    }
+
+    .combined-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(201, 168, 76, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+    }
+
+    .combined-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #c9a84c;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .combined-scores {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .combined-scores .score {
+      font-size: 1.9rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 18px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    .legend-item {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 1px;
+    }
+
+    .legend-item span {
+      font-size: 1rem;
+      margin-right: 4px;
+    }
+
+    /* Who improved card */
+    .big-stat {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .big-number {
+      font-size: 5.5rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #81c784;
+    }
+
+    .big-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mini-stat {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .mini-stat .n {
+      font-size: 2.4rem;
+      font-weight: 800;
+    }
+
+    .mini-stat .l {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .mini-stat.improved .n { color: #81c784; }
+    .mini-stat.same .n { color: #ffb74d; }
+    .mini-stat.declined .n { color: #e57373; }
+
+    .total-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+      letter-spacing: 1px;
+    }
+
+    /* Skills card */
+    .skill-row {
+      margin-bottom: 20px;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .skill-scores {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .skill-scores .new-score {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .bar-track {
+      height: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-old {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 6px;
+      background: #2d4a7a;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    .bar-new {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 6px;
+      opacity: 0.85;
+      transition: width 1.4s cubic-bezier(.4,0,.2,1) 0.2s;
+    }
+
+    .bar-new.up { background: #81c784; }
+    .bar-new.flat { background: #ffb74d; }
+    .bar-new.down { background: #e57373; }
+
+    .skill-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .tag-up { background: rgba(129,199,132,0.2); color: #81c784; }
+    .tag-flat { background: rgba(255,183,77,0.2); color: #ffb74d; }
+    .tag-focus { background: rgba(229,115,115,0.15); color: #e57373; }
+
+    footer {
+      background: #1a2744;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding: 10px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .footer-note {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .footer-note strong {
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Year 8 French</h1>
+    <div class="subtitle">Spring Mock Results 2026</div>
+  </div>
+  <div class="badge">Results Day</div>
+</header>
+
+<main>
+
+  <!-- Card 1: Class Averages -->
+  <div class="card">
+    <div class="card-title">Class Averages</div>
+
+    <div class="class-row">
+      <div class="class-label">8S</div>
+      <div class="score-pair">
+        <div class="score old">60%</div>
+        <div class="arrow-change">
+          <div class="arrow">→</div>
+        </div>
+        <div class="score new">63%</div>
+        <div class="change up">+3</div>
+      </div>
+    </div>
+
+    <div class="class-row">
+      <div class="class-label">8L</div>
+      <div class="score-pair">
+        <div class="score old">59%</div>
+        <div class="arrow-change">
+          <div class="arrow">→</div>
+        </div>
+        <div class="score new">60%</div>
+        <div class="change up">+1</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="combined-row">
+      <div class="combined-label">Year 8</div>
+      <div class="combined-scores">
+        <div class="score old" style="font-size:1.7rem">60%</div>
+        <div style="color:#c9a84c;font-size:1.3rem">→</div>
+        <div class="score new" style="font-size:1.9rem">62%</div>
+        <div class="change up">+2</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span style="color:#6b8cba">■</span> Autumn</div>
+      <div class="legend-item"><span style="color:#fff">■</span> Spring</div>
+    </div>
+  </div>
+
+  <!-- Card 2: Skill Breakdown -->
+  <div class="card">
+    <div class="card-title">Skill Breakdown — Year 8 Average</div>
+
+    <div class="skill-row">
+      <div class="skill-header">
+        <div class="skill-name">
+          Reading
+          <span class="skill-tag tag-up">Biggest gain ↑</span>
+        </div>
+        <div class="skill-scores"><span class="new-score">70%</span> &nbsp;was 66%</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-old" style="width:66%"></div>
+        <div class="bar-new up" data-width="70%"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-header">
+        <div class="skill-name">
+          Listening
+          <span class="skill-tag tag-up">Improved ↑</span>
+        </div>
+        <div class="skill-scores"><span class="new-score">66%</span> &nbsp;was 62%</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-old" style="width:62%"></div>
+        <div class="bar-new up" data-width="66%"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-header">
+        <div class="skill-name">
+          Speaking
+          <span class="skill-tag tag-flat">Held steady</span>
+        </div>
+        <div class="skill-scores"><span class="new-score">60%</span> &nbsp;was 58%</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-old" style="width:58%"></div>
+        <div class="bar-new flat" data-width="60%"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-header">
+        <div class="skill-name">
+          Writing
+          <span class="skill-tag tag-focus">Needs focus</span>
+        </div>
+        <div class="skill-scores"><span class="new-score">51%</span> &nbsp;was 48%</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-old" style="width:48%"></div>
+        <div class="bar-new flat" data-width="51%"></div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-note">Autumn Practice → Spring Mocks 2026</div>
+  <div class="footer-note"><strong>Reading & Listening</strong> — strongest improvements</div>
+  <div class="footer-note"><strong>Writing</strong> — our next focus area</div>
+</footer>
+
+<script>
+  // Animate bars on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.bar-new').forEach(bar => {
+        bar.style.width = bar.dataset.width;
+      });
+    }, 300);
+  });
+</script>
+
+</body>
+</html>
