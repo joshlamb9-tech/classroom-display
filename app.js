@@ -1020,8 +1020,8 @@ function setupKeyboardShortcuts() {
             // Auto mode (re-enable auto class detection)
             case 'home': manualOverride = false; detectCurrentClass(); break;
 
-            // Sign-in summary
-            case 's': if (e.shiftKey) showSignInSummary(); break;
+            // Sign-in summary / ski meeting
+            case 's': if (e.shiftKey) showSignInSummary(); else window.open('ski-meeting-students-2026.html', '_blank'); break;
 
             // Widget toggles
             case 't': if (e.shiftKey) showWidgetToggles(); break;

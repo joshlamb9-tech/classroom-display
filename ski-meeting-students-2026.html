@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Montgenèvre 2026 — Mowden Hall Ski Trip</title>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-deep: #0f1a2e;
+    --gold: #c9a84c;
+    --gold-light: #e8c96e;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Dosis', sans-serif;
+    background: var(--navy-deep);
+    overflow: hidden;
+    height: 100vh; width: 100vw;
+  }
+
+  #global-snow {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 200; overflow: hidden;
+  }
+
+  .snowflake {
+    position: absolute; top: -30px;
+    color: rgba(255,255,255,0.22);
+    animation: fall linear infinite;
+    user-select: none;
+  }
+
+  @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+  /* ── SLIDE STRUCTURE ── */
+  .deck { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;        /* top-aligned — content stretches down */
+    padding: 32px 60px 72px;            /* room for nav at bottom */
+    opacity: 0; transform: translateX(60px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .slide.is-centred { justify-content: center; }  /* hero & closing only */
+
+  .slide.active { opacity: 1; transform: translateX(0); pointer-events: all; }
+
+  .slide.exit-left {
+    opacity: 0; transform: translateX(-60px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* ── BACKGROUNDS ── */
+  .bg-navy    { background: var(--navy); }
+  .bg-deep    { background: var(--navy-deep); }
+  .bg-hero    { background: linear-gradient(160deg, #0a1628 0%, #1a2744 50%, #24386b 100%); }
+  .bg-mountain { background: linear-gradient(175deg, #0e1e3a 0%, #1a3060 40%, #2a4880 100%); }
+
+  /* ── PHOTO STRIP (resort slide) ── */
+  .photo-strip {
+    display: flex; gap: 12px;
+    width: 100%; max-width: 1000px;
+    height: clamp(110px, 16vh, 175px);
+    flex-shrink: 0; margin-top: 10px;
+  }
+
+  .photo-strip img {
+    flex: 1; height: 100%;
+    object-fit: cover; border-radius: 10px;
+    border: 2px solid rgba(201,168,76,0.35);
+  }
+
+  /* ── SLIDE HEADER (logo + title + rule) ── */
+  .slide-header {
+    width: 100%; text-align: center;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+  }
+
+  .hero-logo {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 600; color: var(--gold);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .slide-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+    font-weight: 800; color: var(--white);
+    text-align: center; line-height: 1.1;
+    margin-bottom: 10px; letter-spacing: -0.02em;
+  }
+
+  .gold-rule {
+    width: 60px; height: 3px;
+    background: var(--gold); border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* ── GROW AREA — fills remaining height after header ── */
+  .grow {
+    flex: 1;
+    width: 100%;
+    display: flex; flex-direction: column;
+    align-items: center;
+    min-height: 0;    /* prevents flex overflow */
+  }
+
+  /* ── HERO TYPOGRAPHY ── */
+  .hero-main {
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 800; color: var(--white);
+    text-align: center; line-height: 1;
+    letter-spacing: -0.03em; margin-bottom: 8px;
+  }
+
+  .hero-year {
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 800; color: var(--gold);
+    text-align: center; line-height: 1;
+    letter-spacing: -0.03em; margin-bottom: 28px;
+  }
+
+  .hero-dates {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 600; color: rgba(255,255,255,0.6);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-align: center; margin-bottom: 40px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 40px; padding: 12px 28px;
+    color: var(--gold-light); font-size: 1.1rem; font-weight: 600;
+  }
+
+  /* ── GRIDS — stretch rows to fill container ── */
+  .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; width: 100%; flex: 1;
+    align-content: stretch; align-items: stretch;
+  }
+
+  .grid-3 {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; width: 100%; flex: 1;
+    align-content: stretch; align-items: stretch;
+  }
+
+  .grid-6 {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; width: 100%; flex: 1;
+    align-content: stretch; align-items: stretch;
+  }
+
+  .airport-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; width: 100%; flex: 1;
+    align-content: stretch; align-items: stretch;
+  }
+
+  .rules-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; width: 100%; flex: 1;
+    align-content: stretch; align-items: stretch;
+  }
+
+  .medical-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; width: 100%;
+    align-content: stretch; align-items: stretch;
+    margin-bottom: 14px;
+  }
+
+  /* ── CARDS — always fill their cell ── */
+  .card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px; padding: 20px;
+    text-align: center; height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .card.gold-accent { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); }
+
+  .card-icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+
+  .card-title {
+    font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+    font-weight: 700; color: var(--gold);
+    margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .card-body {
+    font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+    font-weight: 500; color: rgba(255,255,255,0.75); line-height: 1.45;
+  }
+
+  /* ── STAFF CARDS ── */
+  .staff-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px; padding: 20px 16px;
+    text-align: center; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+
+  .staff-avatar {
+    width: clamp(50px, 5vw, 66px); height: clamp(50px, 5vw, 66px);
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2); border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(1rem, 1.6vw, 1.4rem); font-weight: 800; color: var(--gold);
+    margin: 0 auto 10px;
+  }
+
+  .staff-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 700; color: var(--white); margin-bottom: 4px; }
+
+  .staff-role {
+    font-size: clamp(0.82rem, 1.05vw, 0.98rem); font-weight: 600;
+    color: rgba(201,168,76,0.8); letter-spacing: 0.05em;
+    text-transform: uppercase; line-height: 1.4;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 820px;
+    flex: 1; justify-content: space-between;
+  }
+
+  .timeline-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 0 0 0 24px;
+    border-left: 3px solid rgba(201,168,76,0.3);
+    position: relative; flex: 1;
+    padding-top: 8px; padding-bottom: 8px;
+  }
+
+  .timeline-item::before {
+    content: ''; position: absolute; left: -8px; top: 14px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--navy-deep);
+  }
+
+  .timeline-time {
+    font-size: clamp(0.92rem, 1.2vw, 1.1rem); font-weight: 700;
+    color: var(--gold); min-width: 130px;
+    letter-spacing: 0.04em; text-transform: uppercase; padding-top: 2px;
+  }
+
+  .timeline-text { font-size: clamp(1rem, 1.3vw, 1.15rem); font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.4; }
+
+  /* ── SCHEDULE ── */
+  .schedule-list {
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 840px;
+    flex: 1; justify-content: space-between;
+  }
+
+  .schedule-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 12px 18px; flex: 1;
+    margin: 4px 0;
+  }
+
+  .schedule-time { font-size: clamp(0.92rem, 1.2vw, 1.1rem); font-weight: 700; color: var(--gold); min-width: 100px; letter-spacing: 0.04em; }
+  .schedule-icon { font-size: 1.4rem; }
+  .schedule-activity { font-size: clamp(1rem, 1.3vw, 1.15rem); font-weight: 600; color: rgba(255,255,255,0.9); line-height: 1.3; }
+
+  /* ── RULES / AIRPORT CARDS ── */
+  .rule-card, .airport-card {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px; height: 100%;
+  }
+
+  .rule-icon, .airport-icon {
+    font-size: 1.4rem; flex-shrink: 0;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(201,168,76,0.12); border-radius: 8px;
+  }
+
+  .airport-icon { background: none; width: auto; height: auto; }
+
+  .rule-title, .airport-title { font-size: clamp(1rem, 1.3vw, 1.15rem); font-weight: 700; color: var(--gold-light); margin-bottom: 3px; }
+  .rule-body, .airport-body { font-size: clamp(0.92rem, 1.2vw, 1.05rem); font-weight: 500; color: rgba(255,255,255,0.7); line-height: 1.4; }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    background: rgba(201,168,76,0.1);
+    border: 2px solid rgba(201,168,76,0.3);
+    border-radius: 16px; padding: 18px 40px;
+    width: 100%; text-align: center;
+    flex-shrink: 0; margin-bottom: 14px;
+  }
+
+  .philosophy-text { font-size: clamp(1.15rem, 2.2vw, 1.8rem); font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 6px; }
+  .philosophy-sub { font-size: clamp(0.95rem, 1.35vw, 1.2rem); font-weight: 500; color: rgba(201,168,76,0.85); }
+
+  /* ── MEDICAL CARDS ── */
+  .medical-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px; padding: 18px; height: 100%;
+  }
+
+  .medical-card.red-accent { border-color: rgba(220,80,80,0.4); background: rgba(220,80,80,0.06); }
+
+  .medical-label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .medical-number { font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+  .medical-number.red { color: #ff7070; }
+  .medical-desc { font-size: clamp(0.92rem, 1.2vw, 1.05rem); color: rgba(255,255,255,0.6); margin-top: 5px; line-height: 1.4; font-weight: 500; }
+
+  /* ── CLOSING ── */
+  .countdown-box {
+    background: rgba(201,168,76,0.12); border: 2px solid var(--gold);
+    border-radius: 20px; padding: 24px 60px; text-align: center; margin-bottom: 24px;
+  }
+
+  .countdown-number { font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; color: var(--gold); line-height: 1; letter-spacing: -0.05em; }
+  .countdown-label { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px; }
+  .slide-subtitle { font-size: clamp(0.9rem, 2vw, 1.3rem); font-weight: 500; color: rgba(255,255,255,0.7); text-align: center; }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px; z-index: 300;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  }
+
+  .nav-btn {
+    background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold); font-family: 'Dosis', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    padding: 8px 24px; border-radius: 40px; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; letter-spacing: 0.06em;
+  }
+
+  .nav-btn:hover { background: rgba(201,168,76,0.3); transform: scale(1.04); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+
+  .nav-counter { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; }
+  .nav-dots { display: flex; gap: 6px; }
+
+  .nav-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .nav-dot.active { background: var(--gold); transform: scale(1.4); }
+
+  /* ── BUILD-UP CARDS COLUMN ── */
+  .buildup-col {
+    display: flex; flex-direction: column;
+    gap: 12px; width: 100%; max-width: 860px; flex: 1;
+  }
+
+  .buildup-col > .card {
+    flex: 1; text-align: left;
+    display: flex; align-items: center; gap: 18px;
+    justify-content: flex-start; padding: 20px 24px;
+  }
+
+  /* ── SKI GROUPS TWO-COL ── */
+  .groups-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 18px; width: 100%; flex: 1;
+    align-items: stretch;
+  }
+
+  .groups-left {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .groups-left > .card { flex: 1; text-align: left; padding: 20px; justify-content: flex-start; }
+</style>
+</head>
+<body>
+
+<div id="global-snow"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ── SLIDE 0: HERO ── -->
+  <div class="slide bg-hero is-centred active" id="slide-0" style="background: linear-gradient(160deg, rgba(8,18,36,0.82) 0%, rgba(20,35,68,0.72) 50%, rgba(30,52,95,0.62) 100%), url('https://images.pexels.com/photos/30401227/pexels-photo-30401227.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover no-repeat;">
+    <div class="hero-logo" style="margin-bottom:12px">Mowden Hall School</div>
+    <div class="hero-main">Montgenèvre</div>
+    <div class="hero-year">2026</div>
+    <div class="hero-dates">28 March — 4 April</div>
+    <div class="hero-badge">⛷️ &nbsp;Village Club du Soleil &nbsp;|&nbsp; French Alps</div>
+  </div>
+
+  <!-- ── SLIDE 1: STAFF ── -->
+  <div class="slide bg-navy" id="slide-1">
+    <div class="slide-header">
+      <div class="hero-logo">Your Staff Team</div>
+      <div class="slide-title">The people looking after you</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="grid-6" style="max-width:1100px;">
+        <div class="staff-card">
+          <div class="staff-avatar">JL</div>
+          <div class="staff-name">Mr Lamb</div>
+          <div class="staff-role">Trip Leader</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">AM</div>
+          <div class="staff-name">Mrs Mackie</div>
+          <div class="staff-role">Deputy Leader · First Aid Lead</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">TH</div>
+          <div class="staff-name">Mr Hardy</div>
+          <div class="staff-role">Staff</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">JH</div>
+          <div class="staff-name">Mr Hinds</div>
+          <div class="staff-role">Staff</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">WM</div>
+          <div class="staff-name">Mr Murray</div>
+          <div class="staff-role">Staff</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">LC</div>
+          <div class="staff-name">Miss Curran</div>
+          <div class="staff-role">Staff</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: KEY DATES ── -->
+  <div class="slide bg-deep" id="slide-2">
+    <div class="slide-header">
+      <div class="hero-logo">Getting There</div>
+      <div class="slide-title">Key dates</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">Fri 27 Mar</div>
+          <div class="timeline-text"><strong style="color:var(--white)">Boarding Night</strong> — Board at Mowden as normal. Pizza night in the evening. Early night — we leave at 5am.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Sat 28 Mar · 5am</div>
+          <div class="timeline-text"><strong style="color:var(--white)">Coach Departs Mowden</strong> — Be excited!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Sat 28 Mar</div>
+          <div class="timeline-text"><strong style="color:var(--white)">We fly to Montgenèvre</strong> — Newcastle to Grenoble, then coach transfer to the resort.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Sun 29 Mar</div>
+          <div class="timeline-text"><strong style="color:var(--white)">First day on the slopes</strong> — Meet your ski group, collect your hired kit, get on the mountain.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Sat 4 Apr</div>
+          <div class="timeline-text"><strong style="color:var(--white)">Return to Mowden</strong> — Grenoble → Newcastle. Parents collect from Newcastle Arrivals.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: BEFORE YOU GO ── -->
+  <div class="slide bg-navy" id="slide-3">
+    <div class="slide-header">
+      <div class="hero-logo">Before You Go</div>
+      <div class="slide-title">The week before the trip</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="buildup-col">
+        <div class="card gold-accent">
+          <div style="font-size:1.8rem; flex-shrink:0;">🛂</div>
+          <div>
+            <div class="card-title" style="margin-bottom:5px;">Passports — drop off to the school office</div>
+            <div class="card-body" style="font-size:clamp(1rem,1.3vw,1.15rem); line-height:1.5;">Parents need to hand your passport in to the school office before the trip. Make sure this happens — we cannot take you without it.</div>
+          </div>
+        </div>
+        <div class="card gold-accent">
+          <div style="font-size:1.8rem; flex-shrink:0;">🧳</div>
+          <div>
+            <div class="card-title" style="margin-bottom:5px;">Packed ski bag — in school the last week</div>
+            <div class="card-body" style="font-size:clamp(1rem,1.3vw,1.15rem); line-height:1.5;">Your packed ski bag needs to be in school during the final week before departure so it can be weighed. Don't leave it until the morning of the trip.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:1.8rem; flex-shrink:0;">🚗</div>
+          <div>
+            <div class="card-title" style="margin-bottom:5px;">Airport drop-off on Saturday?</div>
+            <div class="card-body" style="font-size:clamp(1rem,1.3vw,1.15rem); line-height:1.5;">If you're being dropped off at the airport, bring your bag with you — it doesn't need to come into school. You just need to make sure your passport has been handed in to the office beforehand.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4: AT THE AIRPORT ── -->
+  <div class="slide bg-deep" id="slide-4">
+    <div class="slide-header">
+      <div class="hero-logo">Newcastle Airport</div>
+      <div class="slide-title">At the airport</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="airport-grid" style="max-width:1060px;">
+        <div class="airport-card">
+          <div class="airport-icon">🛂</div>
+          <div>
+            <div class="airport-title">Passports</div>
+            <div class="airport-body">Staff collect passports when we arrive. You'll get them back when you need them. Make sure yours is in your bag when you leave Mowden.</div>
+          </div>
+        </div>
+        <div class="airport-card">
+          <div class="airport-icon">👥</div>
+          <div>
+            <div class="airport-title">Stay Together</div>
+            <div class="airport-body">We move through the airport as a group. You do not go anywhere alone — not to a shop, not to the toilet. Buddy system is on from the moment we arrive.</div>
+          </div>
+        </div>
+        <div class="airport-card">
+          <div class="airport-icon">🔒</div>
+          <div>
+            <div class="airport-title">Security</div>
+            <div class="airport-body">Follow staff instructions through security. No liquids over 100ml in hand luggage. If in doubt, ask before you pack it.</div>
+          </div>
+        </div>
+        <div class="airport-card">
+          <div class="airport-icon">🚪</div>
+          <div>
+            <div class="airport-title">At The Gate</div>
+            <div class="airport-body">We establish a base at the gate. That's where you come back to. Wait for instructions before boarding. Don't wander.</div>
+          </div>
+        </div>
+        <div class="airport-card">
+          <div class="airport-icon">✈️</div>
+          <div>
+            <div class="airport-title">On The Plane</div>
+            <div class="airport-body">Follow the instructions of the cabin crew. Stay in your seat when told to. If you feel unwell, tell a member of staff immediately.</div>
+          </div>
+        </div>
+        <div class="airport-card">
+          <div class="airport-icon">🤝</div>
+          <div>
+            <div class="airport-title">You Represent Mowden</div>
+            <div class="airport-body">Other people are trying to travel. Be polite, be patient, and be calm. The airport is not a playground.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: THE RESORT ── -->
+  <div class="slide bg-mountain" id="slide-5">
+    <div class="slide-header">
+      <div class="hero-logo">Where We're Staying</div>
+      <div class="slide-title">Montgenèvre, French Alps</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="grid-3" style="max-width:1000px; margin-bottom:14px;">
+        <div class="card gold-accent">
+          <span class="card-icon">🏔️</span>
+          <div class="card-title">The Resort</div>
+          <div class="card-body">Montgenèvre sits on the French-Italian border at 1,850m. Part of the Milky Way ski area — over 400km of pistes.</div>
+        </div>
+        <div class="card gold-accent">
+          <span class="card-icon">🏨</span>
+          <div class="card-title">Where We Stay</div>
+          <div class="card-body">Village Club du Soleil — right in the heart of the resort. Room allocations decided by staff. We'll show you where the staff bedrooms are when we arrive — they'll have a sign so you always know where to find us.</div>
+        </div>
+        <div class="card gold-accent">
+          <span class="card-icon">❄️</span>
+          <div class="card-title">The Snow</div>
+          <div class="card-body">High altitude means reliable snow. Expect blue skies, big mountains, and long runs. Suncream is not optional.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; flex-shrink:0;">
+        <div class="hero-badge" style="font-size:0.88rem; padding:9px 18px;">🎳 Bowling night</div>
+        <div class="hero-badge" style="font-size:0.88rem; padding:9px 18px;">🎤 Karaoke</div>
+        <div class="hero-badge" style="font-size:0.88rem; padding:9px 18px;">🎬 Film night</div>
+        <div class="hero-badge" style="font-size:0.88rem; padding:9px 18px;">🗺️ Town trail</div>
+        <div class="hero-badge" style="font-size:0.88rem; padding:9px 18px;">❓ Quiz night</div>
+      </div>
+      <div class="photo-strip">
+        <img src="https://images.pexels.com/photos/8430872/pexels-photo-8430872.jpeg?auto=compress&cs=tinysrgb&w=800&h=450" alt="Ski resort in snow">
+        <img src="https://images.pexels.com/photos/21792611/pexels-photo-21792611.jpeg?auto=compress&cs=tinysrgb&w=800&h=450" alt="Mountain ski slope with lift">
+        <img src="https://images.pexels.com/photos/15974823/pexels-photo-15974823.jpeg?auto=compress&cs=tinysrgb&w=800&h=450" alt="Skier on the mountain">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: A TYPICAL DAY ── -->
+  <div class="slide bg-navy" id="slide-6">
+    <div class="slide-header">
+      <div class="hero-logo">Daily Routine</div>
+      <div class="slide-title">A typical ski day</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="schedule-list">
+        <div class="schedule-item">
+          <span class="schedule-time">Morning</span>
+          <span class="schedule-icon">🌅</span>
+          <span class="schedule-activity">Thermals and salopettes on — that's breakfast kit. Kit check tunnel before you head out. Suncream on. No exceptions.</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">Morning ski</span>
+          <span class="schedule-icon">⛷️</span>
+          <span class="schedule-activity">Morning session on the slopes with your ESF instructor.</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">Lunch</span>
+          <span class="schedule-icon">🍽️</span>
+          <span class="schedule-activity">Hot lunch back at the hotel.</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">Afternoon ski</span>
+          <span class="schedule-icon">⛷️</span>
+          <span class="schedule-activity">Two-hour afternoon session. Kit check again before you go. Back to the hotel before dark — register with your group.</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">Evening</span>
+          <span class="schedule-icon">🚿</span>
+          <span class="schedule-activity">Shower and change. Supper together. Then a different evening activity every night.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: SKI GROUPS ── -->
+  <div class="slide bg-deep" id="slide-7">
+    <div class="slide-header">
+      <div class="hero-logo">On The Slopes</div>
+      <div class="slide-title">Ski groups</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div class="groups-layout" style="max-width:1020px;">
+        <div class="groups-left">
+          <div class="card gold-accent">
+            <div class="card-title">How Groups Work</div>
+            <div class="card-body" style="font-size:clamp(1rem,1.3vw,1.15rem); line-height:1.55; text-align:left; margin-top:4px;">Your ski instructor will be chosen for you based on your skiing ability. Each group has a designated Mowden staff member to check in with.<br><br>Within your group, you operate in buddy pairs — you are always with someone.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">ESF Instructors</div>
+            <div class="card-body" style="font-size:clamp(1rem,1.3vw,1.15rem); line-height:1.5; text-align:left; margin-top:4px;">All instructors hold full French ski qualifications. They know the mountain. Listen to them — what they say goes.</div>
+          </div>
+        </div>
+        <div class="card gold-accent" style="text-align:left; padding:22px;">
+          <div class="card-title" style="margin-bottom:14px;">On The Mountain</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; justify-content:space-around; height:calc(100% - 32px);">
+            <li style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,1.3vw,1.15rem); font-weight:500; line-height:1.4; padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--gold)">›</span>Never ski off-piste or away from your group</li>
+            <li style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,1.3vw,1.15rem); font-weight:500; line-height:1.4; padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--gold)">›</span>Helmet and ski jacket on at all times</li>
+            <li style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,1.3vw,1.15rem); font-weight:500; line-height:1.4; padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--gold)">›</span>No GoPros or cameras on your helmet</li>
+            <li style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,1.3vw,1.15rem); font-weight:500; line-height:1.4; padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--gold)">›</span>Carry your emergency contact card at all times</li>
+            <li style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,1.3vw,1.15rem); font-weight:500; line-height:1.4; padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--gold)">›</span>If someone is hurt — stop, stay, tell your instructor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: RULES ── -->
+  <div class="slide bg-navy" id="slide-8">
+    <div class="grow">
+      <div class="philosophy">
+        <div class="philosophy-text">"It's your holiday as well as our holiday."</div>
+        <div class="philosophy-sub">We all want the same thing — a brilliant week. That means looking out for each other and making good choices.</div>
+      </div>
+      <div class="rules-grid" style="max-width:1100px;">
+        <div class="rule-card">
+          <div class="rule-icon">📵</div>
+          <div><div class="rule-title">No Electronics</div><div class="rule-body">No phones, tablets, or screens on the trip. The mountain is better than any screen. Be here, be present.</div></div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">👫</div>
+          <div><div class="rule-title">Groups of 4 — But Not a Family of 4</div><div class="rule-body">You stay in groups of 4, within your larger Mowden group which checks in with a staff member. Being in a group of 4 doesn't mean you can go wherever you want.</div></div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">🛏️</div>
+          <div><div class="rule-title">Rooms at Curfew</div><div class="rule-body">In your room, lights out on time. No moving between rooms after curfew. Staff check.</div></div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">🏫</div>
+          <div><div class="rule-title">Represent Mowden</div><div class="rule-body">Other people are on their holidays too. Be kind, be polite, be grateful. You're an ambassador whether you like it or not.</div></div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">☀️</div>
+          <div><div class="rule-title">Suncream Every Session</div><div class="rule-body">High altitude sun is no joke. SPF 50 on face and neck before every session — kit check will confirm it. No cream, no skiing.</div></div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">💶</div>
+          <div><div class="rule-title">Spending Money</div><div class="rule-body">You get three hot meals a day — breakfast, lunch on the mountain, and supper. Spending money is for treats, souvenirs, or the odd hot chocolate. You don't need a lot.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 9: MEDICAL ── -->
+  <div class="slide bg-deep" id="slide-9">
+    <div class="slide-header">
+      <div class="hero-logo">Looking After Each Other</div>
+      <div class="slide-title">Medical &amp; wellbeing</div>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="grow">
+      <div style="width:100%; max-width:1020px; display:flex; flex-direction:column; flex:1;">
+        <div class="philosophy" style="margin-bottom:14px;">
+          <div class="philosophy-text" style="font-size:clamp(1.1rem,2vw,1.65rem);">We are here for a good time. No one has to suffer in silence.<br>Communicate. Speak to a member of staff. Speak to your friends. Check in on each other.</div>
+        </div>
+        <div class="medical-grid" style="flex:1; margin-bottom:0;">
+          <div class="medical-card red-accent">
+            <div class="medical-label">European Emergency Number</div>
+            <div class="medical-number red">112</div>
+            <div class="medical-desc">Police, fire, ambulance. Works across France. Staff carry this. If something serious happens — shout for us first.</div>
+          </div>
+          <div class="medical-card">
+            <div class="medical-label">Medical Officer</div>
+            <div class="medical-number" style="font-size:clamp(1.1rem,2vw,1.5rem); margin-top:4px;">Mrs Mackie</div>
+            <div class="medical-desc">All medication and medical needs go through Mrs Mackie. If you feel ill at any point — day or night — come and find us.</div>
+          </div>
+          <div class="medical-card">
+            <div class="medical-label">Piste Patrol</div>
+            <div class="medical-number" style="font-size:clamp(1rem,1.6vw,1.2rem); margin-top:4px;">Mountain Rescue</div>
+            <div class="medical-desc">If someone is hurt on the mountain: stop, stay with them, and tell your instructor immediately. Do not move them.</div>
+          </div>
+          <div class="medical-card">
+            <div class="medical-label">Local Doctor</div>
+            <div class="medical-number" style="font-size:clamp(1rem,1.6vw,1.2rem); margin-top:4px;">Montgenèvre Medical Centre</div>
+            <div class="medical-desc">Route d'Italie, 38750 Montgenèvre<br>+33 (0)4 92 21 91 23 — Staff know where it is.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 10: CLOSING ── -->
+  <div class="slide bg-hero is-centred" id="slide-10" style="background: linear-gradient(160deg, rgba(8,18,36,0.82) 0%, rgba(20,35,68,0.72) 50%, rgba(30,52,95,0.62) 100%), url('https://images.pexels.com/photos/30401227/pexels-photo-30401227.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover no-repeat;">
+    <div class="hero-logo" style="margin-bottom:16px">Mowden Hall Ski Trip 2026</div>
+    <div class="countdown-box">
+      <div class="countdown-number" id="days-countdown">13</div>
+      <div class="countdown-label">Days to go</div>
+    </div>
+    <div class="slide-title" style="margin-bottom:8px; font-size: clamp(1.8rem,4vw,3rem);">See you on the mountain ⛷️</div>
+    <div class="slide-subtitle">28 March — 4 April · Montgenèvre · Village Club du Soleil</div>
+  </div>
+
+</div>
+
+<nav class="nav">
+  <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)" disabled>← Prev</button>
+  <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+    <div class="nav-dots" id="nav-dots"></div>
+    <div class="nav-counter" id="slide-counter">1 / 11</div>
+  </div>
+  <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next →</button>
+</nav>
+
+<script>
+  const totalSlides = 11;
+  let current = 0;
+
+  const dotsContainer = document.getElementById('nav-dots');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToSlide(n) {
+    const slides = document.querySelectorAll('.slide');
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit-left');
+    setTimeout(() => slides[current].classList.remove('exit-left'), 400);
+    current = n;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('slide-counter').textContent = `${current + 1} / ${totalSlides}`;
+    document.getElementById('prev-btn').disabled = current === 0;
+    document.getElementById('next-btn').disabled = current === totalSlides - 1;
+  }
+
+  function changeSlide(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < totalSlides) goToSlide(next);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+
+  const departure = new Date('2026-03-28');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diff = Math.ceil((departure - today) / (1000*60*60*24));
+  document.getElementById('days-countdown').textContent = diff > 0 ? diff : '🎿';
+
+  const snowContainer = document.getElementById('global-snow');
+  const symbols = ['❄', '❅', '❆', '*', '·'];
+  for (let i = 0; i < 35; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    flake.style.left = (Math.random() * 100) + 'vw';
+    flake.style.animationDuration = (7 + Math.random() * 12) + 's';
+    flake.style.animationDelay = (Math.random() * 12) + 's';
+    flake.style.fontSize = (0.7 + Math.random() * 1.3) + 'rem';
+    flake.style.opacity = (0.1 + Math.random() * 0.25);
+    snowContainer.appendChild(flake);
+  }
+</script>
+
+</body>
+</html>
